@@ -1,0 +1,185 @@
+/* WAD2 Team Project "Educ8" | Global Styles */
+
+
+/*
+
+Colours Used:
+  white;
+  #60a7ce;
+  #6bb2d9;
+  #EEEEEE;
+
+Fonts Used:
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-family: 'Bebas Neue', cursive;
+  font-family: 'Open Sans', sans-serif;
+
+*/
+
+
+
+/* General */
+body, html {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+  padding: 0;
+  background-color: #EEEEEE;
+  font-family: 'Open Sans', sans-serif;
+}
+* {
+  box-sizing: border-box;
+}
+
+/* Page min height so footer doesn't float */
+.content {
+	min-height: calc(100vh - 135px);
+}
+
+/* Links */
+a:link {
+  text-decoration: none;
+  color: #60a7ce;
+}
+a:visited {
+  text-decoration: none;
+  color: #60a7ce;
+}
+a:hover {
+  text-decoration: underline;
+}
+a:active {
+  text-decoration: none;
+  color: #6bb2d9;
+}
+/* Highlight Styles */
+::selection {
+	background: #6bb2d9;
+	color: white;
+}
+::-moz-selection {
+	background: #6bb2d9;
+	color: white;
+}
+
+/* Back to Top Styles */
+#back2top {
+  display: inline-block;
+  background-color: #60a7ce;
+	background-image: url("../icons/scroll_arrow.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  border-radius: 4px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  transition: background-color .3s, opacity .5s, visibility .5s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 999;
+}
+#back2top:hover {
+  cursor: pointer;
+  background-color: #6bb2d9;
+}
+#back2top:active {
+  background-color: lightgray;
+}
+#back2top.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Navigation Styles */
+nav {
+  height: 6vh;
+  background-color: #60a7ce;
+  padding-left: 3vw;
+  padding-right: 3vw;
+  color: white;
+}
+nav img {
+  height: 100%;
+  float: left;
+  padding: 0;
+  margin: 0;
+}
+nav h1 {
+  font-family: 'Bebas Neue', cursive;
+  color: white;
+  height: 100%;
+  float: left;
+  font-size: 4vh;
+  margin: 0.5vh 0 1vh 2vh;
+  cursor: default;
+}
+nav ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+nav li {
+	float: right;
+}
+nav li a {
+	font-family: 'Barlow Semi Condensed', sans-serif;
+	font-weight: bold;
+	font-size: 2.5vh;
+	display: block;
+	text-align: center;
+	padding: 1.3vh;
+	text-decoration: none;
+  transition: all 0.1s ease-in-out;
+}
+nav li a:link {
+  color: white;
+}
+nav li a:visited {
+  color: white;
+}
+nav li a:hover {
+	color: #d1e5f2;
+  text-decoration: none;
+}
+
+/* Footer Styles */
+footer {
+	height: 100px;
+	background-color: #60a7ce;
+	font-size: 26px;
+	text-align: center;
+	line-height: 0;
+	font-family: 'Barlow Semi Condensed', sans-serif;
+  font-weight: bold;
+	z-index: 1000;
+}
+footer h4 {
+	color: white;
+	transform: translate(0, 34px);
+  cursor: default;
+}
+footer p {
+	color: white;
+	font-size: 22px;
+	transform: translate(0, 30px);
+  cursor: default;
+}
+
+
+
+/* Media Queries */
+
+/* Split screen desktop/tablets */
+@media screen and (max-width: 1200px) {
+
+}
+
+/* Phones */
+@media screen and (max-width: 850px) {
+
+}
