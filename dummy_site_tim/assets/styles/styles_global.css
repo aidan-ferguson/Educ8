@@ -62,45 +62,14 @@ a:active {
 	color: white;
 }
 
-/* Back to Top Styles */
-#back2top {
-  display: inline-block;
-  background-color: #60a7ce;
-	background-image: url("../icons/scroll_arrow.png");
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-  width: 60px;
-  height: 60px;
-  text-align: center;
-  border-radius: 4px;
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  transition: background-color .3s, opacity .5s, visibility .5s;
-  opacity: 0;
-  visibility: hidden;
-  z-index: 999;
-}
-#back2top:hover {
-  cursor: pointer;
-  background-color: #6bb2d9;
-}
-#back2top:active {
-  background-color: lightgray;
-}
-#back2top.show {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Navigation Styles */
+/* Navigation/Header Bar */
 nav {
   height: 6vh;
   background-color: #60a7ce;
   padding-left: 3vw;
   padding-right: 3vw;
   color: white;
+  box-shadow: 0 0 6px gray;
 }
 nav img {
   height: 100%;
@@ -147,13 +116,34 @@ nav li a:hover {
   text-decoration: none;
 }
 
-/* Footer Styles */
+/* Main Panel */
+.main_panel {
+  background-color: white;
+  margin: 4vh 4vw 4vh 4vw;
+  box-shadow: 0 0 6px #CCCCCC;
+  border-radius: 10px;
+  width: 75vw;
+	max-width: 1600px;
+  margin-left: auto;
+	margin-right: auto;
+  padding: 2vh 5vw 2vh 5vw;
+}
+
+h1.panel_title {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 70px;
+  font-weight: normal;
+  margin-bottom: 60px;
+}
+
+/* Footer */
 footer {
 	height: 100px;
 	background-color: #60a7ce;
 	font-size: 26px;
 	text-align: center;
 	line-height: 0;
+  box-shadow: 0 0 6px #CCCCCC;
 	font-family: 'Barlow Semi Condensed', sans-serif;
   font-weight: bold;
 	z-index: 1000;
@@ -170,16 +160,52 @@ footer p {
   cursor: default;
 }
 
+/* Back to Top Button */
+#back2top {
+  display: inline-block;
+  background-color: #60a7ce;
+	background-image: url("../icons/scroll_arrow.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  border-radius: 4px;
+  box-shadow: 0 0 4px #CCCCCC;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  transition: background-color .3s, opacity .5s, visibility .5s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 999;
+}
+#back2top:hover {
+  cursor: pointer;
+  background-color: #6bb2d9;
+}
+#back2top:active {
+  background-color: lightgray;
+}
+#back2top.show {
+  opacity: 1;
+  visibility: visible;
+}
 
 
 /* Media Queries */
 
 /* Split screen desktop/tablets */
 @media screen and (max-width: 1200px) {
-
+  .main_panel {
+    width: 90vw;
+  }
 }
 
 /* Phones */
 @media screen and (max-width: 850px) {
-
+  .main_panel {
+    width: 96vw;
+  }
 }
