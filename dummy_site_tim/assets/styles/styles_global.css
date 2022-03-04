@@ -65,6 +65,10 @@ a:active {
 	background: #6bb2d9;
 	color: white;
 }
+/* Horizontal Rule */
+hr {
+	border-style: lightgray;
+}
 
 /* Navigation/Header Bar */
 nav {
@@ -190,7 +194,7 @@ footer p {
 /* Media Queries */
 
 /* Split screen desktop/tablets */
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1500px) {
   .main_panel {
     width: 90vw;
   }

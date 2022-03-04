@@ -1,0 +1,53 @@
+/* WAD2 Team Project "Educ8" | "My Courses" Page Styles */
+
+/* Tiles */
+.course_tiles {
+  width: 100%;
+  margin: 5vh auto;
+}
+.course_tiles .tile {
+  width: calc(99%/3);
+  display: inline-block;
+  border-radius: 10px;
+  background-color: #d7e9d2;
+  padding: 30px;
+  margin: 0px;
+  transform: scale(0.95);
+  box-shadow: 0 0 6px gray;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+.course_tiles .tile:hover {
+  box-shadow: 0 0 20px #BBBBBB;
+  filter: brightness(1.03);
+  transform: scale(0.97);
+}
+.course_tiles h2 {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 38px;
+}
+.course_tiles p {
+  font-size: 22px;
+  text-align: center;
+}
+.course_tiles hr {
+  margin: none;
+}
+
+
+
+/* Media Queries */
+
+/* Split screen desktop/tablets */
+@media screen and (max-width: 1500px) {
+  .course_tiles .tile {
+    width: calc(99%/2);
+  }
+}
+
+/* Phones */
+@media screen and (max-width: 850px) {
+  .course_tiles .tile {
+    width: 100%;
+  }
+}
