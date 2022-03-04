@@ -124,14 +124,14 @@ nav li a:hover {
 /* Main Panel */
 .content_panel {
   background-color: white;
-  margin: 4vh 4vw 4vh 4vw;
+  margin: 4vh 4vw;
   box-shadow: 0 0 6px #CCCCCC;
   border-radius: 10px;
   width: 75vw;
 	max-width: 1600px;
   margin-left: auto;
 	margin-right: auto;
-  padding: 2vh 5vw 2vh 5vw;
+  padding: 2vh 5vw 4vh 5vw;
 }
 
 h1.panel_title {
