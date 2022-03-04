@@ -1,4 +1,4 @@
-/* Kerffufler.com | Scripts for scroll fading/animation, and back to top button */
+/* WAD2 Team Project "Educ8" | Global Visual Scripts */
 
 $(document).ready(function(){
 
