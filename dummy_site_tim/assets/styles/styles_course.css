@@ -1,1 +1,60 @@
 /* WAD2 Team Project "Educ8" | Course Page Styles */
+
+.course_files {
+  margin-bottom: 30px;
+}
+.course_files .file {
+  display: inline-block;
+  border: 1px solid gray;
+  border-radius: 2px;
+  width: calc(99%/2);
+  padding: 2px 20px;
+  transform: scale(0.96);
+}
+.course_files p {
+  font-family: monospace;
+  float: left;
+  max-width: 24vw;
+  cursor: default;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.course_files button {
+  float: right;
+  font-size: 20px;
+  margin-top: 4px;
+  padding: 10px 12px;
+  background: none;
+  border-radius: 5px;
+  border: none;
+  color: #60a7ce;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+.course_files button:hover {
+  color: #6bb2d9;
+  transform: scale(1.1);
+  background-color: #EEEEEE;
+}
+
+
+
+/* Media Queries */
+
+/* Split screen desktop/tablets */
+@media screen and (max-width: 1500px) {
+  .course_files p {
+    max-width: 28vw;
+  }
+}
+
+/* Phones */
+@media screen and (max-width: 850px) {
+  .course_files .file {
+    width: 100%;
+  }
+  .course_files p {
+    max-width: 60vw;
+  }
+}

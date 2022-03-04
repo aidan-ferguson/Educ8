@@ -8,6 +8,7 @@ Colours Used:
   #60a7ce;
   #6bb2d9;
   #EEEEEE;
+	gray;
 
 Fonts Used:
   font-family: 'Barlow Semi Condensed', sans-serif;
@@ -26,6 +27,7 @@ body, html {
   padding: 0;
   background-color: #EEEEEE;
   font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
 }
 * {
   box-sizing: border-box;
@@ -139,6 +141,9 @@ h2.panel_subtitle {
 	margin-top: -20px;
 	margin-bottom: 40px;
 }
+h2.panel_heading {
+	font-size: 36px;
+}
 
 /* Footer */
 footer {
@@ -180,7 +185,7 @@ footer p {
   position: fixed;
   bottom: 30px;
   right: 30px;
-  transition: background-color .3s, opacity .5s, visibility .5s;
+  transition: background-color .15s, opacity .5s, visibility .5s;
   opacity: 0;
   visibility: hidden;
   z-index: 999;
@@ -202,14 +207,14 @@ footer p {
 
 /* Split screen desktop/tablets */
 @media screen and (max-width: 1500px) {
-  .main_panel {
+  .content_panel {
     width: 90vw;
   }
 }
 
 /* Phones */
 @media screen and (max-width: 850px) {
-  .main_panel {
+  .content_panel {
     width: 96vw;
   }
 }
