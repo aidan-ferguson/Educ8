@@ -3,7 +3,7 @@
 $(document).ready(function(){
 
 
-	// Animate Scrolling on buttons
+	// Animate scrolling on buttons
 	$('a[href*="#"]').on('click', function (e) {
 		$('html, body').animate({
 			scrollTop: $($(this).attr('href')).offset().top
