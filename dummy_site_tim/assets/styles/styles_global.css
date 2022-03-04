@@ -120,7 +120,7 @@ nav li a:hover {
 }
 
 /* Main Panel */
-.main_panel {
+.content_panel {
   background-color: white;
   margin: 4vh 4vw 4vh 4vw;
   box-shadow: 0 0 6px #CCCCCC;
@@ -134,7 +134,10 @@ nav li a:hover {
 
 h1.panel_title {
   font-size: 70px;
-  margin-bottom: 60px;
+}
+h2.panel_subtitle {
+	margin-top: -20px;
+	margin-bottom: 40px;
 }
 
 /* Footer */
