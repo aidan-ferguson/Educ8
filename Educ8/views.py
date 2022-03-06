@@ -29,6 +29,7 @@ def add_or_edit_flashcard(request, course_name_slug):
 def show_flashcard(request, course_name_slug, flashcardID):
     pass
 
+@login_required
 def add_student(request, course_name_slug):
     pass
 
