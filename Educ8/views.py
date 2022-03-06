@@ -5,7 +5,7 @@ from datetime import datetime
 
 def index(request):
     visitor_cookie_handler(request)
-    response = render(request, 'rango/index.html')
+    response = render(request, 'Educ8/index.html')
     return response
 
 @login_required
