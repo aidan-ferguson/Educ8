@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def index(request):
-    return HttpResponse("Educ8 says aight!")
+    return render(request, 'Educ8/index.html') 
 
 def home(request):
     pass
