@@ -26,7 +26,7 @@ def add_flashcard(request, course_name_slug):
     pass
 
 @login_required
-def show_flashcard(request, flashcardID):
+def show_flashcard(request, course_name_slug, flashcardID):
     pass
 
 def register(request):
