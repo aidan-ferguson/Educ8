@@ -1,4 +1,6 @@
 import os
+import random
+from django.contrib.auth.models import User
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_group_project.settings')
 
@@ -16,10 +18,24 @@ Things to do:
 """
 
 def populate() -> None:
-    student = [{"username":"Dom1", "password":"Password", "first_name":"Dom", "last_name":"Jina"},
-               {"username":"Dom2", "password":"Password", "first_name":"Dom", "last_name":"Jina"},
-               {"username":"Dom3", "password":"Password", "first_name":"Dom", "last_name":"Jina"},
-               {"username":"Dom4", "password":"Password", "first_name":"Dom", "last_name":"Jina"}]
+    """ student = [{"username":'Dom1', "password":"Password", "first_name":"Dom", "last_name":"Jina"},
+               {"username":'Dom2', "password":"Password", "first_name":"Dom", "last_name":"Jina"},
+               {"username":'Dom3', "password":"Password", "first_name":"Dom", "last_name":"Jina"},
+               {"username":'Dom4', "password":"Password", "first_name":"Dom", "last_name":"Jina"}]
+
+    Teacher = [{"username":"Bob1", "password":"Password", "first_name":"Dom", "last_name":"Jina"},
+               {"username":"Bob2", "password":"Password", "first_name":"Dom", "last_name":"Jina"},
+               {"username":"Bob3", "password":"Password", "first_name":"Dom", "last_name":"Jina"},
+               {"username":"Bob4", "password":"Password", "first_name":"Dom", "last_name":"Jina"}]
+
+    Course = [{"courseName":"Maths", "createdBy":"Bob1", "students":[]}]
+
+    Flashcard = [{"title":"addition1", "question":"What is 1 + 1?", "answer": "2", "createdBy":"Dom1", "Course":"Maths"}] """
+
+    student = {"Dom1": {"password":"Password", "first_name":"Dom", "last_name":"Jina"},
+               'Dom2': {"password":"Password", "first_name":"Dom", "last_name":"Jina"},
+               'Dom3': {"password":"Password", "first_name":"Dom", "last_name":"Jina"},
+               'Dom4': {"password":"Password", "first_name":"Dom", "last_name":"Jina"}}
 
     Teacher = [{"username":"Bob1", "password":"Password", "first_name":"Dom", "last_name":"Jina"},
                {"username":"Bob2", "password":"Password", "first_name":"Dom", "last_name":"Jina"},
@@ -30,23 +46,27 @@ def populate() -> None:
 
     Flashcard = [{"title":"addition1", "question":"What is 1 + 1?", "answer": "2", "createdBy":"Dom1", "Course":"Maths"}]
 
-    for student_data in student:
-        add_student(student_data["username"], student_data["password"], student_data["first_name"], student_data["last_name"])
+    for students, student_data in student.items():
+        add_student(students, student_data["password"], student_data["first_name"], student_data["last_name"])
 
-    for teacher_data in Teacher:
-        add_teacher(teacher_data["username"], teacher_data["password"], teacher_data["first_name"], teacher_data["last_name"])
+    for teacher, teacher_data in Teacher.items():
+        add_teacher(teacher, teacher_data["password"], teacher_data["first_name"], teacher_data["last_name"])
     
-    for course_data in Course:
-        add_course(course_data["courseName"], course_data["createdBy"], course_data["students"])
+    for course, course_data in Course:
+        add_course(course, course_data["createdBy"], course_data["students"])
     
-    for flashcard_data in Flashcard:
-        add_flashcard(flashcard_data["title"], flashcard_data["question"], flashcard_data["answer"], flashcard_data["createdBy"], flashcard_data["Course"])
+    for flashcards, flashcard_data in Flashcard:
+        add_flashcard(flashcards, flashcard_data["question"], flashcard_data["answer"], flashcard_data["createdBy"], flashcard_data["Course"])
 
 def add_student(Username: str, Password: str, first_name: str, last_name: str) -> object:
-    s = Student.objects.create(user=Username)
+    s = User.objects.create_user(username=Username,
+                                    first_name = first_name,
+                                    last_name = last_name,
+                                    password = Password)
+    """ s.user = Username
     s.first_name = first_name
     s.last_name = last_name
-    s.password = Password
+    s.password = Password """
     s.save()
     return s
 
