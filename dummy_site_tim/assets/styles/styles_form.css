@@ -38,6 +38,7 @@ form {
 }
 .field input[type=radio] {
   cursor: pointer;
+  margin-top: 16px;
 }
 .field input[type=checkbox] {
   cursor: pointer;
@@ -47,6 +48,13 @@ form {
 .form_hr {
   margin: 36px 0;
 }
+
+/* Error message */
+p.error_message {
+  color: #FF4444;
+  font-size: 20px;
+}
+
 
 
 /* Media Queries */

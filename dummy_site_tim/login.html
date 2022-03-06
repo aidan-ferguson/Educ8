@@ -52,10 +52,16 @@
 
     <form class="" action="index.html" method="post">
 
-      <p class="error_message"><b>Error:</b> Not enough geese.</p>
+      <p class="error_message"><b>Error:</b> Weight limit exceeded.</p>
 
       <div class="field">
-        <label for="fname">Text field:</label>
+        <label for="fname">Username:</label>
+        <br>
+        <input type="text" name="fname" value="">
+      </div>
+
+      <div class="field">
+        <label for="fname">Password:</label>
         <br>
         <input type="text" name="fname" value="">
       </div>
@@ -69,21 +75,10 @@
         <label for="teacher">Teacher</label>
       </div>
 
-      <div class="field">
-        <label for="qtext">Text area:</label>
-        <br>
-        <textarea name="qtext" value=""></textarea>
-      </div>
-
       <hr class="form_hr">
 
       <div class="field">
-        <input type="checkbox" name="terms" value="">
-        <label for="terms"><i> I have read and accept the <a href="terms.html" target="_blank"><b>Terms & Conditions</b></a>.</i></label>
-      </div>
-
-      <div class="field">
-        <input type="submit" value="Submit">
+        <input type="submit" value="Login">
       </div>
 
     </form>
