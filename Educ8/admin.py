@@ -6,4 +6,4 @@ class StudentAdmin(admin.ModelAdmin):
     list_display = ('username', 'first_name', 'last_name')
 
 admin.site.register(Teacher)
-admin.site.register(Student, StudentAdmin)
+admin.site.register(Student)

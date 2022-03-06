@@ -1,14 +1,11 @@
 import os
-import random
-from django.contrib.auth.models import User
-
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_group_project.settings')
 
 import django
-
 django.setup()
 
-from Educ8.models import Student, Teacher, Course, Flashcard
+from django.contrib.auth.models import User
+from Educ8.models import Student, Teacher#, Course, Flashcard
 
 """
 Things to do:
@@ -59,15 +56,21 @@ def populate() -> None:
         add_flashcard(flashcards, flashcard_data["question"], flashcard_data["answer"], flashcard_data["createdBy"], flashcard_data["Course"]) """
 
 def add_student(Username: str, Password: str, first_name: str, last_name: str) -> object:
-    s = User.objects.create_user(user=Username,
+    s = User.objects.create(username=Username,
                                     first_name = first_name,
                                     last_name = last_name,
                                     password = Password)
-    """ s.user = Username
-    s.first_name = first_name
-    s.last_name = last_name
-    s.password = Password """
-    s.save()
+    """s = Student(username=Username,
+                                    first_name = first_name,
+                                    last_name = last_name,
+                                    password = Password)"""
+    # s = Student()
+    # s.username = Username
+    # s.first_name = first_name
+    # s.last_name = last_name
+    # s.password = Password
+    Student.objects.get_or_create(user=s)
+    # s.save()
     return s
 
 """ def add_teacher(Username: str, Password: str, first_name: str, last_name: str) -> object:
