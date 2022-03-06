@@ -29,26 +29,29 @@ def populate() -> None:
 
     Flashcard = [{"title":"addition1", "question":"What is 1 + 1?", "answer": "2", "createdBy":"Dom1", "Course":"Maths"}] """
 
-    student = {"Dom1": {"password":"Password", "first_name":"Dom", "last_name":"Jina"},
+    students = {"Dom1": {"password":"Password", "first_name":"Dom", "last_name":"Jina"},
                'Dom2': {"password":"Password", "first_name":"Dom", "last_name":"Jina"},
                'Dom3': {"password":"Password", "first_name":"Dom", "last_name":"Jina"},
                'Dom4': {"password":"Password", "first_name":"Dom", "last_name":"Jina"}}
 
-    Teacher = [{"username":"Bob1", "password":"Password", "first_name":"Dom", "last_name":"Jina"},
-               {"username":"Bob2", "password":"Password", "first_name":"Dom", "last_name":"Jina"},
-               {"username":"Bob3", "password":"Password", "first_name":"Dom", "last_name":"Jina"},
-               {"username":"Bob4", "password":"Password", "first_name":"Dom", "last_name":"Jina"}]
+    teachers = {"Bob1" : {"password":"Password", "first_name":"Dom", "last_name":"Jina"},
+               "Bob2" : {"password":"Password", "first_name":"Dom", "last_name":"Jina"},
+               "Bob3" : {"password":"Password", "first_name":"Dom", "last_name":"Jina"},
+               "Bob4" : {"password":"Password", "first_name":"Dom", "last_name":"Jina"}}
+    
+
 
     Course = [{"courseName":"Maths", "createdBy":"Bob1", "students":[]}]
 
     Flashcard = [{"title":"addition1", "question":"What is 1 + 1?", "answer": "2", "createdBy":"Dom1", "Course":"Maths"}]
 
-    for students, student_data in student.items():
-        add_student(students, student_data["password"], student_data["first_name"], student_data["last_name"])
+    for student, student_data in students.items():
+        add_student(student, student_data["password"], student_data["first_name"], student_data["last_name"])
 
-    """ for teacher, teacher_data in Teacher.items():
+    for teacher, teacher_data in teachers.items():
         add_teacher(teacher, teacher_data["password"], teacher_data["first_name"], teacher_data["last_name"])
-    
+
+    """
     for course, course_data in Course:
         add_course(course, course_data["createdBy"], course_data["students"])
     
@@ -56,31 +59,22 @@ def populate() -> None:
         add_flashcard(flashcards, flashcard_data["question"], flashcard_data["answer"], flashcard_data["createdBy"], flashcard_data["Course"]) """
 
 def add_student(Username: str, Password: str, first_name: str, last_name: str) -> object:
-    s = User.objects.create(username=Username,
+    user = User.objects.get_or_create(username=Username,
                                     first_name = first_name,
                                     last_name = last_name,
-                                    password = Password)
-    """s = Student(username=Username,
-                                    first_name = first_name,
-                                    last_name = last_name,
-                                    password = Password)"""
-    # s = Student()
-    # s.username = Username
-    # s.first_name = first_name
-    # s.last_name = last_name
-    # s.password = Password
-    Student.objects.get_or_create(user=s)
-    # s.save()
+                                    password = Password)[0]
+    s = Student.objects.get_or_create(user=user)[0]
     return s
 
-""" def add_teacher(Username: str, Password: str, first_name: str, last_name: str) -> object:
-    t = Teacher.objects.create(username=Username)
-    t.first_name = first_name
-    t.last_name = last_name
-    t.password = Password
-    t.save()
+def add_teacher(Username: str, Password: str, first_name: str, last_name: str) -> object:
+    user = User.objects.get_or_create(username=Username,
+                            first_name = first_name,
+                            last_name = last_name,
+                            password = Password)[0]
+    t = Teacher.objects.get_or_create(user=user)[0]
     return t
 
+"""
 def add_course(CourseName: str, createdBy: str, students: list) -> object:
     c = Course.objects.create(name=CourseName)
     c.createdBy = createdBy
