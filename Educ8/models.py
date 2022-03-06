@@ -38,7 +38,7 @@ class Student(models.Model):
     Methods:
     __str__ : Returns the username of the Student. This makes debugging easier.
     """
-    user = models.OneToOneField(User, on_delete=models.PROTECT, primary_key=True, unique=True)
+    user = models.OneToOneField(User, on_delete=models.PROTECT, default="DEFAULT", primary_key=True)
     
     def __str__(self):
         return self.username
