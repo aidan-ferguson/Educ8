@@ -41,8 +41,8 @@ class Student(models.Model):
     __str__ : Returns the username of the Student. This makes debugging easier.
     """
     username = models.OneToOneField(User, on_delete=models.PROTECT, default="DEFAULT", primary_key=True)
-    firstname = models.OneToOneField(User, on_delete=models.PROTECT, related_name="firstname", null=True)
-    lastname = models.OneToOneField(User, on_delete=models.PROTECT, related_name="lastname", null=True)
+    firstname = models.OneToOneField(User, on_delete=models.PROTECT, related_name="first name", null=True)
+    lastname = models.OneToOneField(User, on_delete=models.PROTECT, related_name="surname", null=True)
     
     def __str__(self):
         return self.username.username
