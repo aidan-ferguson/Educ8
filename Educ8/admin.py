@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from Educ8.models import Teacher, Student
+
+admin.site.register(Teacher)
+admin.site.register(Student)
