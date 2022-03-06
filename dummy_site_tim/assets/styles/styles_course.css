@@ -1,9 +1,10 @@
 /* WAD2 Team Project "Educ8" | Course Page Styles */
 
-.course_files {
+/* Files section */
+.files_container {
   margin-bottom: 30px;
 }
-.course_files .file {
+.files_container .file {
   display: inline-block;
   border: 1px solid gray;
   border-radius: 2px;
@@ -11,7 +12,7 @@
   padding: 2px 20px;
   transform: scale(0.96);
 }
-.course_files p {
+.files_container p {
   font-family: monospace;
   float: left;
   max-width: 24vw;
@@ -20,7 +21,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.course_files button {
+.files_container button {
   float: right;
   font-size: 20px;
   margin-top: 4px;
@@ -32,12 +33,45 @@
   cursor: pointer;
   transition: all 0.1s ease-in-out;
 }
-.course_files button:hover {
+.files_container button:hover {
   color: #6bb2d9;
   transform: scale(1.1);
   background-color: #EEEEEE;
 }
 
+/* Flashcard tiles */
+.flashcard_container .flashcard_tile {
+  width: calc(99%/3);
+  display: inline-block;
+  border-radius: 10px;
+  padding: 30px 30px 0 30px;
+  margin: 0px;
+  transform: scale(0.95);
+  box-shadow: 0 0 6px gray;
+  transition: all 0.1s ease-in-out;
+}
+.flashcard_container .flashcard_tile:hover {
+  box-shadow: 0 0 20px #BBBBBB;
+  filter: brightness(1.04);
+  transform: scale(0.97);
+}
+.flashcard_container h2 {
+  margin: none;
+  padding: none;
+}
+.flashcard_container button {
+  float: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 5px;
+  transition: all 0.1s ease-in-out;
+}
+.flashcard_container button:hover {
+  transform: scale(1.1);
+  background-color: #EEEEEE;
+}
 
 
 /* Media Queries */
@@ -46,6 +80,9 @@
 @media screen and (max-width: 1500px) {
   .course_files p {
     max-width: 28vw;
+  }
+  .flashcard_container .flashcard_tile {
+    width: calc(99%/2);
   }
 }
 
@@ -56,5 +93,8 @@
   }
   .course_files p {
     max-width: 60vw;
+  }
+  .flashcard_container .flashcard_tile {
+    width: 100%;
   }
 }
