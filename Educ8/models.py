@@ -58,7 +58,7 @@ class Course(models.Model):
     __str__ : Returns the name of the Course. This makes debugging easier.
     """
     courseName = models.CharField(max_length=256, primary_key=True)
-    createdBy = models.ForeignKey(Teacher, on_delete = models.CASCADE)
+    createdBy = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True)
     students = models.ManyToManyField(Student, blank=True)
 
     def __str__(self):

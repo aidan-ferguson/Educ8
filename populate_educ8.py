@@ -5,7 +5,7 @@ import django
 django.setup()
 
 from django.contrib.auth.models import User
-from Educ8.models import Student, Teacher#, Course, Flashcard
+from Educ8.models import Student, Teacher, Course, Flashcard
 
 """
 Things to do:
@@ -30,18 +30,18 @@ def populate() -> None:
     Flashcard = [{"title":"addition1", "question":"What is 1 + 1?", "answer": "2", "createdBy":"Dom1", "Course":"Maths"}] """
 
     students = {"Dom1": {"password":"Password", "first_name":"Dom", "last_name":"Jina"},
-               'Dom2': {"password":"Password", "first_name":"Dom", "last_name":"Jina"},
-               'Dom3': {"password":"Password", "first_name":"Dom", "last_name":"Jina"},
-               'Dom4': {"password":"Password", "first_name":"Dom", "last_name":"Jina"}}
+                "Dom2": {"password":"Password", "first_name":"Dom", "last_name":"Jina"},
+                "Dom3": {"password":"Password", "first_name":"Dom", "last_name":"Jina"},
+                "Dom4": {"password":"Password", "first_name":"Dom", "last_name":"Jina"}}
 
-    teachers = {"Bob1" : {"password":"Password", "first_name":"Dom", "last_name":"Jina"},
-               "Bob2" : {"password":"Password", "first_name":"Dom", "last_name":"Jina"},
-               "Bob3" : {"password":"Password", "first_name":"Dom", "last_name":"Jina"},
-               "Bob4" : {"password":"Password", "first_name":"Dom", "last_name":"Jina"}}
-    
+    teachers = {"Bob1" : {"password":"Password", "first_name":"Dom", "last_name":"Jina", "object":None},
+                "Bob2" : {"password":"Password", "first_name":"Dom", "last_name":"Jina", "object":None},
+                "Bob3" : {"password":"Password", "first_name":"Dom", "last_name":"Jina", "object":None},
+                "Bob4" : {"password":"Password", "first_name":"Dom", "last_name":"Jina", "object":None}}
 
-
-    Course = [{"courseName":"Maths", "createdBy":"Bob1", "students":[]}]
+    courses = {"Maths" : {"createdBy":"Bob1", "students":[]},
+               "Extreme Cake Baking" : {"createdBy":"Bob3", "students":[]},
+               "English" : {"createdBy":"Bob4", "students":[]}}
 
     Flashcard = [{"title":"addition1", "question":"What is 1 + 1?", "answer": "2", "createdBy":"Dom1", "Course":"Maths"}]
 
@@ -51,10 +51,11 @@ def populate() -> None:
     for teacher, teacher_data in teachers.items():
         add_teacher(teacher, teacher_data["password"], teacher_data["first_name"], teacher_data["last_name"])
 
-    """
-    for course, course_data in Course:
-        add_course(course, course_data["createdBy"], course_data["students"])
+    for course, course_data in courses.items():
+        # We access the actual object of the teacher so it can link to the teacher in the database 
+        add_course(course, teachers[course_data["createdBy"]]["object"], course_data["students"])
     
+    """
     for flashcards, flashcard_data in Flashcard:
         add_flashcard(flashcards, flashcard_data["question"], flashcard_data["answer"], flashcard_data["createdBy"], flashcard_data["Course"]) """
 
@@ -74,16 +75,16 @@ def add_teacher(Username: str, Password: str, first_name: str, last_name: str) -
     t = Teacher.objects.get_or_create(user=user)[0]
     return t
 
-"""
-def add_course(CourseName: str, createdBy: str, students: list) -> object:
-    c = Course.objects.create(name=CourseName)
-    c.createdBy = createdBy
-    c.save()
+
+def add_course(CourseName: str, createdBy: object, students: list) -> object:
+    c = Course.objects.get_or_create(courseName=CourseName, createdBy=createdBy)[0]
+    # c.save()
     for student in students:
         c.students.add(student)
     c.save()
     return c
 
+"""
 def add_flashcard(title: str, question: str, answer: str, createdBy: str, Course: str) -> object:
     f = Flashcard.objects.create(title=title, createdBy=createdBy, Course=Course)
     f.question = question
