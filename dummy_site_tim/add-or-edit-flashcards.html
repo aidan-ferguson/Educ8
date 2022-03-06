@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!-- WAD2 Team Project "Educ8" -->
+
+<html lang="en" dir="ltr">
+
+<head>
+
+  <title>Educ8 | Create Flashcard</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Icon -->
+  <link rel="shortcut icon" type="image/x-icon" href="assets/icons/icon.ico">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="assets/styles/styles_global.css">
+  <link rel="stylesheet" href="assets/styles/styles_form.css">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400&family=Bebas+Neue&family=Open+Sans:wght@400&display=swap" rel="stylesheet">
+  <!-- Scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="assets/scripts/scripts_global.js"></script>
+  <script src="assets/scripts/scripts_form.js"></script>
+
+</head>
+
+<body>
+  <div class="content">
+
+  <!-- Navigation -->
+  <nav>
+    <a id="header-nav-logo" href="index.html"><img src="assets/icons/logo.png"></a>
+    <ul>
+      <li>
+        <a href='form_template.html'><i class="fa fa-arrow-circle-right"></i> Logout</a>
+      </li>
+      <li>
+        <a href='my_courses.html'><i class="fa fa-book"></i> My Courses</a>
+      </li>
+      <li>
+        <a href='index.html'><i class="fa fa-home"></i> Home</a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Main page content -->
+  <div class="content_panel">
+
+    <h1 class="panel_title">Create Flashcard</h1>
+    <hr>
+
+    <form class="" action="index.html" method="post">
+
+      <p class="error_message"><b>Error:</b> Too many geese.</p>
+
+      <div class="field">
+        <label for="title">Title:</label>
+        <br>
+        <input type="text" name="title" value="">
+      </div>
+
+      <div class="field">
+        <label for="qtext">Question Text:</label>
+        <br>
+        <textarea name="qtext" value=""></textarea>
+      </div>
+
+      <div class="field">
+        <label for="atext">Answer Text:</label>
+        <br>
+        <textarea name="qtext" value=""></textarea>
+      </div>
+
+      <hr class="form_hr">
+
+      <div class="field">
+        <input type="submit" value="Create Card">
+      </div>
+
+    </form>
+
+  </div>
+
+
+  </div>
+  <!-- Footer -->
+  <footer>
+    <h4>&copy; Educ8 2022</h4>
+    <p>A WAD2 Team Project</p>
+  </footer>
+
+
+  <a id="back2top" title="Scroll to the Top" class="tooltip"></a>
+  <div class="scrollbar-container">
+    <div class="scrollbar" id="scroll"/>
+  </div>
+
+</body>
+
+</html>
+<!-- You've reached the end of the page -->
