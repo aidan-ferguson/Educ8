@@ -47,27 +47,6 @@ class Student(models.Model):
     def __str__(self):
         return self.username.username
 
-class Flashcard(models.Model):
-    """Flashcard class: This is a model for our Flashcard table in our database.
-
-    Attributes:
-        title (str): This is the title of the Flashcard.
-        question (str): This is the question of the Flashcard.
-        answer (str): This is the answer of the Flashcard.
-        createdBy (str): This is the username of the Student who created the Flashcard.
-        Course (str): This is the Course of the Student, for which this Flashcard belongs to.
-
-    Methods:
-    __str__ : Returns the title of the Flashcard. This makes debugging easier.
-    """
-    title = models.CharField(max_length=32, primary_key=True, unique=True)
-    question = models.CharField(max_length=256)
-    answer = models.CharField(max_length=256)
-    createdBy = models.ForeignKey(Student, on_delete=models.CASCADE)
-    Course = models.CharField(Student, max_length=256)
-
-    def __str__(self):
-        return self.title
 
 class Course(models.Model):
     """Course class: This is a model for our Course table in our database.
@@ -86,3 +65,25 @@ class Course(models.Model):
 
     def __str__(self):
         return self.courseName
+    
+class Flashcard(models.Model):
+    """Flashcard class: This is a model for our Flashcard table in our database.
+
+    Attributes:
+        title (str): This is the title of the Flashcard.
+        question (str): This is the question of the Flashcard.
+        answer (str): This is the answer of the Flashcard.
+        createdBy (str): This is the username of the Student who created the Flashcard.
+        Course (str): This is the Course of the Student, for which this Flashcard belongs to.
+
+    Methods:
+    __str__ : Returns the title of the Flashcard. This makes debugging easier.
+    """
+    title = models.CharField(max_length=32, primary_key=True, unique=True)
+    question = models.CharField(max_length=256)
+    answer = models.CharField(max_length=256)
+    createdBy = models.ForeignKey(Student, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
