@@ -39,11 +39,14 @@ def populate() -> None:
                 "Bob3" : {"password":"Password", "first_name":"Dom", "last_name":"Jina", "object":None},
                 "Bob4" : {"password":"Password", "first_name":"Dom", "last_name":"Jina", "object":None}}
 
-    courses = {"Maths" : {"createdBy":"Bob1", "students":[]},
-               "Extreme Cake Baking" : {"createdBy":"Bob3", "students":[]},
-               "English" : {"createdBy":"Bob4", "students":[]}}
+    courses = {"Maths" : {"createdBy":"Bob1", "students":[], "object":None},
+               "Extreme Cake Baking" : {"createdBy":"Bob3", "students":[], "object":None},
+               "English" : {"createdBy":"Bob4", "students":[], "object":None}}
 
-    Flashcard = [{"title":"addition1", "question":"What is 1 + 1?", "answer": "2", "createdBy":"Dom1", "Course":"Maths"}]
+    flashcards = {"Addition Flashcard" : {"question":"What is 1 + 1?", "answer": "2", "createdBy":"Dom1", "Course":"Maths"},
+                  "Showdown Winner" : {"question":"Who won the 2008 Jumper Knitting competition?", "answer": "My Gran", "createdBy":"Dom4", "Course":"Extreme Cake Baking"},
+                  "Crochet is 4 nerdz" : {"question":"What is better crochet or knitting?", "answer": "Knitting", "createdBy":"Dom2", "Course":"Maths"},
+                  "Best Course" : {"question":"Best 2nd year GofU CS course", "answer": "OOSE2", "createdBy":"Dom1", "Course":"Extreme Cake Baking"}}
 
     for student, student_data in students.items():
         student_data["object"] = add_student(student, student_data["password"], student_data["first_name"], student_data["last_name"])
@@ -52,13 +55,11 @@ def populate() -> None:
         teacher_data["object"] = add_teacher(teacher, teacher_data["password"], teacher_data["first_name"], teacher_data["last_name"])
 
     for course, course_data in courses.items():
-        # We access the actual object of the teacher so it can link to the teacher in the database 
-        print(teachers[course_data["createdBy"]]["object"])
-        add_course(course, teachers[course_data["createdBy"]]["object"], course_data["students"])
+        # We access the actual object of the teacher so it can link to the teacher in the database
+        course_data["object"] = add_course(course, teachers[course_data["createdBy"]]["object"], course_data["students"])
     
-    """
-    for flashcards, flashcard_data in Flashcard:
-        add_flashcard(flashcards, flashcard_data["question"], flashcard_data["answer"], flashcard_data["createdBy"], flashcard_data["Course"]) """
+    for flashcard, flashcard_data in flashcards.items():
+        add_flashcard(flashcard, flashcard_data["question"], flashcard_data["answer"], students[flashcard_data["createdBy"]]["object"], courses[flashcard_data["Course"]]["object"])
 
 def add_student(Username: str, Password: str, first_name: str, last_name: str) -> object:
     user = User.objects.get_or_create(username=Username,
@@ -84,14 +85,13 @@ def add_course(CourseName: str, createdBy: object, studentsToAdd: list) -> objec
     c.save()
     return c
 
-"""
-def add_flashcard(title: str, question: str, answer: str, createdBy: str, Course: str) -> object:
-    f = Flashcard.objects.create(title=title, createdBy=createdBy, Course=Course)
+def add_flashcard(title: str, question: str, answer: str, createdBy: object, Course: object) -> object:
+    f = Flashcard.objects.get_or_create(createdBy=createdBy, course=Course)[0]
+    f.title = title
     f.question = question
     f.answer = answer
     f.save()
-    return f """
-
+    return f
 
 if __name__ == '__main__':
     print('Starting Educ8 population script...')
