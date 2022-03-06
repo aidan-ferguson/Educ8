@@ -22,11 +22,14 @@ def add_file(request, course_name_slug):
     pass
 
 @login_required
-def add_flashcard(request, course_name_slug):
+def add_or_edit_flashcard(request, course_name_slug):
     pass
 
 @login_required
 def show_flashcard(request, course_name_slug, flashcardID):
+    pass
+
+def add_student(request, course_name_slug):
     pass
 
 def register(request):
