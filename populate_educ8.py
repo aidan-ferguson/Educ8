@@ -15,19 +15,12 @@ Things to do:
 """
 
 def populate() -> None:
-    """ student = [{"username":'Dom1', "password":"Password", "first_name":"Dom", "last_name":"Jina"},
-               {"username":'Dom2', "password":"Password", "first_name":"Dom", "last_name":"Jina"},
-               {"username":'Dom3', "password":"Password", "first_name":"Dom", "last_name":"Jina"},
-               {"username":'Dom4', "password":"Password", "first_name":"Dom", "last_name":"Jina"}]
-
-    Teacher = [{"username":"Bob1", "password":"Password", "first_name":"Dom", "last_name":"Jina"},
-               {"username":"Bob2", "password":"Password", "first_name":"Dom", "last_name":"Jina"},
-               {"username":"Bob3", "password":"Password", "first_name":"Dom", "last_name":"Jina"},
-               {"username":"Bob4", "password":"Password", "first_name":"Dom", "last_name":"Jina"}]
-
-    Course = [{"courseName":"Maths", "createdBy":"Bob1", "students":[]}]
-
-    Flashcard = [{"title":"addition1", "question":"What is 1 + 1?", "answer": "2", "createdBy":"Dom1", "Course":"Maths"}] """
+    
+    """
+        Define the mock data to be inserted into the database.
+        All object attributes will be replaced with the actual database objects after creation
+            this is due to the fact that they need to be inserted into other tables
+    """
 
     students = {"Dom1": {"password":"Password", "first_name":"Dom", "last_name":"Jina", "object":None},
                 "Dom2": {"password":"Password", "first_name":"Dom", "last_name":"Jina", "object":None},
@@ -48,20 +41,33 @@ def populate() -> None:
                   "Crochet is 4 nerdz" : {"question":"What is better crochet or knitting?", "answer": "Knitting", "createdBy":"Dom2", "Course":"Maths"},
                   "Best Course" : {"question":"Best 2nd year GofU CS course", "answer": "OOSE2", "createdBy":"Dom1", "Course":"Extreme Cake Baking"}}
 
+    """
+        Simple loop over all student and teacher data to insert into the database
+    """
     for student, student_data in students.items():
         student_data["object"] = add_student(student, student_data["password"], student_data["first_name"], student_data["last_name"])
 
     for teacher, teacher_data in teachers.items():
         teacher_data["object"] = add_teacher(teacher, teacher_data["password"], teacher_data["first_name"], teacher_data["last_name"])
 
+    """
+        We need to determine the actual objects of the students to be added, that is the purpose of the list comprehension
+        We also get the actual teacher object in the add_course() call
+    """
     for course, course_data in courses.items():
         students_to_add = [students[student]["object"] for student in course_data["students"]]
         course_data["object"] = add_course(course, teachers[course_data["createdBy"]]["object"], students_to_add)
     
+    """
+        Once again, determine the actual objects of the students and flashcards from their string representation
+    """
     for flashcard, flashcard_data in flashcards.items():
         add_flashcard(flashcard, flashcard_data["question"], flashcard_data["answer"], students[flashcard_data["createdBy"]]["object"], courses[flashcard_data["Course"]]["object"])
 
-def add_student(Username: str, Password: str, first_name: str, last_name: str) -> object:
+"""
+    For both student and teacher first create the underlying user object and then add a student object to the database
+"""
+def add_student(Username: str, Password: str, first_name: str, last_name: str) -> Student:
     user = User.objects.get_or_create(username=Username,
                                     first_name = first_name,
                                     last_name = last_name,
@@ -69,7 +75,7 @@ def add_student(Username: str, Password: str, first_name: str, last_name: str) -
     s = Student.objects.get_or_create(user=user)[0]
     return s
 
-def add_teacher(Username: str, Password: str, first_name: str, last_name: str) -> object:
+def add_teacher(Username: str, Password: str, first_name: str, last_name: str) -> Teacher:
     user = User.objects.get_or_create(username=Username,
                             first_name = first_name,
                             last_name = last_name,
@@ -77,15 +83,20 @@ def add_teacher(Username: str, Password: str, first_name: str, last_name: str) -
     t = Teacher.objects.get_or_create(user=user)[0]
     return t
 
-
-def add_course(CourseName: str, createdBy: object, studentsToAdd: list) -> object:
+"""
+    Create a course in the database and add the students to it
+"""
+def add_course(CourseName: str, createdBy: Teacher, studentsToAdd: list) -> Course:
     c = Course.objects.get_or_create(courseName=CourseName, createdBy=createdBy)[0]
     for student in studentsToAdd:
         c.students.add(student)
     c.save()
     return c
 
-def add_flashcard(title: str, question: str, answer: str, createdBy: object, Course: object) -> object:
+"""
+    Create a flashcard in the database
+"""
+def add_flashcard(title: str, question: str, answer: str, createdBy: Student, Course: Course) -> Flashcard:
     f = Flashcard.objects.get_or_create(createdBy=createdBy, course=Course)[0]
     f.title = title
     f.question = question
