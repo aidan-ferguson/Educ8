@@ -44,7 +44,7 @@
   width: calc(99%/3);
   display: inline-block;
   border-radius: 10px;
-  padding: 30px 30px 0 30px;
+  padding: 6px 30px 12px 30px;
   margin: 0px;
   transform: scale(0.95);
   box-shadow: 0 0 6px gray;
@@ -56,13 +56,19 @@
   transform: scale(0.97);
 }
 .flashcard_container h2 {
+  font-size: 28px;
   margin: none;
   padding: none;
 }
+.flashcard_container p {
+  font-size: 20px;
+}
 .flashcard_container button {
   float: left;
+  font-size: 18px;
   background: none;
   border: none;
+  margin: 0 10px;
   cursor: pointer;
   padding: 12px;
   border-radius: 5px;

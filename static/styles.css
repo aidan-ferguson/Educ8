@@ -1,0 +1,7 @@
+html, body {
+  background-color: #EE9999;
+}
+marquee {
+  font-size: 200px;
+  text-decoration: underline;
+}
