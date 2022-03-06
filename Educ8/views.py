@@ -4,7 +4,7 @@ from django.http import HttpResponse
 def index(request):
     return render(request, 'Educ8/index.html') 
 
-def home(request):
+def courses(request):
     pass
 
 def show_course(request, course_name_slug):
@@ -18,3 +18,16 @@ def add_flashcard(request, course_name_slug):
 
 def show_flashcard(request, course_name_slug, flashcard_name_slug):
     pass
+
+def register(request):
+    pass
+
+def user_login(request):
+    pass
+
+def restricted(request):
+    pass
+
+def logout(request):
+    pass
+
