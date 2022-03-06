@@ -13,6 +13,9 @@ urlpatterns = [
          views.add_course, name='add_course'),
     path('course/<slug:course_name_slug>/add_file/',
          views.add_file, name='add_file'),
+    path('courses/<slug:course_name_slug>/add_flashcard',
+         views.add_flashcard, name='add_flashcard'),
+    #path('courses/<slug:course_name_slug>/')
     path('register/', views.register, name='register'),
     path('login/', views.user_login, name='login'),
     path('restricted/', views.restricted, name='restricted'),
