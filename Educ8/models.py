@@ -24,7 +24,7 @@ class Teacher(models.Model):
     username = models.OneToOneField(User, on_delete=models.PROTECT, primary_key=True, unique=True)
 
     def __str__(self):
-        return self.username
+        return self.user.username
 
 class Student(models.Model):
     """Student class: This is a model for our Student table in our database.
@@ -38,7 +38,7 @@ class Student(models.Model):
     Methods:
     __str__ : Returns the username of the Student. This makes debugging easier.
     """
-    username = models.OneToOneField(User, on_delete=models.PROTECT, primary_key=True, unique=True)
+    user = models.OneToOneField(User, on_delete=models.PROTECT, primary_key=True, unique=True)
     
     def __str__(self):
         return self.username

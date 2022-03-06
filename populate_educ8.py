@@ -30,8 +30,20 @@ def populate() -> None:
 
     Flashcard = [{"title":"addition1", "question":"What is 1 + 1?", "answer": "2", "createdBy":"Dom1", "Course":"Maths"}]
 
+    for student_data in student:
+        add_student(student_data["username"], student_data["password"], student_data["first_name"], student_data["last_name"])
+
+    for teacher_data in Teacher:
+        add_teacher(teacher_data["username"], teacher_data["password"], teacher_data["first_name"], teacher_data["last_name"])
+    
+    for course_data in Course:
+        add_course(course_data["courseName"], course_data["createdBy"], course_data["students"])
+    
+    for flashcard_data in Flashcard:
+        add_flashcard(flashcard_data["title"], flashcard_data["question"], flashcard_data["answer"], flashcard_data["createdBy"], flashcard_data["Course"])
+
 def add_student(Username: str, Password: str, first_name: str, last_name: str) -> object:
-    s = Student.objects.create(username=Username)
+    s = Student.objects.create(user=Username)
     s.first_name = first_name
     s.last_name = last_name
     s.password = Password
