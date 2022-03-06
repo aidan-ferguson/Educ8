@@ -49,17 +49,17 @@ def populate() -> None:
     for students, student_data in student.items():
         add_student(students, student_data["password"], student_data["first_name"], student_data["last_name"])
 
-    for teacher, teacher_data in Teacher.items():
+    """ for teacher, teacher_data in Teacher.items():
         add_teacher(teacher, teacher_data["password"], teacher_data["first_name"], teacher_data["last_name"])
     
     for course, course_data in Course:
         add_course(course, course_data["createdBy"], course_data["students"])
     
     for flashcards, flashcard_data in Flashcard:
-        add_flashcard(flashcards, flashcard_data["question"], flashcard_data["answer"], flashcard_data["createdBy"], flashcard_data["Course"])
+        add_flashcard(flashcards, flashcard_data["question"], flashcard_data["answer"], flashcard_data["createdBy"], flashcard_data["Course"]) """
 
 def add_student(Username: str, Password: str, first_name: str, last_name: str) -> object:
-    s = User.objects.create_user(username=Username,
+    s = User.objects.create_user(user=Username,
                                     first_name = first_name,
                                     last_name = last_name,
                                     password = Password)
@@ -70,7 +70,7 @@ def add_student(Username: str, Password: str, first_name: str, last_name: str) -
     s.save()
     return s
 
-def add_teacher(Username: str, Password: str, first_name: str, last_name: str) -> object:
+""" def add_teacher(Username: str, Password: str, first_name: str, last_name: str) -> object:
     t = Teacher.objects.create(username=Username)
     t.first_name = first_name
     t.last_name = last_name
@@ -92,7 +92,7 @@ def add_flashcard(title: str, question: str, answer: str, createdBy: str, Course
     f.question = question
     f.answer = answer
     f.save()
-    return f
+    return f """
 
 
 if __name__ == '__main__':

@@ -1,5 +1,7 @@
+from re import T
 from django.db import models
 from django.contrib.auth.models import User
+
 
 """
 Things to do:
@@ -38,10 +40,12 @@ class Student(models.Model):
     Methods:
     __str__ : Returns the username of the Student. This makes debugging easier.
     """
-    user = models.OneToOneField(User, on_delete=models.PROTECT, default="DEFAULT", primary_key=True)
+    username = models.OneToOneField(User, on_delete=models.PROTECT, default="DEFAULT", primary_key=True)
+    firstname = models.OneToOneField(User, on_delete=models.PROTECT, related_name="firstname", null=True)
+    lastname = models.OneToOneField(User, on_delete=models.PROTECT, related_name="lastname", null=True)
     
     def __str__(self):
-        return self.username
+        return self.username.username
 
 class Flashcard(models.Model):
     """Flashcard class: This is a model for our Flashcard table in our database.
