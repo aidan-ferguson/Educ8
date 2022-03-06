@@ -29,10 +29,10 @@ def populate() -> None:
 
     Flashcard = [{"title":"addition1", "question":"What is 1 + 1?", "answer": "2", "createdBy":"Dom1", "Course":"Maths"}] """
 
-    students = {"Dom1": {"password":"Password", "first_name":"Dom", "last_name":"Jina"},
-                "Dom2": {"password":"Password", "first_name":"Dom", "last_name":"Jina"},
-                "Dom3": {"password":"Password", "first_name":"Dom", "last_name":"Jina"},
-                "Dom4": {"password":"Password", "first_name":"Dom", "last_name":"Jina"}}
+    students = {"Dom1": {"password":"Password", "first_name":"Dom", "last_name":"Jina", "object":None},
+                "Dom2": {"password":"Password", "first_name":"Dom", "last_name":"Jina", "object":None},
+                "Dom3": {"password":"Password", "first_name":"Dom", "last_name":"Jina", "object":None},
+                "Dom4": {"password":"Password", "first_name":"Dom", "last_name":"Jina", "object":None}}
 
     teachers = {"Bob1" : {"password":"Password", "first_name":"Dom", "last_name":"Jina", "object":None},
                 "Bob2" : {"password":"Password", "first_name":"Dom", "last_name":"Jina", "object":None},
@@ -46,13 +46,14 @@ def populate() -> None:
     Flashcard = [{"title":"addition1", "question":"What is 1 + 1?", "answer": "2", "createdBy":"Dom1", "Course":"Maths"}]
 
     for student, student_data in students.items():
-        add_student(student, student_data["password"], student_data["first_name"], student_data["last_name"])
+        student_data["object"] = add_student(student, student_data["password"], student_data["first_name"], student_data["last_name"])
 
     for teacher, teacher_data in teachers.items():
-        add_teacher(teacher, teacher_data["password"], teacher_data["first_name"], teacher_data["last_name"])
+        teacher_data["object"] = add_teacher(teacher, teacher_data["password"], teacher_data["first_name"], teacher_data["last_name"])
 
     for course, course_data in courses.items():
         # We access the actual object of the teacher so it can link to the teacher in the database 
+        print(teachers[course_data["createdBy"]]["object"])
         add_course(course, teachers[course_data["createdBy"]]["object"], course_data["students"])
     
     """
@@ -76,10 +77,9 @@ def add_teacher(Username: str, Password: str, first_name: str, last_name: str) -
     return t
 
 
-def add_course(CourseName: str, createdBy: object, students: list) -> object:
+def add_course(CourseName: str, createdBy: object, studentsToAdd: list) -> object:
     c = Course.objects.get_or_create(courseName=CourseName, createdBy=createdBy)[0]
-    # c.save()
-    for student in students:
+    for student in studentsToAdd:
         c.students.add(student)
     c.save()
     return c
