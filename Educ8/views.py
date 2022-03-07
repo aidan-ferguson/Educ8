@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.shortcuts import redirect
-from Educ8.forms import CourseForm, TeacherForm, StudentForm
+from Educ8.forms import CourseForm, FlashcardForm, TeacherForm, StudentForm
 from datetime import datetime
 from Educ8.models import Course
 from Educ8.models import Flashcard
@@ -59,7 +59,33 @@ def add_file(request, course_name_slug):
 
 @login_required
 def add_or_edit_flashcard(request, course_name_slug):
-    pass
+    try:
+        course = Course.objects.get(slug=course_name_slug)
+    except Course.DoesNotExist:
+        course = None
+
+    if course is None:
+        return redirect('/Educ8/')
+
+    form = FlashcardForm()
+
+    if request.method == 'POST':
+        form = FlashcardForm(request.POST)
+
+        if form.is_valid():
+            if course:
+                flashCard = form.save(commit=False)
+                flashCard.course  = course
+                flashCard.views = 0
+                flashCard.save()
+
+                return redirect(reverse('Educ8:show_course', kwargs={'course_name_slug' : course_name_slug}))
+
+        else:
+            print(form.errors)
+
+    context_dict = {'form' : form, 'course' : course}
+    return render(request, 'Educ8/add_or_edit_flashcard.html', context=context_dict)
 
 @login_required
 def show_flashcard(request, course_name_slug, flashcardID):
