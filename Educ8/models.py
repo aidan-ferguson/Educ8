@@ -76,8 +76,8 @@ class Flashcard(models.Model):
     Methods:
     __str__ : Returns the title of the Flashcard. This makes debugging easier.
     """
-    title = models.CharField(max_length=32)
-    question = models.CharField(max_length=256)
+    title = models.CharField(max_length=128)
+    question = models.CharField(max_length=1024)
     answer = models.CharField(max_length=256)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     createdBy = models.ForeignKey(Student, on_delete=models.CASCADE)
