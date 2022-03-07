@@ -6,6 +6,11 @@ class StudentAdmin(admin.ModelAdmin):
     list_display = ('username', 'first_name', 'last_name')
 
 # Register following models with the admin interface
-TO_REGISTER = [Teacher, Student, StudentAdmin, Course, CourseFile, Flashcard]
-list(map(lambda x: admin.site.register(x), TO_REGISTER))
+# TO_REGISTER = [Teacher, Student, Course, CourseFile, Flashcard]
+# list(map(lambda x: admin.site.register(x), TO_REGISTER))
 
+admin.site.register(Teacher)
+admin.site.register(Student)
+admin.site.register(Course)
+admin.site.register(CourseFile)
+admin.site.register(Flashcard)
