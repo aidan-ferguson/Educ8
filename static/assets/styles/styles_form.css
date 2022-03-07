@@ -1,0 +1,95 @@
+/* WAD2 Team Project "Educ8" | General Form Styles */
+
+/* Form styles */
+form {
+  padding: 20px;
+}
+.field {
+  margin: 20px 0;
+}
+.field label {
+  font-size: 18px;
+}
+.field input[type=text], .field input[type=password], .field textarea {
+  max-width: 600px;
+  width: 100%;
+  font-size: 16px;
+  padding: 10px;
+}
+.field input[type=submit] {
+  padding: 10px 20px;
+  background-color: #60a7ce;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 24px;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  box-shadow: 0 0 4px gray;
+  transition: all 0.1s ease-in-out;
+}
+.field input[type=submit]:hover {
+  transform: scale(1.04);
+  cursor: pointer;
+  filter: brightness(1.04);
+}
+.field input[type=submit].cancel {
+  background-color: #FF7777;
+  margin-left: 16px;
+}
+.field input[type=submit].add {
+  font-size: 16px;
+  padding: 6px 12px;
+  margin-left: 10px;
+  background-color: #EEEEEE;
+  color: black;
+}
+.field select {
+  font-size: 16px;
+  padding: 6px;
+}
+.field input[type=radio] {
+  cursor: pointer;
+  margin-top: 16px;
+}
+.field input[type=checkbox] {
+  cursor: pointer;
+}
+.field input[type=file] {
+  cursor: pointer;
+  font-size: 16px;
+  padding: 6px 12px;
+  border: none;
+}
+.field textarea {
+  height: 14vh;
+  resize: none;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+}
+
+/* hr between main form content and submit */
+.form_hr {
+  margin: 36px 0;
+}
+
+/* Error message */
+p.error_message {
+  color: #FF4444;
+  font-size: 20px;
+}
+
+
+
+/* Media Queries */
+
+/* Split screen desktop/tablets */
+@media screen and (max-width: 1500px) {
+
+}
+
+/* Phones */
+@media screen and (max-width: 850px) {
+  .field input[type=text], .field input[type=password], .field textarea {
+    max-width: 100%;
+  }
+}
