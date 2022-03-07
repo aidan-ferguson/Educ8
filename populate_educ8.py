@@ -42,6 +42,10 @@ def populate() -> None:
                   "Crochet is 4 nerdz" : {"question":"What is better crochet or knitting?", "answer": "Knitting", "createdBy":"Dom2", "Course":"Maths"},
                   "Best Course" : {"question":"Best 2nd year GofU CS course", "answer": "OOSE2", "createdBy":"Dom1", "Course":"Extreme Cake Baking"}}
 
+    files = {"important course notice.png": {"course":"Extreme Cake Baking"},
+             "Assignment Instructions.pdf": {"course":"Maths"},
+             "Assessed Excerise 1.txt": {"course":"English"}}
+
     """
         Simple loop over all student and teacher data to insert into the database
     """
@@ -65,11 +69,9 @@ def populate() -> None:
     for flashcard, flashcard_data in flashcards.items():
         add_flashcard(flashcard, flashcard_data["question"], flashcard_data["answer"], students[flashcard_data["createdBy"]]["object"], courses[flashcard_data["Course"]]["object"])
 
-    course_file = CourseFile(
-        course = courses["Maths"]["object"]
-    )
-    course_file.file.save('manage.py', File(open('manage.py', 'rb')))
-    course_file.save()
+    for file, file_data in files.items():
+        add_file(file, courses[file_data["course"]]["object"])
+
 
 """
     For both student and teacher first create the underlying user object and then add a student object to the database
@@ -110,6 +112,13 @@ def add_flashcard(title: str, question: str, answer: str, createdBy: Student, Co
     f.answer = answer
     f.save()
     return f
+
+def add_file(filename: str, course: Course):
+    course_file = CourseFile(
+        course = course
+    )
+    course_file.file.save(filename, File(open(f'static/population_files/{filename}', 'rb')))
+    course_file.save()
 
 if __name__ == '__main__':
     print('Starting Educ8 population script...')
