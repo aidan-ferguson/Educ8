@@ -5,7 +5,7 @@
 
 <head>
 
-  <title>Educ8 | Create Flashcard</title>
+  <title>Educ8 | Create an Account</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Icon -->
@@ -47,36 +47,64 @@
   <!-- Main page content -->
   <div class="content_panel">
 
-    <h1 class="panel_title">Create Flashcard</h1>
+    <h1 class="panel_title">Create an Account</h1>
     <hr>
 
     <form class="" action="index.html" method="post">
 
-      <p class="error_message"><b>Error:</b> Too many geese.</p>
+      <p class="error_message"><b>Error:</b> You are not worthy of an Educ8&trade; account.</p>
 
       <div class="field">
-        <label for="title">Title:</label>
+        <label for="fname">Forename(s):</label>
         <br>
-        <input type="text" name="title" value="">
+        <input type="text" name="fname" value="" placeholder="Enter forename(s)...">
       </div>
 
       <div class="field">
-        <label for="qtext">Question Text:</label>
+        <label for="surname">Surname(s):</label>
         <br>
-        <textarea name="qtext" value=""></textarea>
+        <input type="text" name="surname" value="" placeholder="Enter surname(s)">
       </div>
 
       <div class="field">
-        <label for="atext">Answer Text:</label>
+        <label for="fname">Username:</label>
         <br>
-        <textarea name="qtext" value=""></textarea>
+        <input type="text" name="fname" value="" placeholder="Create a username...">
+      </div>
+
+      <div class="field">
+        <label for="password">Create a Password:</label>
+        <br>
+        <input type="text" name="password" value="" placeholder="Create a password...">
+      </div>
+
+      <div class="field">
+        <label for="confirm">Confirm Password:</label>
+        <br>
+        <input type="text" name="confirm" value="" placeholder="Re-type password...">
+      </div>
+
+      <div class="field">
+        <label for="user_type">I am a...</label>
+        <br>
+        <input type="radio" name="user_type" value="">
+        <label for="student">Student</label>
+        <input type="radio" name="user_type" value="">
+        <label for="teacher">Teacher</label>
       </div>
 
       <hr class="form_hr">
 
       <div class="field">
-        <input type="submit" value="Create Card">
+        <input type="checkbox" name="terms" value="">
+        <label for="terms"><i> I have read and accept the <a href="terms.html" target="_blank"><b>Terms & Conditions</b></a>.</i></label>
       </div>
+
+      <div class="field">
+        <input type="submit" value="Sign Up">
+      </div>
+
+      <p>Already have an account? Login <a href="login.html"><b>here</b></a>.</p>
 
     </form>
 

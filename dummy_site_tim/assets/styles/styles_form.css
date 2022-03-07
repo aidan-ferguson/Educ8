@@ -27,14 +27,25 @@ form {
   box-shadow: 0 0 4px gray;
   transition: all 0.1s ease-in-out;
 }
-.field textarea {
-  height: 14vh;
-  resize: none;
-}
 .field input[type=submit]:hover {
   transform: scale(1.04);
   cursor: pointer;
   filter: brightness(1.04);
+}
+.field input[type=submit].cancel {
+  background-color: #FF7777;
+  margin-left: 16px;
+}
+.field input[type=submit].add {
+  font-size: 16px;
+  padding: 6px 12px;
+  margin-left: 10px;
+  background-color: #EEEEEE;
+  color: black;
+}
+.field select {
+  font-size: 16px;
+  padding: 6px;
 }
 .field input[type=radio] {
   cursor: pointer;
@@ -42,6 +53,12 @@ form {
 }
 .field input[type=checkbox] {
   cursor: pointer;
+}
+.field textarea {
+  height: 14vh;
+  resize: none;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
 }
 
 /* hr between main form content and submit */

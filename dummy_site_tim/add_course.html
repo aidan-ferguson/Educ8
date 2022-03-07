@@ -5,7 +5,7 @@
 
 <head>
 
-  <title>Educ8 | Form Template</title>
+  <title>Educ8 | Create Course</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Icon -->
@@ -47,32 +47,17 @@
   <!-- Main page content -->
   <div class="content_panel">
 
-    <h1 class="panel_title">Form Template Page</h1>
+    <h1 class="panel_title">Create a Course</h1>
     <hr>
 
     <form class="" action="index.html" method="post">
 
-      <p class="error_message"><b>Error:</b> Not enough geese.</p>
+      <p class="error_message"><b>Error:</b> Contains nuts.</p>
 
       <div class="field">
-        <label for="fname">Text field:</label>
+        <label for="name">Course Name:</label>
         <br>
-        <input type="text" name="fname" value="" placeholder="Enter some text...">
-      </div>
-
-      <div class="field">
-        <label for="user_type">I am a...</label>
-        <br>
-        <input type="radio" name="user_type" value="">
-        <label for="student">Student</label>
-        <input type="radio" name="user_type" value="">
-        <label for="teacher">Teacher</label>
-      </div>
-
-      <div class="field">
-        <label for="qtext">Text area:</label>
-        <br>
-        <textarea name="qtext" value="" placeholder="Text area prompt..."></textarea>
+        <input type="text" name="name" value="" placeholder="Enter course name...">
       </div>
 
       <div class="field">
@@ -88,16 +73,18 @@
         <input class="add" type="submit" value="Add">
       </div>
 
+      <div class="field">
+        <label>Students to Add:</label><br>
+        <ul>
+          <li>Cameron McDonald</li>
+          <li>Dom Jina</li>
+        </ul>
+      </div>
+
       <hr class="form_hr">
 
       <div class="field">
-        <input type="checkbox" name="terms" value="">
-        <label for="terms"><i> I have read and accept the <a href="terms.html" target="_blank"><b>Terms & Conditions</b></a>.</i></label>
-      </div>
-
-      <div class="field">
-        <input type="submit" value="Submit">
-        <input class="cancel" type="submit" value="Cancel">
+        <input type="submit" value="Create Course">
       </div>
 
     </form>
