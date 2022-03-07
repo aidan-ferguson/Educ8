@@ -18,7 +18,7 @@ def index(request):
 
 @login_required
 def my_courses(request):
-    pass
+    course_list = Course.objects.filter()
 
 @login_required
 def show_course(request, course_name_slug):
