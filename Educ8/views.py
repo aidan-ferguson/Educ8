@@ -2,6 +2,9 @@ from xml.dom.domreg import registered
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
+from django.urls import reverse
+from django.shortcuts import redirect
 from Educ8.forms import TeacherForm, StudentForm
 from datetime import datetime
 
@@ -45,7 +48,7 @@ def register(request):
     """
 
     registered = False
-    
+
     # if user selects student:
 
     if request.method == 'POST':
@@ -89,14 +92,33 @@ def register(request):
     """
 
 def user_login(request):
-    pass
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+
+        if user:
+            if user.is_active:
+                login(request, user)
+                return redirect(reverse('Educ8:index'))
+            else:
+                return HttpResponse("Your Educ8 account is disabled.")
+        
+        else:
+            print(f"Invalid login detals: {username}, {password}")
+            return HttpResponse("Invalid login details supplied.")
+    
+    else: 
+        return render(request, 'Educ8/login.html')
 
 def restricted(request):
     pass
 
 @login_required
 def logout(request):
-    pass
+    logout(request)
+    return redirect(reverse('Educ8:index'))
 
 def get_server_side_cookie(request, cookie, default_val=None):
     val = request.session.get(cookie)
