@@ -40,7 +40,3 @@ class FlashcardForm(forms.ModelForm):
         model = Flashcard
         fields = ('title', 'question', 'answer')
         
-class CourseFileForm(forms.ModelForm):
-    file = forms.FileField(upload_to=generate_file_path)
-    course = forms.ForeignKey(Course, on_delete=forms.CASCADE)
-
