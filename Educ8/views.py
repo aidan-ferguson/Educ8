@@ -33,7 +33,7 @@ def add_course(request):
         else:
             print(form.errors)
 
-    return render(request, 'Educ8/add_course.html', {'form' : form})
+    return render(request, 'rango/add_course.html', {'form' : form})
 
 @login_required
 def add_file(request, course_name_slug):
