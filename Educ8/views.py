@@ -40,7 +40,7 @@ def show_flashcard(request, course_name_slug, flashcardID):
 def add_student(request, course_name_slug):
     pass
 
-def register(request):
+def studentRegister(request):
 
     """view to register a student, 
     check if the form is valid and 
@@ -48,8 +48,6 @@ def register(request):
     """
 
     registered = False
-
-    # if user selects student:
 
     if request.method == 'POST':
         student_form = StudentForm(request.POST)
@@ -71,7 +69,15 @@ def register(request):
 
     # else if user selects teacher:
 
+def teacherRegister(request):
+
+    """view to register a student, 
+    check if the form is valid and 
+    direct them to the signup page
     """
+
+    registered = False
+
     if request.method == 'POST':
         teacher_form = TeacherForm(request.POST)
     
@@ -89,7 +95,7 @@ def register(request):
         teacher_form = TeacherForm()
 
     return render(request, 'Educ8/signup.html', context={'teacher_form' : teacher_form, 'registered' : registered})
-    """
+    
 
 def user_login(request):
     if request.method == 'POST':
