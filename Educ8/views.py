@@ -12,6 +12,10 @@ from Educ8.models import Flashcard
 from Educ8.models import CourseFile
 
 def index(request):
+
+    """calls cookie handling function,
+    renders a response tempplate."""
+
     visitor_cookie_handler(request)
     response = render(request, 'Educ8/index.html')
     return response
@@ -107,6 +111,9 @@ def show_flashcard(request, course_name_slug, flashcardID):
     pass
 
 def add_student(request, course_name_slug):
+
+    """conditional to check course exists.
+    code to add students to specific courses"""
 
     try:
         course = Course.objects.get(slug=course_name_slug)
