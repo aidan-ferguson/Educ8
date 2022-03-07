@@ -3,9 +3,10 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_group_project.settings')
 
 import django
 django.setup()
-
 from django.contrib.auth.models import User
-from Educ8.models import Student, Teacher, Course, Flashcard
+from django.core.files import File
+
+from Educ8.models import Student, Teacher, Course, Flashcard, File
 
 """
 Things to do:
@@ -63,6 +64,8 @@ def populate() -> None:
     """
     for flashcard, flashcard_data in flashcards.items():
         add_flashcard(flashcard, flashcard_data["question"], flashcard_data["answer"], students[flashcard_data["createdBy"]]["object"], courses[flashcard_data["Course"]]["object"])
+
+    course_file = File()
 
 """
     For both student and teacher first create the underlying user object and then add a student object to the database
