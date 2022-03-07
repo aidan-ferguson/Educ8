@@ -54,6 +54,12 @@ form {
 .field input[type=checkbox] {
   cursor: pointer;
 }
+.field input[type=file] {
+  cursor: pointer;
+  font-size: 16px;
+  padding: 6px 12px;
+  border: none;
+}
 .field textarea {
   height: 14vh;
   resize: none;
