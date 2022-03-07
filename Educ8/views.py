@@ -8,7 +8,7 @@ from django.shortcuts import redirect
 from Educ8.forms import CourseForm, TeacherForm, StudentForm
 from datetime import datetime
 from Educ8.models import Course
-from Educ8.models import FlashCard
+from Educ8.models import Flashcard
 from Educ8.models import File
 
 def index(request):
@@ -17,7 +17,7 @@ def index(request):
     return response
 
 @login_required
-def courses(request):
+def my_courses(request):
     pass
 
 @login_required
@@ -26,7 +26,7 @@ def show_course(request, course_name_slug):
     
     try:
         course = Course.objects.get(slug=course_name_slug)
-        flashCards = FlashCard.objects.get(course=course)
+        flashCards = Flashcard.objects.get(course=course)
         files = File.objects.filter(course=course)
         context_dict['files'] = files
         context_dict['flashCards'] = flashCards
