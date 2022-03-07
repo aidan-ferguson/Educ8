@@ -92,7 +92,33 @@ def show_flashcard(request, course_name_slug, flashcardID):
     pass
 
 def add_student(request, course_name_slug):
-    pass
+
+    try:
+        course = Course.objects.get(slug=course_name_slug)
+    except Course.DoesNotExist:
+        course = None
+
+    if course is None:
+        return redirect('/Educ8/')
+    
+    form = StudentForm()
+
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
+
+        if form.is_valid():
+            if course:
+                student = form.save(commit=False)
+                student.course = course
+                student.save()
+
+                return redirect('/Educ8/')
+        
+        else:
+            print(form.errors)
+    
+    return render(request, 'Educ8/add_students.html', {'form' : form})
+
 
 def studentRegister(request):
 
