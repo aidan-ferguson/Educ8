@@ -23,7 +23,7 @@ class TeacherForm(forms.ModelForm):
 
 
 class CourseForm(forms.ModelForm):
-    courseName = forms.CharField(max_length=128, help_text="Please enter the name of the course")
+    courseName = forms.CharField(max_length=128)
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     class Meta:
@@ -32,9 +32,9 @@ class CourseForm(forms.ModelForm):
 
 
 class FlashcardForm(forms.ModelForm):
-    title = forms.CharField(max_length=32, help_text="Please enter a title for the flashcard")
-    question = forms.CharField(max_length=256, help_text="Please enter a question")
-    answer = forms.CharField(max_length=256, help_text="Please enter the answer")
+    title = forms.CharField(max_length=32)
+    question = forms.CharField(max_length=256)
+    answer = forms.CharField(max_length=256)
 
     class Meta:
         model = Flashcard

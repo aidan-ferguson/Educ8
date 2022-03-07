@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.shortcuts import redirect
-from Educ8.forms import TeacherForm, StudentForm
+from Educ8.forms import CourseForm, TeacherForm, StudentForm
 from datetime import datetime
 from Educ8.models import Course
 from Educ8.models import FlashCard
@@ -41,7 +41,17 @@ def show_course(request, course_name_slug):
 
 @login_required
 def add_course(request):
-    pass
+    form = CourseForm()
+    if request.method == 'POST':
+        form = CourseForm(request.POST)
+
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect('/Educ8/')
+        else:
+            print(form.errors)
+
+    return render(request, 'Educ8/add_course.html', {'form' : form})
 
 @login_required
 def add_file(request, course_name_slug):
