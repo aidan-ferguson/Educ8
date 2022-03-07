@@ -1,4 +1,3 @@
-from re import T
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -85,3 +84,20 @@ class Flashcard(models.Model):
 
     def __str__(self):
         return self.title
+
+"""
+    Method for generating filepaths based on the course they are uploaded to
+"""
+def generate_file_path(instance, filename):
+    return f'files/{instance.course.courseName}/{filename}'
+
+class File(models.Model):
+    """File class: This is a model for the File table in the database
+
+    Attributes:
+        file (FileField): This will hold the file which will be uploaded to the media directory (access this in templates using Object.file.url for the absolute URL)
+        course (ForeignKey): Holds the foreign key to the course which the files have been uploaded to
+    """
+
+    file = models.FileField(upload_to=generate_file_path)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
