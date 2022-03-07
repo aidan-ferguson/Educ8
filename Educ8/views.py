@@ -7,6 +7,9 @@ from django.urls import reverse
 from django.shortcuts import redirect
 from Educ8.forms import CourseForm, TeacherForm, StudentForm
 from datetime import datetime
+from Educ8.models import Course
+from Educ8.models import FlashCard
+from Educ8.models import File
 
 def index(request):
     visitor_cookie_handler(request)
@@ -19,7 +22,22 @@ def courses(request):
 
 @login_required
 def show_course(request, course_name_slug):
-    pass
+    context_dict = {}
+    
+    try:
+        course = Course.objects.get(slug=course_name_slug)
+        flashCards = FlashCard.objects.get(course=course)
+        files = File.objects.filter(course=course)
+        context_dict['files'] = files
+        context_dict['flashCards'] = flashCards
+        context_dict['course'] = course
+    except Course.DoesNotExist:
+        context_dict['course'] = None
+        context_dict['flashCards'] = None
+        context_dict['files'] = None
+    
+    return render(request, 'Educ8/course.html', context=context_dict)
+
 
 @login_required
 def add_course(request):
