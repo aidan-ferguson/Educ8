@@ -18,7 +18,22 @@ def index(request):
 
 @login_required
 def my_courses(request):
-    course_list = Course.objects.filter()
+    context_dict = {}
+    
+    form = StudentForm()
+    if request.method == 'GET':
+        form = StudentForm(request.GET)
+        
+        if form.is_valid():
+            student = form.save()
+            course_list = []
+            for course in Course.objects.get():
+                if student.username in course.students:
+                    course_list.append(course)
+    
+    context_dict['courses'] = course_list
+    return render(request, 'Educ8/my_courses.html', context=context_dict)
+                    
 
 @login_required
 def show_course(request, course_name_slug):
