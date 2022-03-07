@@ -1,6 +1,8 @@
+from xml.dom.domreg import registered
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from Educ8.forms import TeacherForm, StudentForm
 from datetime import datetime
 
 def index(request):
@@ -36,7 +38,55 @@ def add_student(request, course_name_slug):
     pass
 
 def register(request):
-    pass
+
+    """view to register a student, 
+    check if the form is valid and 
+    direct them to the signup page
+    """
+
+    registered = False
+    
+    # if user selects student:
+
+    if request.method == 'POST':
+        student_form = StudentForm(request.POST)
+    
+
+        if student_form.is_valid():
+            student = student_form.save()
+            student.set_password(student.password)
+            student.save()
+
+            registered = True
+        else:
+            print(student_form.error_class)
+
+    else:
+        student_form = StudentForm()
+
+    return render(request, 'Educ8/signup.html', context={'student_form' : student_form, 'registered' : registered})
+
+    # else if user selects teacher:
+
+    """
+    if request.method == 'POST':
+        teacher_form = TeacherForm(request.POST)
+    
+
+        if teacher_form.is_valid():
+            student = teacher_form.save()
+            student.set_password(student.password)
+            student.save()
+
+            registered = True
+        else:
+            print(teacher_form.error_class)
+
+    else:
+        teacher_form = TeacherForm()
+
+    return render(request, 'Educ8/signup.html', context={'teacher_form' : teacher_form, 'registered' : registered})
+    """
 
 def user_login(request):
     pass
