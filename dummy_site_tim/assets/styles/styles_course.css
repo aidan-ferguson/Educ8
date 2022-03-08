@@ -104,6 +104,27 @@ a.add_button {
   color: #C8FF8C;
 }
 
+/* Administration section */
+.admin_container {
+  margin-bottom: 40px;
+}
+.admin_container button {
+  padding: 10px 20px;
+  background-color: #60a7ce;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 24px;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  box-shadow: 0 0 4px gray;
+  transition: all 0.1s ease-in-out;
+  margin-right: 16px;
+}
+.admin_container button:hover {
+  transform: scale(1.04);
+  cursor: pointer;
+  filter: brightness(1.04);
+}
 
 
 /* Media Queries */
