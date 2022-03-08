@@ -76,8 +76,34 @@
 }
 .flashcard_container button:hover {
   transform: scale(1.1);
-  background-color: #EEEEEE;
+  filter: brightness(1.1);
+  background-color: inherit;
 }
+.flashcard_container .button_tile {
+  min-height: 250px;
+  text-align: center;
+}
+.flashcard_container .button_tile a {
+  font-size: 140px;
+  transition: all 0.1s ease-in-out;
+}
+.flashcard_container .button_tile a:hover {
+  transform: scale(1.2);
+  filter: brightness(1.1);
+}
+.flashcard_container .button_tile p {
+  color: black;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 30px;
+  margin: 0 auto 20px auto;
+}
+a.revise_button {
+  color: #EEEE11;
+}
+a.add_button {
+  color: #C8FF8C;
+}
+
 
 
 /* Media Queries */
