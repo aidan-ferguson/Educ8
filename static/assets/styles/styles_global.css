@@ -59,6 +59,7 @@ a:active {
   text-decoration: none;
   color: #6bb2d9;
 }
+
 /* Highlight Styles */
 ::selection {
 	background: #6bb2d9;
@@ -68,9 +69,15 @@ a:active {
 	background: #6bb2d9;
 	color: white;
 }
+
 /* Horizontal Rule */
 hr {
 	border-style: lightgray;
+}
+
+/* Bullet points */
+ul li {
+	list-style: circle;
 }
 
 /* Navigation/Header Bar */
@@ -136,14 +143,32 @@ nav li a:hover {
 }
 
 h1.panel_title {
-  font-size: 70px;
+  font-size: 64px;
 }
 h2.panel_subtitle {
 	margin-top: -20px;
 	margin-bottom: 40px;
 }
 h2.panel_heading {
-	font-size: 36px;
+	font-size: 32px;
+}
+
+/* Buttons */
+.btn {
+	padding: 10px 20px;
+  background-color: #60a7ce;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 24px;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  box-shadow: 0 0 4px gray;
+  transition: all 0.1s ease-in-out;
+}
+.btn:hover {
+	transform: scale(1.04);
+	cursor: pointer;
+	filter: brightness(1.04);
 }
 
 /* Footer */

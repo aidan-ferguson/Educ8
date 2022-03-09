@@ -16,22 +16,6 @@ form {
   font-size: 16px;
   padding: 10px;
 }
-.field input[type=submit] {
-  padding: 10px 20px;
-  background-color: #60a7ce;
-  border: none;
-  border-radius: 4px;
-  color: white;
-  font-size: 24px;
-  font-family: 'Barlow Semi Condensed', sans-serif;
-  box-shadow: 0 0 4px gray;
-  transition: all 0.1s ease-in-out;
-}
-.field input[type=submit]:hover {
-  transform: scale(1.04);
-  cursor: pointer;
-  filter: brightness(1.04);
-}
 .field input[type=submit].cancel {
   background-color: #FF7777;
   margin-left: 16px;

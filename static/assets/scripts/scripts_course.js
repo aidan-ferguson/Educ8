@@ -12,4 +12,9 @@ $(document).ready(function(){
 
   });
 
+  // Remove colour from revise and add tiles
+  $(".button_tile").each(function() {
+    $(this).css("background-color", "white");
+  });
+
 });

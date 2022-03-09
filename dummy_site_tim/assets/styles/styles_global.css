@@ -59,6 +59,7 @@ a:active {
   text-decoration: none;
   color: #6bb2d9;
 }
+
 /* Highlight Styles */
 ::selection {
 	background: #6bb2d9;
@@ -68,9 +69,15 @@ a:active {
 	background: #6bb2d9;
 	color: white;
 }
+
 /* Horizontal Rule */
 hr {
 	border-style: lightgray;
+}
+
+/* Bullet points */
+ul li {
+	list-style: circle;
 }
 
 /* Navigation/Header Bar */
