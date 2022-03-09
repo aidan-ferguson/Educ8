@@ -136,14 +136,14 @@ nav li a:hover {
 }
 
 h1.panel_title {
-  font-size: 70px;
+  font-size: 64px;
 }
 h2.panel_subtitle {
 	margin-top: -20px;
 	margin-bottom: 40px;
 }
 h2.panel_heading {
-	font-size: 36px;
+	font-size: 32px;
 }
 
 /* Buttons */

@@ -5,7 +5,7 @@
 .card_panel {
   border-radius: 20px;
   width: 90%;
-  max-width: 900px;
+  max-width: 750px;
   margin: 40px auto;
   padding: 30px 50px;
   min-height: 40vh;
@@ -27,7 +27,7 @@
 /* Buttons */
 .button_container {
   width: 90%;
-  max-width: 900px;
+  max-width: 750px;
   margin: 20px auto;
   display: flex;
   justify-content: center;
