@@ -75,11 +75,6 @@ hr {
 	border-style: lightgray;
 }
 
-/* Bullet points */
-ul li {
-	list-style: circle;
-}
-
 /* Navigation/Header Bar */
 nav {
   height: 6vh;
