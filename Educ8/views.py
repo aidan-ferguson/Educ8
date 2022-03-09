@@ -23,26 +23,26 @@ def index(request):
 @login_required
 def my_courses(request):
     context_dict = {}
-    
+
     form = StudentForm()
     if request.method == 'GET':
         form = StudentForm(request.GET)
-        
+
         if form.is_valid():
             student = form.save()
             course_list = []
             for course in Course.objects.get():
                 if student.username in course.students:
                     course_list.append(course)
-    
+
     context_dict['courses'] = course_list
     return render(request, 'Educ8/my_courses.html', context=context_dict)
-                    
+
 
 @login_required
 def show_course(request, course_name_slug):
     context_dict = {}
-    
+
     try:
         course = Course.objects.get(slug=course_name_slug)
         flashCards = Flashcard.objects.get(course=course)
@@ -54,7 +54,7 @@ def show_course(request, course_name_slug):
         context_dict['course'] = None
         context_dict['flashCards'] = None
         context_dict['files'] = None
-    
+
     return render(request, 'Educ8/course.html', context=context_dict)
 
 
@@ -73,7 +73,7 @@ def add_course(request):
     return render(request, 'rango/add_course.html', {'form' : form})
 
 @login_required
-def add_file(request, course_name_slug):
+def add_files(request, course_name_slug):
     pass
 
 @login_required
@@ -122,7 +122,7 @@ def add_student(request, course_name_slug):
 
     if course is None:
         return redirect('/Educ8/')
-    
+
     form = StudentForm()
 
     if request.method == 'POST':
@@ -135,17 +135,17 @@ def add_student(request, course_name_slug):
                 student.save()
 
                 return redirect('/Educ8/')
-        
+
         else:
             print(form.errors)
-    
+
     return render(request, 'Educ8/add_students.html', {'form' : form})
 
 
 def studentRegister(request):
 
-    """view to register a student, 
-    check if the form is valid and 
+    """view to register a student,
+    check if the form is valid and
     direct them to the signup page
     """
 
@@ -153,7 +153,7 @@ def studentRegister(request):
 
     if request.method == 'POST':
         student_form = StudentForm(request.POST)
-    
+
 
         if student_form.is_valid():
             student = student_form.save()
@@ -173,8 +173,8 @@ def studentRegister(request):
 
 def teacherRegister(request):
 
-    """view to register a student, 
-    check if the form is valid and 
+    """view to register a student,
+    check if the form is valid and
     direct them to the signup page
     """
 
@@ -182,7 +182,7 @@ def teacherRegister(request):
 
     if request.method == 'POST':
         teacher_form = TeacherForm(request.POST)
-    
+
 
         if teacher_form.is_valid():
             student = teacher_form.save()
@@ -197,7 +197,7 @@ def teacherRegister(request):
         teacher_form = TeacherForm()
 
     return render(request, 'Educ8/signup.html', context={'teacher_form' : teacher_form, 'registered' : registered})
-    
+
 
 def user_login(request):
     if request.method == 'POST':
@@ -212,12 +212,12 @@ def user_login(request):
                 return redirect(reverse('Educ8:index'))
             else:
                 return HttpResponse("Your Educ8 account is disabled.")
-        
+
         else:
             print(f"Invalid login detals: {username}, {password}")
             return HttpResponse("Invalid login details supplied.")
-    
-    else: 
+
+    else:
         return render(request, 'Educ8/login.html')
 
 def restricted(request):
