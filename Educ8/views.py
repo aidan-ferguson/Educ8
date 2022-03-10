@@ -192,14 +192,14 @@ def register(request):
             student_form = StudentForm(request.POST)
 
 
-        if student_form.is_valid():
-            student = student_form.save()
-            student.set_password(student.password)
-            student.save()
+            if student_form.is_valid():
+                student = student_form.save()
+                student.set_password(student.password)
+                student.save()
 
-            registered = True
-        else:
-            print(student_form.error_class)
+                registered = True
+            else:
+                print(student_form.error_class)
 
 
     else:
