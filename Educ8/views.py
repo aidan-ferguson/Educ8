@@ -152,7 +152,7 @@ def register(request):
     registered = False
 
     if request.method == 'POST':
-        userType = request.POST.get('HELP')
+        userType = request.POST.get('user_type')
         if userType == 'teacher':
 
             teacher_form = TeacherForm(request.POST)
