@@ -74,7 +74,7 @@ def add_course(request):
 
 @login_required
 def add_files(request, course_name_slug):
-    pass
+    render(request, 'Educ8/add_files.html')
 
 @login_required
 def add_or_edit_flashcard(request, course_name_slug):
