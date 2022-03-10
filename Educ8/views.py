@@ -34,8 +34,8 @@ def my_courses(request):
             for course in Course.objects.get():
                 if student.username in course.students:
                     course_list.append(course)
-
-    context_dict['courses'] = course_list
+            context_dict['courses'] = course_list
+    
     return render(request, 'Educ8/my_courses.html', context=context_dict)
 
 
