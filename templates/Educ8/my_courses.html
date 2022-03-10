@@ -1,0 +1,73 @@
+{% extends 'Educ8/base.html' %}
+{% load staticfiles %}
+
+
+{% block title_block %}
+  My Courses
+{% endblock %}
+
+
+{% block content_block %}
+
+  <!-- Main page content -->
+  <div class="content_panel">
+
+    <h1 class="panel_title">Timothy's Courses</h1>
+    <hr>
+
+    <!-- Course tiles -->
+    <section class="course_tiles">
+
+      <div class="tile">
+        <a href='course.html'>
+          <h2>Web Application Development</h2>
+          <hr>
+          <p>Alistair Morrison</p>
+        </a>
+      </div>
+
+      <div class="tile">
+        <a href='course.html'>
+          <h2>Intro to Knitting</h2>
+          <hr>
+          <p>The Rt Hon. Bobby McBobson Jr. MBE</p>
+        </a>
+      </div>
+
+      <div class="tile">
+        <a href='course.html'>
+          <h2>How 2 Cook Pretty Good</h2>
+          <hr>
+          <p>Morgan Hamsey</p>
+        </a>
+      </div>
+
+      <div class="tile">
+        <a href='course.html'>
+          <h2>A course with an unecessarily long title which needs to be cut off</h2>
+          <hr>
+          <p>Emily Surname</p>
+        </a>
+      </div>
+
+      <div class="tile">
+        <a href='course.html'>
+          <h2>Advanced Chair Building</h2>
+          <hr>
+          <p>Egbert Mumples</p>
+        </a>
+      </div>
+
+      <div class="tile">
+        <a href='course.html'>
+          <h2>Knitting Masterclass</h2>
+          <hr>
+          <p>The Rt Hon. Bobby McBobson Jr. MBE</p>
+        </a>
+      </div>
+
+    </section>
+
+  </div>
+
+{% endblock %}
