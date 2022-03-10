@@ -14,7 +14,7 @@ from Educ8.models import CourseFile
 def index(request):
 
     """calls cookie handling function,
-    renders a response tempplate."""
+    renders a response template."""
 
     visitor_cookie_handler(request)
     response = render(request, 'Educ8/index.html')
@@ -110,7 +110,7 @@ def add_or_edit_flashcard(request, course_name_slug):
 def show_flashcard(request, course_name_slug, flashcardID):
     pass
 
-def add_student(request, course_name_slug):
+def add_students(request, course_name_slug):
 
     """conditional to check course exists.
     code to add students to specific courses"""
@@ -218,7 +218,7 @@ def user_login(request):
             return HttpResponse("Invalid login details supplied.")
 
     else:
-        return render(request, 'Educ8/login.html')
+        return render(request, 'Educ8/forms/login.html')
 
 def restricted(request):
     pass

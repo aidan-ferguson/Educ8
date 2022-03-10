@@ -1,0 +1,84 @@
+{% extends 'Educ8/base.html' %}
+{% load staticfiles %}
+
+
+{% block title_block %}
+  Register
+{% endblock %}
+
+
+{% block asset_block %}
+  <link rel="stylesheet" href="{% static 'assets/styles/styles_form.css' %}">
+  <script src="{% static 'assets/scripts/scripts_form.js' %}"></script>
+{% endblock %}
+
+
+{% block content_block %}
+
+  <!-- Main page content -->
+  <div class="content_panel">
+
+    <h1 class="panel_title">Create an Account</h1>
+    <hr>
+
+    <form class="" action="index.html" method="post">
+
+      <p class="error_message"><b>Error:</b> You are not worthy of an Educ8&trade; account.</p>
+
+      <div class="field">
+        <label for="fname">Forename(s):</label>
+        <br>
+        <input type="text" name="fname" value="" placeholder="Enter forename(s)...">
+      </div>
+
+      <div class="field">
+        <label for="surname">Surname(s):</label>
+        <br>
+        <input type="text" name="surname" value="" placeholder="Enter surname(s)">
+      </div>
+
+      <div class="field">
+        <label for="fname">Username:</label>
+        <br>
+        <input type="text" name="fname" value="" placeholder="Create a username...">
+      </div>
+
+      <div class="field">
+        <label for="password">Create a Password:</label>
+        <br>
+        <input type="text" name="password" value="" placeholder="Create a password...">
+      </div>
+
+      <div class="field">
+        <label for="confirm">Confirm Password:</label>
+        <br>
+        <input type="text" name="confirm" value="" placeholder="Re-type password...">
+      </div>
+
+      <div class="field">
+        <label for="user_type">I am a...</label>
+        <br>
+        <input type="radio" name="user_type" value="">
+        <label for="student">Student</label>
+        <input type="radio" name="user_type" value="">
+        <label for="teacher">Teacher</label>
+      </div>
+
+      <hr class="form_hr">
+
+      <div class="field">
+        <input type="checkbox" name="terms" value="">
+        <label for="terms"><i> I have read and accept the <a href="terms.html" target="_blank"><b>Terms & Conditions</b></a>.</i></label>
+      </div>
+
+      <div class="field">
+        <input class="btn" type="submit" value="Sign Up">
+      </div>
+
+      <p>Already have an account? Login <a href="login.html"><b>here</b></a>.</p>
+
+    </form>
+
+  </div>
+
+{% endblock %}

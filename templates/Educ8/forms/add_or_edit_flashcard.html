@@ -1,0 +1,57 @@
+{% extends 'Educ8/base.html' %}
+{% load staticfiles %}
+
+
+{% block title_block %}
+  Add/Edit Flashcard
+{% endblock %}
+
+
+{% block asset_block %}
+  <link rel="stylesheet" href="{% static 'assets/styles/styles_form.css' %}">
+  <script src="{% static 'assets/scripts/scripts_form.js' %}"></script>
+{% endblock %}
+
+
+{% block content_block %}
+
+  <!-- Main page content -->
+  <div class="content_panel">
+
+    <h1 class="panel_title">Create Flashcard</h1>
+    <hr>
+
+    <form class="" action="index.html" method="post">
+
+      <p class="error_message"><b>Error:</b> Too many geese.</p>
+
+      <div class="field">
+        <label for="title">Title:</label>
+        <br>
+        <input type="text" name="title" value="">
+      </div>
+
+      <div class="field">
+        <label for="qtext">Question Text:</label>
+        <br>
+        <textarea name="qtext" value=""></textarea>
+      </div>
+
+      <div class="field">
+        <label for="atext">Answer Text:</label>
+        <br>
+        <textarea name="qtext" value=""></textarea>
+      </div>
+
+      <hr class="form_hr">
+
+      <div class="field">
+        <input class="btn" type="submit" value="Create Card">
+        <input class="btn cancel" type="submit" value="Cancel">
+      </div>
+
+    </form>
+
+  </div>
+
+{% endblock %}
