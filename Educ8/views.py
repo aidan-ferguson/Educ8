@@ -108,7 +108,19 @@ def add_or_edit_flashcard(request, course_name_slug):
 
 @login_required
 def show_flashcard(request, course_name_slug, flashcardID):
-    pass
+    context_dict={}
+    try:
+        course = Course.objects.get(slug=course_name_slug)
+        flashcard = Course.objects.get(slug=flashcardID)
+        context_dict['flashCards'] = flashcard
+        context_dict['course'] = course
+    except Course.DoesNotExist:
+        course = None
+        flashcard = None
+        context_dict['flashCards'] = None
+        context_dict['course'] = None
+    return render(request, 'Educ8/course/flashCards', context=context_dict)
+
 
 def add_students(request, course_name_slug):
 
