@@ -21,7 +21,9 @@
     <h1 class="panel_title">Create an Account</h1>
     <hr>
 
-    <form class="" action="index.html" method="post">
+    <form class="" action="index.html" method="post" action="{% url 'Educ8:forms/register' %}">
+
+      {% csrf_token %}
 
       <p class="error_message"><b>Error:</b> You are not worthy of an Educ8&trade; account.</p>
 

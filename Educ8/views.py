@@ -36,7 +36,7 @@ def my_courses(request):
                 if student.username in course.students:
                     course_list.append(course)
             context_dict['courses'] = course_list
-    
+
     return render(request, 'Educ8/my_courses.html', context=context_dict)
 
 
@@ -200,13 +200,13 @@ def register(request):
             registered = True
         else:
             print(student_form.error_class)
-            
+
 
     else:
         teacher_form = TeacherForm()
         student_form = StudentForm()
 
-    return render(request, 'Educ8/signup.html', context={'registered' : registered})
+    return render(request, 'Educ8/forms/register.html', context={'registered' : registered})
 
 
 def user_login(request):
