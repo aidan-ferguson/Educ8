@@ -1,0 +1,61 @@
+{% extends 'Educ8/base.html' %}
+{% load staticfiles %}
+
+
+{% block title_block %}
+  Login
+{% endblock %}
+
+
+{% block asset_block %}
+  <link rel="stylesheet" href="{% static 'assets/styles/styles_form.css' %}">
+  <script src="{% static 'assets/scripts/scripts_form.js' %}"></script>
+{% endblock %}
+
+
+{% block content_block %}
+
+  <!-- Main page content -->
+  <div class="content_panel">
+
+    <h1 class="panel_title">Form Template Page</h1>
+    <hr>
+
+    <form class="" action="index.html" method="post">
+
+      <p class="error_message"><b>Error:</b> Weight limit exceeded.</p>
+
+      <div class="field">
+        <label for="username">Username:</label>
+        <br>
+        <input type="text" name="username" value="" placeholder="Enter username...">
+      </div>
+
+      <div class="field">
+        <label for="password">Password:</label>
+        <br>
+        <input type="password" name="password" value="" placeholder="Enter password...">
+      </div>
+
+      <div class="field">
+        <label for="user_type">I am a...</label>
+        <br>
+        <input type="radio" name="user_type" value="">
+        <label for="student">Student</label>
+        <input type="radio" name="user_type" value="">
+        <label for="teacher">Teacher</label>
+      </div>
+
+      <hr class="form_hr">
+
+      <div class="field">
+        <input class="btn" type="submit" value="Login">
+      </div>
+
+      <p>Don't have an account? Register <a href="register.html"><b>here</b></a>.</p>
+
+    </form>
+
+  </div>
+
+{% endblock %}

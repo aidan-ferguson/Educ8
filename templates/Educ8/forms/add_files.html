@@ -1,0 +1,43 @@
+{% extends 'Educ8/base.html' %}
+{% load staticfiles %}
+
+
+{% block title_block %}
+  Add Files
+{% endblock %}
+
+
+{% block asset_block %}
+  <link rel="stylesheet" href="{% static 'assets/styles/styles_form.css' %}">
+  <script src="{% static 'assets/scripts/scripts_form.js' %}"></script>
+{% endblock %}
+
+
+{% block content_block %}
+
+  <!-- Main page content -->
+  <div class="content_panel">
+
+    <h1 class="panel_title">Add a File</h1>
+    <hr>
+
+    <form class="" action="index.html" method="post">
+
+      <p class="error_message"><b>Error:</b> Failed to learn French.</p>
+
+      <div class="field">
+        <label for="upload">Upload a File:</label><br>
+        <input type="file" name="upload"><br>
+      </div>
+
+      <hr class="form_hr">
+
+      <div class="field">
+        <input class="btn" type="submit" value="Add File">
+      </div>
+
+    </form>
+
+  </div>
+
+{% endblock %}

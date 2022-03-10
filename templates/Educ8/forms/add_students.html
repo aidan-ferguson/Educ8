@@ -1,0 +1,59 @@
+{% extends 'Educ8/base.html' %}
+{% load staticfiles %}
+
+
+{% block title_block %}
+  Add Students
+{% endblock %}
+
+
+{% block asset_block %}
+  <link rel="stylesheet" href="{% static 'assets/styles/styles_form.css' %}">
+  <script src="{% static 'assets/scripts/scripts_form.js' %}"></script>
+{% endblock %}
+
+
+{% block content_block %}
+
+  <!-- Main page content -->
+  <div class="content_panel">
+
+    <h1 class="panel_title">Add a Student</h1>
+    <hr>
+
+    <form class="" action="index.html" method="post">
+
+      <p class="error_message"><b>Error:</b> meh.</p>
+
+      <div class="field">
+        <label for="add">Add Students:</label><br>
+        <select name="add">
+          <option value="Aiden Ferguson">Aiden Ferguson</option>
+          <option value="Cameron McDonald" disabled>Cameron McDonald</option>
+          <option value="David Whelan">David Whelan</option>
+          <option value="Dom Jina" disabled>Dom Jina</option>
+          <option value="Michael McVey">Michael McVey</option>
+          <option value="Timothy Wang">Timothy Wang</option>
+        </select>
+        <input class="btn add" type="submit" value="Add">
+      </div>
+
+      <div class="field">
+        <label>Students to Add:</label><br>
+        <ul>
+          <li>Cameron McDonald</li>
+          <li>Dom Jina</li>
+        </ul>
+      </div>
+
+      <hr class="form_hr">
+
+      <div class="field">
+        <input class="btn" type="submit" value="Add Student(s)">
+      </div>
+
+    </form>
+
+  </div>
+
+{% endblock %}
