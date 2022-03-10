@@ -5,7 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.shortcuts import redirect
-from Educ8.forms import CourseForm, FlashcardForm, TeacherForm, StudentForm, FileForm
+from jupyterlab_server import slugify
+from Educ8.forms import CourseForm, FlashcardForm, TeacherForm, StudentForm, CourseFileForm
 from datetime import datetime
 from Educ8.models import Course
 from Educ8.models import Flashcard
@@ -72,18 +73,15 @@ def add_course(request):
 
     return render(request, 'rango/add_course.html', {'form' : form})
 
-@login_required
+# TODO: use forms instead?
+#@login_required
 def add_files(request, course_name_slug):
     if request.method == 'POST':
-        form = FileForm(request.POST, request.FILES)
-        print("here")
-        if form.is_valid():
-            print("here2")
-            course = Course.objects.get(slug=course_name_slug)
-            # course_file = CourseFile(course=course)
-            print(type(request.FILES['file']))
-            # course_file.file.save(filename, File(open(f'static/population_files/{filename}', 'rb')))
-            # course_file.save()
+        course = Course.objects.get(slug=course_name_slug)
+        course_file = CourseFile(course=course)
+        file = request.FILES['file']
+        course_file.file.save(file.name, file)
+        course_file.save()
     return render(request, 'Educ8/forms/add_files.html')
 
 @login_required

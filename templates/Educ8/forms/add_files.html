@@ -21,12 +21,13 @@
     <h1 class="panel_title">Add a File</h1>
     <hr>
 
-    <form class="" action="index.html" method="post">
+    <!-- TODO: redirect to course page -->
+    <form class="" action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
 
       <p class="error_message"><b>Error:</b> Failed to learn French.</p>
 
       <div class="field">
-        {% csrf_token %}
         <label for="upload">Upload a File:</label><br>
         <input type="file" name="file"><br>
       </div>

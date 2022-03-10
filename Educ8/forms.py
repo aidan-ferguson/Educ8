@@ -40,5 +40,9 @@ class FlashcardForm(forms.ModelForm):
         model = Flashcard
         fields = ('title', 'question', 'answer')
         
-class FileForm(forms.ModelForm):
+class CourseFileForm(forms.ModelForm):
     file = forms.FileField()
+
+    class Meta:
+        model = CourseFile
+        fields = ('file', 'course')
