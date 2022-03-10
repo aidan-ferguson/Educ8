@@ -1,0 +1,201 @@
+{% extends 'Educ8/base.html' %}
+{% load staticfiles %}
+
+
+{% block title_block %}
+  Login
+{% endblock %}
+
+
+{% block asset_block %}
+  <link rel="stylesheet" href="{% static 'assets/styles/styles_course.css' %}">
+  <script src="{% static 'assets/scripts/scripts_course.js' %}"></script>
+{% endblock %}
+
+
+{% block content_block %}
+
+  <!-- Main page content -->
+  <div class="content_panel">
+
+    <h1 class="panel_title">Knitting Essentials</h1>
+    <h2 class="panel_subtitle">The Rt Hon. Bobby McBobson Jr. MBE</h2>
+    <hr>
+
+    <!-- Administration section -->
+    <section class="admin">
+      <h2 class="panel_heading">Administration</h2>
+
+      <div class="admin_container">
+        <button class="btn" type="button" name="add_files">Add File(s)</button>
+        <button class="btn" type="button" name="add_files">Add Student(s)</button>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- Course files section -->
+    <section class="course_files">
+      <h2 class="panel_heading">Course Files</h2>
+
+      <div class="files_container">
+
+        <div class="file">
+          <p>guide_to_yarn.pdf</p>
+          <a title="Download File" class="tooltip">
+            <button type="button" name="download"><i class="fa fa-download"></i></button>
+          </a>
+        </div>
+
+        <div class="file">
+          <p>thread_density_chart.jpg</p>
+          <a title="Download File" class="tooltip">
+            <button type="button" name="download"><i class="fa fa-download"></i></button>
+          </a>
+        </div>
+
+        <div class="file">
+          <p>essential_knitting_patterns.pdf</p>
+          <a title="Download File" class="tooltip">
+            <button type="button" name="download"><i class="fa fa-download"></i></button>
+          </a>
+        </div>
+
+        <div class="file">
+          <p>professional_purling_tutorial.mp4</p>
+          <a title="Download File" class="tooltip">
+            <button type="button" name="download"><i class="fa fa-download"></i></button>
+          </a>
+        </div>
+
+        <div class="file">
+          <p>why_crochet_sucks.docx</p>
+          <a title="Download File" class="tooltip">
+            <button type="button" name="download"><i class="fa fa-download"></i></button>
+          </a>
+        </div>
+
+        <div class="file">
+          <p>synthetic_vs_natural_fabrics.pdf</p>
+          <a title="Download File" class="tooltip">
+            <button type="button" name="download"><i class="fa fa-download"></i></button>
+          </a>
+        </div>
+
+        <div class="file">
+          <p>gunthers_sock_guide.png</p>
+          <a title="Download File" class="tooltip">
+            <button type="button" name="download"><i class="fa fa-download"></i></button>
+          </a>
+        </div>
+
+        <div class="file">
+          <p>top_10_knitting_needles_of_all_time.pdf</p>
+          <a title="Download File" class="tooltip">
+            <button type="button" name="download"><i class="fa fa-download"></i></button>
+          </a>
+        </div>
+
+        <div class="file">
+          <p>what_wool_is_right_for_you.pptx</p>
+          <a title="Download File" class="tooltip">
+            <button type="button" name="download"><i class="fa fa-download"></i></button>
+          </a>
+        </div>
+
+        <div class="file">
+          <p>jumper_knitting_finalist_showdown.mov</p>
+          <a title="Download File" class="tooltip">
+            <button type="button" name="download"><i class="fa fa-download"></i></button>
+          </a>
+        </div>
+
+      </div>
+
+    </section>
+
+    <hr>
+
+    <!-- Flashcards section -->
+    <section class="flashcards">
+      <h2 class="panel_heading">Course Flashcards</h2>
+
+        <div class="flashcard_container">
+
+          <div class="flashcard_tile">
+            <h2>Knitting & Purling</h2>
+            <hr>
+            <p>What is the difference between a knit stitch and a purl stitch?</p>
+            <hr>
+            <button type="button" name="edit"><i class="fa fa-pen-to-square"></i> Edit</button>
+            <button type="button" name="delete"><i class="fa fa-trash-can"></i> Delete</button>
+          </div>
+
+          <div class="flashcard_tile">
+            <h2>Crochet bad</h2>
+            <hr>
+            <p>What are the main 25 disadvantages of crochet compared to knitting?</p>
+            <hr>
+            <button type="button" name="edit"><i class="fa fa-pen-to-square"></i> Edit</button>
+            <button type="button" name="delete"><i class="fa fa-trash-can"></i> Delete</button>
+          </div>
+
+          <div class="flashcard_tile">
+            <h2>Needle Length</h2>
+            <hr>
+            <p>What is the correct length of needle according to "Gunther's Sock Guide" for children-size socks?</p>
+            <hr>
+            <button type="button" name="edit"><i class="fa fa-pen-to-square"></i> Edit</button>
+            <button type="button" name="delete"><i class="fa fa-trash-can"></i> Delete</button>
+          </div>
+
+          <div class="flashcard_tile">
+            <h2>Showdown Winner</h2>
+            <hr>
+            <p>Who won the 2008 Jumper Knitting competition?</p>
+            <hr>
+            <button type="button" name="edit"><i class="fa fa-pen-to-square"></i> Edit</button>
+            <button type="button" name="delete"><i class="fa fa-trash-can"></i> Delete</button>
+          </div>
+
+          <div class="flashcard_tile">
+            <h2>Crochet is 4 nerdz</h2>
+            <hr>
+            <p>Why is crochet objectively worse than knitting?</p>
+            <hr>
+            <button type="button" name="edit"><i class="fa fa-pen-to-square"></i> Edit</button>
+            <button type="button" name="delete"><i class="fa fa-trash-can"></i> Delete</button>
+          </div>
+
+          <div class="flashcard_tile">
+            <h2>Dangers of Crochet</h2>
+            <hr>
+            <p>How many accidents are caused by crochet each month globally?</p>
+            <hr>
+            <button type="button" name="edit"><i class="fa fa-pen-to-square"></i> Edit</button>
+            <button type="button" name="delete"><i class="fa fa-trash-can"></i> Delete</button>
+          </div>
+
+          <div class="flashcard_tile button_tile">
+            <a class="revise_button" href="#">
+              <i class="fa fa-circle-arrow-right"></i>
+              <br>
+              <p>Revise Flashcards</p>
+            </a>
+          </div>
+
+          <div class="flashcard_tile button_tile">
+            <a class="add_button" href="add_or_edit_flashcard.html">
+              <i class="fa fa-circle-plus"></i>
+              <br>
+              <p>Create a New Flashcard</p>
+            </a>
+          </div>
+
+        </div>
+
+    </section>
+
+  </div>
+
+{% endblock %}

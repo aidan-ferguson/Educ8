@@ -21,7 +21,9 @@
     <h1 class="panel_title">Form Template Page</h1>
     <hr>
 
-    <form class="" action="index.html" method="post">
+    <form class="" action="index.html" method="post" action="{% url 'Educ8:forms/login' %}">
+
+      {% csrf_token %}
 
       <p class="error_message"><b>Error:</b> Weight limit exceeded.</p>
 
