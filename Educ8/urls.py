@@ -12,7 +12,7 @@ urlpatterns = [
     path('my_courses/add_course/',
          views.add_course, name='add_course'),
     path('my_courses/<slug:course_name_slug>/add_file/',
-         views.add_file, name='add_file'),
+         views.add_files, name='add_files'),
     path('my_courses/<slug:course_name_slug>/add_or_edit_flashcard',
          views.add_or_edit_flashcard, name='add_or_edit_flashcard'),
     path('my_courses/<slug:course_name_slug>/<slug:flashcard_id_slug',
@@ -24,5 +24,5 @@ urlpatterns = [
     path('login/', views.user_login, name='login'),
     path('restricted/', views.restricted, name='restricted'),
     path('logout/', views.logout, name='logout'),
-    
+
 ]
