@@ -210,9 +210,6 @@ def user_login(request):
     else:
         return render(request, 'Educ8/forms/login.html')
 
-def restricted(request):
-    pass
-
 @login_required
 def logout(request):
     logout(request)
