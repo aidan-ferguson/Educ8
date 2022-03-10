@@ -24,7 +24,7 @@ class Teacher(models.Model):
     Methods:
     __str__ : Returns the username of the Teacher. This makes debugging easier.
     """
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, min_length=MINIMUM_LENGTH, max_length=MAX_LENGTH_USERNAME)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
     def __str__(self):
         return self.user.username
@@ -41,7 +41,7 @@ class Student(models.Model):
     Methods:
     __str__ : Returns the username of the Student. This makes debugging easier.
     """
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, min_length=MINIMUM_LENGTH, max_length=MAX_LENGTH_USERNAME)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
     def __str__(self):
         return self.user.username
