@@ -9,6 +9,8 @@ Things to do:
     Get someone to check everything.
 """
 
+MINIMUM_LENGTH = 4
+MAX_LENGTH_USERNAME = 32
 
 class Teacher(models.Model):
     """Teacher class: This is a model for our Teacher table in our database.
@@ -22,7 +24,7 @@ class Teacher(models.Model):
     Methods:
     __str__ : Returns the username of the Teacher. This makes debugging easier.
     """
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, min_length=MINIMUM_LENGTH, max_length=MAX_LENGTH_USERNAME)
 
     def __str__(self):
         return self.user.username
@@ -39,7 +41,7 @@ class Student(models.Model):
     Methods:
     __str__ : Returns the username of the Student. This makes debugging easier.
     """
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, min_length=MINIMUM_LENGTH, max_length=MAX_LENGTH_USERNAME)
 
     def __str__(self):
         return self.user.username
@@ -56,7 +58,7 @@ class Course(models.Model):
     Methods:
     __str__ : Returns the name of the Course. This makes debugging easier.
     """
-    courseName = models.CharField(max_length=256, primary_key=True)
+    courseName = models.CharField(max_length=256, primary_key=True, min_length=MINIMUM_LENGTH)
     createdBy = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True)
     students = models.ManyToManyField(Student, blank=True)
 
@@ -76,9 +78,9 @@ class Flashcard(models.Model):
     Methods:
     __str__ : Returns the title of the Flashcard. This makes debugging easier.
     """
-    title = models.CharField(max_length=128)
-    question = models.CharField(max_length=1024)
-    answer = models.CharField(max_length=256)
+    title = models.CharField(max_length=128, min_length=1)
+    question = models.CharField(max_length=1024, min_length=1)
+    answer = models.CharField(max_length=1024, min_length=1)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     createdBy = models.ForeignKey(Student, on_delete=models.CASCADE)
 
