@@ -74,7 +74,7 @@ def add_course(request):
 
 @login_required
 def add_files(request, course_name_slug):
-    render(request, 'Educ8/add_files.html')
+    pass
 
 @login_required
 def add_or_edit_flashcard(request, course_name_slug):
@@ -108,18 +108,7 @@ def add_or_edit_flashcard(request, course_name_slug):
 
 @login_required
 def show_flashcard(request, course_name_slug, flashcardID):
-    context_dict={}
-    try:
-        course = Course.objects.get(slug=course_name_slug)
-        flashcard = Course.objects.get(slug=flashcardID)
-        context_dict['flashCards'] = flashcard
-        context_dict['course'] = course
-    except Course.DoesNotExist:
-        course = None
-        flashcard = None
-        context_dict['flashCards'] = None
-        context_dict['course'] = None
-    return render(request, 'Educ8/course/flashCards', context=context_dict)
+    pass
 
 def add_students(request, course_name_slug):
 
@@ -153,9 +142,9 @@ def add_students(request, course_name_slug):
     return render(request, 'Educ8/add_students.html', {'form' : form})
 
 
-def studentRegister(request):
+def register(request):
 
-    """view to register a student,
+    """view to register a student/teacher,
     check if the form is valid and
     direct them to the signup page
     """
@@ -163,7 +152,24 @@ def studentRegister(request):
     registered = False
 
     if request.method == 'POST':
-        student_form = StudentForm(request.POST)
+        userType = request.POST.get('HELP')
+        if userType == 'teacher':
+
+            teacher_form = TeacherForm(request.POST)
+
+
+            if teacher_form.is_valid():
+                student = teacher_form.save()
+                student.set_password(student.password)
+                student.save()
+
+                registered = True
+            else:
+                print(teacher_form.error_class)
+
+        elif userType == 'student':
+
+            student_form = StudentForm(request.POST)
 
 
         if student_form.is_valid():
@@ -174,40 +180,13 @@ def studentRegister(request):
             registered = True
         else:
             print(student_form.error_class)
-
-    else:
-        student_form = StudentForm()
-
-    return render(request, 'Educ8/signup.html', context={'student_form' : student_form, 'registered' : registered})
-
-    # else if user selects teacher:
-
-def teacherRegister(request):
-
-    """view to register a student,
-    check if the form is valid and
-    direct them to the signup page
-    """
-
-    registered = False
-
-    if request.method == 'POST':
-        teacher_form = TeacherForm(request.POST)
-
-
-        if teacher_form.is_valid():
-            student = teacher_form.save()
-            student.set_password(student.password)
-            student.save()
-
-            registered = True
-        else:
-            print(teacher_form.error_class)
+            
 
     else:
         teacher_form = TeacherForm()
+        student_form = StudentForm()
 
-    return render(request, 'Educ8/signup.html', context={'teacher_form' : teacher_form, 'registered' : registered})
+    return render(request, 'Educ8/signup.html', context={'registered' : registered})
 
 
 def user_login(request):
