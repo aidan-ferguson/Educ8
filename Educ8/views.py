@@ -164,36 +164,31 @@ def add_students(request, course_name_slug):
 
     return render(request, 'Educ8/add_students.html', {'form' : form})
 
-
+# Need to verify passwords are the same and return any form errors
 def register(request):
 
     """view to register a student/teacher,
     check if the form is valid and
     direct them to the signup page
     """
-
     registered = False
 
     if request.method == 'POST':
         userType = request.POST.get('user_type')
         if userType == 'teacher':
-
             teacher_form = TeacherForm(request.POST)
 
-
             if teacher_form.is_valid():
-                student = teacher_form.save()
-                student.set_password(student.password)
-                student.save()
+                teacher = teacher_form.save()
+                teacher.set_password(teacher.password)
+                teacher.save()
 
                 registered = True
             else:
-                print(teacher_form.error_class)
+                print(teacher_form.errors)
 
         elif userType == 'student':
-
             student_form = StudentForm(request.POST)
-
 
             if student_form.is_valid():
                 student = student_form.save()
@@ -202,7 +197,7 @@ def register(request):
 
                 registered = True
             else:
-                print(student_form.error_class)
+                print(student_form.errors)
 
 
     else:
@@ -211,7 +206,7 @@ def register(request):
 
     return render(request, 'Educ8/forms/register.html', context={'registered' : registered})
 
-
+# Can we pass the 'next' GET variable to the register view?
 def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -234,7 +229,7 @@ def user_login(request):
         return render(request, 'Educ8/forms/login.html')
 
 @login_required
-def logout(request):
+def user_logout(request):
     logout(request)
     return redirect(reverse('Educ8:index'))
 

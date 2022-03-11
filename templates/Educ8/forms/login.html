@@ -21,7 +21,7 @@
     <h1 class="panel_title">Form Template Page</h1>
     <hr>
 
-    <form class="" action="index.html" method="post" action="{% url 'Educ8:forms/login' %}">
+    <form class="" method="post" action="{% url 'Educ8:forms/login' %}">
 
       {% csrf_token %}
 
@@ -54,7 +54,7 @@
         <input class="btn" type="submit" value="Login">
       </div>
 
-      <p>Don't have an account? Register <a href="register.html"><b>here</b></a>.</p>
+      <p>Don't have an account? Register <a href="{% url 'Educ8:forms/register' %}"><b>here</b></a>.</p>
 
     </form>
 

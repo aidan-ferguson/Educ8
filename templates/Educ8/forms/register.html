@@ -21,7 +21,7 @@
     <h1 class="panel_title">Create an Account</h1>
     <hr>
 
-    <form class="" action="index.html" method="post" action="{% url 'Educ8:forms/register' %}">
+    <form class="" method="post" action="{% url 'Educ8:forms/register' %}">
 
       {% csrf_token %}
 
@@ -42,7 +42,7 @@
       <div class="field">
         <label for="fname">Username:</label>
         <br>
-        <input type="text" name="fname" value="" placeholder="Create a username...">
+        <input type="text" name="username" value="" placeholder="Create a username...">
       </div>
 
       <div class="field">
@@ -60,9 +60,9 @@
       <div class="field">
         <label for="user_type">I am a...</label>
         <br>
-        <input type="radio" name="user_type" value="">
+        <input type="radio" name="user_type" value="student">
         <label for="student">Student</label>
-        <input type="radio" name="user_type" value="">
+        <input type="radio" name="user_type" value="teacher">
         <label for="teacher">Teacher</label>
       </div>
 

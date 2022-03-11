@@ -142,3 +142,6 @@ MEDIA_URL = '/media/'
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_SECURE = True
+
+# Override default redirect for @login_required and let Educ8 handle login
+LOGIN_URL = '/Educ8/login'
