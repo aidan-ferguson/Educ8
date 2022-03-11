@@ -73,15 +73,18 @@ def add_course(request):
 
     return render(request, 'rango/add_course.html', {'form' : form})
 
-# TODO: use forms instead?
+# TODO: Error handling, max file size?
 #@login_required
 def add_files(request, course_name_slug):
     if request.method == 'POST':
-        course = Course.objects.get(slug=course_name_slug)
-        course_file = CourseFile(course=course)
-        file = request.FILES['file']
-        course_file.file.save(file.name, file)
-        course_file.save()
+        form = CourseFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            course = Course.objects.get(slug=course_name_slug)
+            course_file = CourseFile(course=course)
+            file = request.FILES['file']
+            course_file.file.save(file.name, file)
+            course_file.save()
+            return redirect(f'/Educ8/my_courses/{course_name_slug}')
     return render(request, 'Educ8/forms/add_files.html')
 
 @login_required

@@ -45,4 +45,4 @@ class CourseFileForm(forms.ModelForm):
 
     class Meta:
         model = CourseFile
-        fields = ('file', 'course')
+        fields = ('file',)
