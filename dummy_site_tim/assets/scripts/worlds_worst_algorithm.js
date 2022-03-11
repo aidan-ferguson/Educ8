@@ -25,7 +25,7 @@ function timGenerator(seedString, target) {
     return parseInt(num);
   }
 
-  // Function to convert a string to a number in between 120 and 255
+  // Function to convert a string to a number in between 130 and 255
   // Takes the sum of each character's ASCII code, then use the last 3 digits
   // If the resulant number is too large do "stuff" to it then try again
   function toNum(text) {
@@ -34,21 +34,21 @@ function timGenerator(seedString, target) {
       sum += text.charCodeAt(i);
     }
     sum = lastThreeDigits(sum);
-    while (sum > 119) {
+    while (sum > 109) {
       sum = sum*2+lastThreeDigits(reverseNum(sum)*7);
       console.log(sum);
-      if (lastThreeDigits(sum) <= 119) {
+      if (lastThreeDigits(sum) <= 109) {
         break;
       }
     }
-    return lastThreeDigits(sum) + 135;
+    return lastThreeDigits(sum) + 145;
   }
 
   // Split text into three more-or-less-equal substrings, remove all spaces and whitespace
   var text = seedString;
-  var leftSubstring = text.substring(0, Math.round(text.length/3)).replace(/ /g,'').toLowerCase();
-  var midSubstring = text.substring(Math.round(text.length/3), Math.round(text.length/3)*2).replace(/ /g,'').toLowerCase();
-  var rightSubstring = text.substring(Math.round(text.length/3)*2+1, text.length).replace(/ /g,'').toLowerCase();
+  var leftSubstring = text.substring(0, Math.round(text.length/3)).replace(/ /g,'');
+  var midSubstring = text.substring(Math.round(text.length/3), Math.round(text.length/3)*2).replace(/ /g,'');
+  var rightSubstring = text.substring(Math.round(text.length/3)*2+1, text.length).replace(/ /g,'');
 
   // Pass each substring into the value to get RGB values
   target.css("background-color", `rgb(${toNum(leftSubstring)}, ${toNum(midSubstring)}, ${toNum(rightSubstring)})`);
