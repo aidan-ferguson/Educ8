@@ -2,10 +2,7 @@
 
 $(document).ready(function(){
 
-  // Background color generator
-  var red = Math.floor(Math.random() * 100) + 155;
-  var green = Math.floor(Math.random() * 100) + 155;
-  var blue = Math.floor(Math.random() * 100) + 155;
-  $(".card_panel").css("background-color", `rgb(${red}, ${green}, ${blue})`);
+  // Generate background colour
+  timGenerator($(".card_panel").find("h2").text(), $(".card_panel"));
 
 });
