@@ -39,6 +39,8 @@ function timGenerator(seedString, target) {
       console.log(sum);
       if (lastThreeDigits(sum) <= 109) {
         break;
+      } else if (sum > 1000000) {
+        sum = Math.round(Math.sqrt(sum));
       }
     }
     return lastThreeDigits(sum) + 145;
@@ -46,6 +48,10 @@ function timGenerator(seedString, target) {
 
   // Split text into three more-or-less-equal substrings, remove all spaces and whitespace
   var text = seedString;
+  if (text.length < 10) {
+    text += "i <3 javascript" + text;
+    console.log(text);
+  }
   var leftSubstring = text.substring(0, Math.round(text.length/3)).replace(/ /g,'');
   var midSubstring = text.substring(Math.round(text.length/3), Math.round(text.length/3)*2).replace(/ /g,'');
   var rightSubstring = text.substring(Math.round(text.length/3)*2+1, text.length).replace(/ /g,'');
