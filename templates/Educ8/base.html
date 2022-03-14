@@ -39,11 +39,6 @@
   <nav>
     <a id="header-nav-logo" href="{% url 'Educ8:index' %}"><img src="{% static 'assets/icons/logo.png' %}"></a>
 
-
-
-
-
-
     {% if user.is_authenticated %}
     <ul>
       <li>
@@ -56,10 +51,6 @@
         <a href="{% url 'Educ8:index' %}"><i class="fa fa-home"></i> Home</a>
       </li>
     </ul>
-
-
-
-
     {% else %}
     <ul>
       <li>
@@ -73,8 +64,6 @@
       </li>
     </ul>
     {% endif %}
-
-
 
 
   </nav>

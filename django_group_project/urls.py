@@ -25,3 +25,6 @@ urlpatterns = [
     path('Educ8/', include('Educ8.urls')),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# 404 Page
+handler404 = 'Educ8.views.page_not_found'

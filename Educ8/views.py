@@ -1,18 +1,15 @@
 from xml.dom.domreg import registered
-from django.shortcuts import render
 from django.http import HttpResponse
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
+from django.template import RequestContext
 from django.template.defaultfilters import slugify
-from Educ8.forms import CourseForm, FlashcardForm, TeacherForm, StudentForm, CourseFileForm
 from datetime import datetime
-from Educ8.models import Course
-from Educ8.models import Flashcard
-from Educ8.models import CourseFile
+from Educ8.forms import CourseForm, FlashcardForm, TeacherForm, StudentForm, CourseFileForm
+from Educ8.models import Course, Flashcard, CourseFile
 from Educ8.decorators import is_teacher, is_student
-from django.contrib.auth.decorators import user_passes_test
 
 def index(request):
 
@@ -261,3 +258,7 @@ def visitor_cookie_handler(request):
 
 def terms(request):
     return render(request, "Educ8/terms.html")
+
+# HTTP 404 Error (Page not found)
+def page_not_found(request, exception):
+    return render(request, "Educ8/404.html")
