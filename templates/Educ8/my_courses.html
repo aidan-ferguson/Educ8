@@ -25,53 +25,18 @@
     <!-- Course tiles -->
     <section class="course_tiles">
 
-      <div class="tile">
-        <a href='course.html'>
-          <h2>Web Application Development</h2>
-          <hr>
-          <p>Alistair Morrison</p>
-        </a>
-      </div>
 
-      <div class="tile">
-        <a href='course.html'>
-          <h2>Intro to Knitting</h2>
-          <hr>
-          <p>The Rt Hon. Bobby McBobson Jr. MBE</p>
-        </a>
-      </div>
+      {% for course in courses %}
+        <div class="tile">
+          <a href='course.html'>
+            <h2>{{ course.courseName }}</h2>
+            <hr>
+            <p>{{ course.createdBy }}</p>
+          </a>
+        </div>
+        {% endfor %}
 
-      <div class="tile">
-        <a href='course.html'>
-          <h2>How 2 Cook Pretty Good</h2>
-          <hr>
-          <p>Morgan Hamsey</p>
-        </a>
-      </div>
-
-      <div class="tile">
-        <a href='course.html'>
-          <h2>A course with an unecessarily long title which needs to be cut off</h2>
-          <hr>
-          <p>Emily Surname</p>
-        </a>
-      </div>
-
-      <div class="tile">
-        <a href='course.html'>
-          <h2>Advanced Chair Building</h2>
-          <hr>
-          <p>Egbert Mumples</p>
-        </a>
-      </div>
-
-      <div class="tile">
-        <a href='course.html'>
-          <h2>Knitting Masterclass</h2>
-          <hr>
-          <p>The Rt Hon. Bobby McBobson Jr. MBE</p>
-        </a>
-      </div>
+      
 
     </section>
 

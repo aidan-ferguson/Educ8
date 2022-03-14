@@ -21,3 +21,17 @@ class IndexViewTests(TestCase):
         self.assertContains(response, 'The Greatest Online Learning Platform (GOLP)')
         self.assertContains(response, 'Login')
         self.assertContains(response, 'Register')
+
+class RegisterViewTests(TestCase):
+    def test_register_view(self):
+        response = self.client.get(reverse('Educ8:rgister'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Create an Account')
+        self.assertContains(response, 'Forename(s):')
+        self.assertContains(response, 'Surname(s):')
+        self.assertContains(response, 'Username:')
+        self.assertContains(response, 'Create a Password:')
+        self.assertContains(response, 'Confirm Password:')
+        self.assertContains(response, 'I am a...')
+        self.assertContains(response, 'Student')
+        self.assertContains(response, 'Teacher')
