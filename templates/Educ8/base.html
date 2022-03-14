@@ -44,9 +44,8 @@
 
 
 
-    
+    {% if user.is_authenticated %}
     <ul>
-      {% if user.is_authenticated %}
       <li>
         <a href="{% url 'Educ8:forms/logout' %}"><i class="fa fa-arrow-circle-right"></i> Logout</a>
       </li>
@@ -56,13 +55,12 @@
       <li>
         <a href="{% url 'Educ8:index' %}"><i class="fa fa-home"></i> Home</a>
       </li>
-      {% endif %}
     </ul>
 
 
 
 
-    <!-- MICHAEL THIS IS THE ONE THAT NEEDS TO BE PUT IN IF THE USER IS NOT LOGGED IN -->
+    {% else %}
     <ul>
       <li>
         <a href="{% url 'Educ8:forms/login' %}"><i class="fa fa-arrow-circle-left"></i> Login</a>
@@ -74,6 +72,7 @@
         <a href="{% url 'Educ8:index' %}"><i class="fa fa-home"></i> Home</a>
       </li>
     </ul>
+    {% endif %}
 
 
 
