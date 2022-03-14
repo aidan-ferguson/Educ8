@@ -30,46 +30,46 @@
       <div class="field">
         <label for="fname">Forename(s):</label>
         <br>
-        <input type="text" name="fname" value="" placeholder="Enter forename(s)...">
+        <input type="text" name="fname" maxlength="32" required placeholder="Enter forename(s)...">
       </div>
 
       <div class="field">
         <label for="surname">Surname(s):</label>
         <br>
-        <input type="text" name="surname" value="" placeholder="Enter surname(s)">
+        <input type="text" name="surname" maxlength="32" required placeholder="Enter surname(s)">
       </div>
 
       <div class="field">
         <label for="fname">Username:</label>
         <br>
-        <input type="text" name="username" value="" placeholder="Create a username...">
+        <input type="text" name="username" minlength="4" maxlength="32" required placeholder="Create a username...">
       </div>
 
       <div class="field">
         <label for="password">Create a Password:</label>
         <br>
-        <input type="password" name="password" value="" placeholder="Create a password...">
+        <input type="password" name="password" minlength="9" maxlength="32" required placeholder="Create a password...">
       </div>
 
       <div class="field">
         <label for="confirm">Confirm Password:</label>
         <br>
-        <input type="password" name="confirm" value="" placeholder="Re-type password...">
+        <input type="password" name="confirm" required placeholder="Re-type password...">
       </div>
 
       <div class="field">
         <label for="user_type">I am a...</label>
         <br>
-        <input type="radio" name="user_type" value="student">
+        <input type="radio" name="user_type" value="student" required>
         <label for="student">Student</label>
-        <input type="radio" name="user_type" value="teacher">
+        <input type="radio" name="user_type" value="teacher" required>
         <label for="teacher">Teacher</label>
       </div>
 
       <hr class="form_hr">
 
       <div class="field">
-        <input type="checkbox" name="terms" value="">
+        <input type="checkbox" name="terms" required>
         <label for="terms"><i> I have read and accept the <a href="{% url 'Educ8:terms' %}"><b>Terms & Conditions</b></a>.</i></label>
       </div>
 
