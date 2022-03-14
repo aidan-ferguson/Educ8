@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.shortcuts import redirect
-from jupyterlab_server import slugify
+from django.template.defaultfilters import slugify
 from Educ8.forms import CourseForm, FlashcardForm, TeacherForm, StudentForm, CourseFileForm
 from datetime import datetime
 from Educ8.models import Course
