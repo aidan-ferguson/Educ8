@@ -3,7 +3,7 @@ from Educ8.models import Course
 from django.urls import reverse
 from Educ8.models import Flashcard
 
-
+### method tests ###
 class CourseMethodTests(TestCase):
     def test_slug_line_creation(self):
         
@@ -12,7 +12,7 @@ class CourseMethodTests(TestCase):
         
         self.assertEqual(course.slug, 'example-course')
                 
-
+### view tests ###
 class IndexViewTests(TestCase):
     def test_index_view(self):
         response = self.client.get(reverse('Educ8:index'))
