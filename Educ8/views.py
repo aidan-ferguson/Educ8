@@ -188,6 +188,7 @@ def register(request):
                 teacher.save()
 
                 registered = True
+                return redirect(reverse('Educ8:index'))
             else:
                 print(teacher_form.errors)
 
@@ -200,6 +201,7 @@ def register(request):
                 student.save()
 
                 registered = True
+                return redirect(reverse('Educ8:index'))
             else:
                 print(student_form.errors)
 

@@ -130,7 +130,7 @@ dmypy.json
 
 # Educ8 Stuff
 .idea/
-Educ8/migrations
+Educ8/migrations/
 
 # No media files (uploaded to courses)
-media/files
+media/files/
