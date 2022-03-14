@@ -11,7 +11,7 @@ from datetime import datetime
 from Educ8.models import Course
 from Educ8.models import Flashcard
 from Educ8.models import CourseFile
-from Educ8.decorators import teacher_required, student_required
+from Educ8.decorators import is_teacher, is_student
 from django.contrib.auth.decorators import user_passes_test
 
 def index(request):
@@ -81,7 +81,7 @@ def add_course(request):
 
 # TODO: Error handling, max file size?
 @login_required
-@user_passes_test(teacher_required)
+@user_passes_test(is_teacher)
 def add_files(request, course_name_slug):
     if request.method == 'POST':
         form = CourseFileForm(request.POST, request.FILES)

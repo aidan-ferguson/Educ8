@@ -1,5 +1,5 @@
-def student_required(user):
+def is_student(user):
     return user.is_active and user.is_student
 
-def teacher_required(user):
+def is_teacher(user):
     return user.is_active and user.is_teacher
