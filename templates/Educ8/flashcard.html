@@ -1,0 +1,39 @@
+{% extends 'Educ8/base.html' %}
+{% load staticfiles %}
+
+
+{% block title_block %}
+  Revise Flashcards
+{% endblock %}
+
+
+{% block asset_block %}
+  <link rel="stylesheet" href="{% static 'assets/styles/styles_flashcard.css' %}">
+  <script src="{% static 'assets/scripts/scripts_flashcard.js' %}"></script>
+{% endblock %}
+
+
+{% block content_block %}
+
+  <!-- Main page content -->
+  <div class="content_panel">
+
+    <h1 class="panel_title">Revise Flashcards</h1>
+    <hr>
+
+    <!-- MICHAEL THIS IS THE BIT THAT NEEDS CHANGED -->
+    <div class="card_panel">
+      <h2>Needle Length</h2>
+      <hr>
+      <p>What is the correct length of needle according to "Gunther's Sock Guide" for children-size socks?</p>
+    </div>
+    <!-- TO HERE -->
+    <div class="button_container">
+      <button class="btn" type="button" name="answer"><i class="fa fa-repeat"></i> Reveal Answer</button>
+      <button class="btn" type="button" name="next"><i class="fa-solid fa-arrow-right"></i> Next Card</button>
+    </div>
+
+
+  </div>
+
+{% endblock %}
