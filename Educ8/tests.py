@@ -35,3 +35,15 @@ class RegisterViewTests(TestCase):
         self.assertContains(response, 'I am a...')
         self.assertContains(response, 'Student')
         self.assertContains(response, 'Teacher')
+
+class LoginViewTests(TestCase):
+    def test_login_view(self):
+        response = self.client.get(reverse('Educ8:forms/login'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Login')
+        self.assertContains(response, 'Username:')
+        self.assertContains(response, 'Password:')
+        self.assertContains(response, 'I am a...')
+        self.assertContains(response, 'Student')
+        self.assertContains(response, 'Teacher')
+        self.assertContains(response, "Don't have an account? Register")
