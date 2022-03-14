@@ -34,12 +34,9 @@
       <div class="field">
         <label for="add">Add Students:</label><br>
         <select name="add">
-          <option value="Aiden Ferguson">Aiden Ferguson</option>
-          <option value="Cameron McDonald" disabled>Cameron McDonald</option>
-          <option value="David Whelan">David Whelan</option>
-          <option value="Dom Jina" disabled>Dom Jina</option>
-          <option value="Michael McVey">Michael McVey</option>
-          <option value="Timothy Wang">Timothy Wang</option>
+          {% for student in students %}
+          <option value= {{ student.first_name }} {{ student.last_name }} >Aiden Ferguson</option>
+          {% endfor %}
         </select>
         <input class="btn add" type="submit" value="Add">
       </div>
