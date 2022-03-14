@@ -38,6 +38,13 @@
   <!-- Navigation -->
   <nav>
     <a id="header-nav-logo" href="{% url 'Educ8:index' %}"><img src="{% static 'assets/icons/logo.png' %}"></a>
+
+
+
+
+
+
+    <!-- MICHAEL THIS IS THE ONE THAT NEEDS TO BE PUT IN IF THE USER IS LOGGED IN -->
     <ul>
       <li>
         <a href="{% url 'Educ8:forms/logout' %}"><i class="fa fa-arrow-circle-right"></i> Logout</a>
@@ -49,6 +56,26 @@
         <a href="{% url 'Educ8:index' %}"><i class="fa fa-home"></i> Home</a>
       </li>
     </ul>
+
+
+
+
+    <!-- MICHAEL THIS IS THE ONE THAT NEEDS TO BE PUT IN IF THE USER IS NOT LOGGED IN -->
+    <ul>
+      <li>
+        <a href="{% url 'Educ8:forms/login' %}"><i class="fa fa-arrow-circle-left"></i> Login</a>
+      </li>
+      <li>
+        <a href="{% url 'Educ8:register' %}"><i class="fa fa-pen-to-square"></i> Register</a>
+      </li>
+      <li>
+        <a href="{% url 'Educ8:index' %}"><i class="fa fa-home"></i> Home</a>
+      </li>
+    </ul>
+
+
+
+
   </nav>
 
   <!-- Main page content -->
