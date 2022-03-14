@@ -1,42 +1,50 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.core.validators import MinLengthValidator
 from django.template.defaultfilters import slugify
 
 MINIMUM_LENGTH = 4
 MAX_LENGTH_USERNAME = 32
 
-class Teacher(models.Model):
-    """Teacher class: This is a model for our Teacher table in our database.
+# class Teacher(models.Model):
+#     """Teacher class: This is a model for our Teacher table in our database.
 
-    Attributes:
-        user (oneToOneField with default user): This contains attibutes
-                                                such as username, email,
-                                                password, name and more.
+#     Attributes:
+#         user (oneToOneField with default user): This contains attibutes
+#                                                 such as username, email,
+#                                                 password, name and more.
 
-    Methods:
-    __str__ : Returns the username of the Teacher. This makes debugging easier.
-    """
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, validators=[MinLengthValidator(MINIMUM_LENGTH)], max_length=MAX_LENGTH_USERNAME)
+#     Methods:
+#     __str__ : Returns the username of the Teacher. This makes debugging easier.
+#     """
+#     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, validators=[MinLengthValidator(MINIMUM_LENGTH)], max_length=MAX_LENGTH_USERNAME)
+
+#     def __str__(self):
+#         return self.user.username
+
+# class Student(models.Model):
+#     """Student class: This is a model for our Student table in our database.
+
+#     Attributes:
+#         user (oneToOneField with default user): This contains attibutes
+#                                                 such as username, email,
+#                                                 password, name and more.
+
+#     Methods:
+#     __str__ : Returns the username of the Student. This makes debugging easier.
+#     """
+#     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, validators=[MinLengthValidator(MINIMUM_LENGTH)], max_length=MAX_LENGTH_USERNAME)
+
+#     def __str__(self):
+#         return self.user.username
+
+class Account(AbstractUser):
+    is_teacher = models.BooleanField(default=False)
+    is_student = models.BooleanField(default=False)
+
 
     def __str__(self):
-        return self.user.username
-
-class Student(models.Model):
-    """Student class: This is a model for our Student table in our database.
-
-    Attributes:
-        user (oneToOneField with default user): This contains attibutes
-                                                such as username, email,
-                                                password, name and more.
-
-    Methods:
-    __str__ : Returns the username of the Student. This makes debugging easier.
-    """
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, validators=[MinLengthValidator(MINIMUM_LENGTH)], max_length=MAX_LENGTH_USERNAME)
-
-    def __str__(self):
-        return self.user.username
+        return self.username
 
 
 class Course(models.Model):
@@ -52,8 +60,8 @@ class Course(models.Model):
     __str__ : Returns the name of the Course. This makes debugging easier.
     """
     courseName = models.CharField(max_length=256, primary_key=True, validators=[MinLengthValidator(4)])
-    createdBy = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True)
-    students = models.ManyToManyField(Student, blank=True)
+    createdBy = models.ForeignKey(Account, related_name='course_creator', on_delete=models.CASCADE, null=True)
+    students = models.ManyToManyField(Account, blank=True)
     slug = models.SlugField(unique=True)
     
     def save(self, *args, **kwargs):
@@ -80,8 +88,7 @@ class Flashcard(models.Model):
     question = models.CharField(max_length=1024, validators=[MinLengthValidator(1)])
     answer = models.CharField(max_length=1024, validators=[MinLengthValidator(1)])
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    createdBy = models.ForeignKey(Student, on_delete=models.CASCADE)
-
+    createdBy = models.ForeignKey(Account, related_name='flashcard_creator', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title

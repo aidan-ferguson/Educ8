@@ -1,25 +1,34 @@
 
 from dataclasses import fields
 from pyexpat import model
-from stat import FILE_ATTRIBUTE_NOT_CONTENT_INDEXED
 from django import forms 
-from Educ8.models import Teacher, Student, Course, Flashcard, CourseFile
-from django.contrib.auth.models import User
-
-class StudentForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
-
-    class Meta:
-        model = User
-        fields = ('username', 'password', 'first_name', 'last_name')
+from Educ8.models import Account, Course, Flashcard, CourseFile
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import get_user_model
 
 
-class TeacherForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
+class TeacherForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = get_user_model()
 
-    class Meta:
-        model = User
-        fields = ('username', 'password', 'first_name', 'last_name')
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.is_teacher = True
+        if commit:
+            user.save()
+        return user
+
+
+class StudentForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = get_user_model()
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.is_student = True
+        if commit:
+            user.save()
+        return user
 
 
 class CourseForm(forms.ModelForm):

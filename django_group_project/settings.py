@@ -145,3 +145,6 @@ SESSION_COOKIE_SECURE = True
 
 # Override default redirect for @login_required and let Educ8 handle login
 LOGIN_URL = '/Educ8/login'
+
+# So django knows to use the custom user model for the authentication system
+AUTH_USER_MODEL = 'Educ8.Account'
