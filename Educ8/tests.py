@@ -1,6 +1,7 @@
 from django.test import TestCase
 from Educ8.models import Course
 from django.urls import reverse
+from Educ8.models import Flashcard
 
 
 class CourseMethodTests(TestCase):
@@ -10,6 +11,7 @@ class CourseMethodTests(TestCase):
         course.save()
         
         self.assertEqual(course.slug, 'example-course')
+                
 
 class IndexViewTests(TestCase):
     def test_index_view(self):

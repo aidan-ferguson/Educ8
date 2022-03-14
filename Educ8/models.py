@@ -82,6 +82,7 @@ class Flashcard(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     createdBy = models.ForeignKey(Student, on_delete=models.CASCADE)
 
+
     def __str__(self):
         return self.title
 
