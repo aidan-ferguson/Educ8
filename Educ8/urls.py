@@ -3,7 +3,7 @@ from Educ8 import views
 
 app_name = 'Educ8'
 
-urlpatterns = [
+urlpatterns = [ #Maps a url to its respective view and form
     path('', views.index, name='index'),
     path('my_courses/',
          views.my_courses, name='my_courses'),

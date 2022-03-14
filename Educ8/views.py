@@ -21,6 +21,9 @@ def index(request):
     response = render(request, 'Educ8/index.html')
     return response
 
+
+#Method for getting all of the courses a student is enrolled into
+#and then returns the list to the my_courses page.
 @login_required
 def my_courses(request):
     context_dict = {}
@@ -39,7 +42,8 @@ def my_courses(request):
 
     return render(request, 'Educ8/my_courses.html', context=context_dict)
 
-
+#Method for getting all of the flashcards and files for a single course
+#and then returning them to "course"
 @login_required
 def show_course(request, course_name_slug):
     context_dict = {}
@@ -58,7 +62,7 @@ def show_course(request, course_name_slug):
 
     return render(request, 'Educ8/course.html', context=context_dict)
 
-
+#method for allowing a teacher to create a course
 @login_required
 def add_course(request):
     form = CourseForm()
