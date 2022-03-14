@@ -47,3 +47,8 @@ class LoginViewTests(TestCase):
         self.assertContains(response, 'Student')
         self.assertContains(response, 'Teacher')
         self.assertContains(response, "Don't have an account? Register")
+
+class TermsViewTests(TestCase):
+    def test_terms_view(self):
+        response = self.client.get(reverse('Educ8:terms'))
+        self.assertEqual(response.status_code, 200)
