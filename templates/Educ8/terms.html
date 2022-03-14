@@ -6,6 +6,23 @@
   Terms and Conditions
 {% endblock %}
 
+
+{% block asset_block %}
+  <style media="screen">
+
+  a#soul {
+    color: white;
+    cursor: default;
+  }
+  a#soul::selection {
+    background: #FFFFFE;
+  	color: white;
+  }
+
+  </style>
+{% endblock %}
+
+
 {% block content_block %}
 
   <!-- Main page content -->
@@ -19,6 +36,7 @@
       <li>not hack us</li>
       <li></li>
       <li></li>
+      <li><a id="soul">we own your soul</a></li>
       <li></li>
     </ol>
 
