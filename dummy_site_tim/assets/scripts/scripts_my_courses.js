@@ -2,7 +2,7 @@
 
 $(document).ready(function(){
 
-  // Scripts for course tile elements
+  // Scripts for course tile element
   $(".tile").each(function() {
 
     // Generate background colour
