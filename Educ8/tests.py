@@ -24,7 +24,7 @@ class IndexViewTests(TestCase):
 
 class RegisterViewTests(TestCase):
     def test_register_view(self):
-        response = self.client.get(reverse('Educ8:register'))
+        response = self.client.get(reverse('Educ8:forms/register'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Create an Account')
         self.assertContains(response, 'Forename(s):')
