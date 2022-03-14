@@ -3,14 +3,6 @@ from django.contrib.auth.models import User
 from django.core.validators import MinLengthValidator
 from django.template.defaultfilters import slugify
 
-
-"""
-Things to do:
-    Create a function which checks if a Student exists.
-    Create a function which checks if a Teacher exists.
-    Get someone to check everything.
-"""
-
 MINIMUM_LENGTH = 4
 MAX_LENGTH_USERNAME = 32
 
@@ -18,10 +10,9 @@ class Teacher(models.Model):
     """Teacher class: This is a model for our Teacher table in our database.
 
     Attributes:
-        username (str): This is the username of the Teacher.
-        password (str): This is the password of the Teacher.
-        first_name (str): This is the first name of the Teacher.
-        last_name (str): This is the last name of the Teacher.
+        user (oneToOneField with default user): This contains attibutes
+                                                such as username, email,
+                                                password, name and more.
 
     Methods:
     __str__ : Returns the username of the Teacher. This makes debugging easier.
@@ -35,10 +26,9 @@ class Student(models.Model):
     """Student class: This is a model for our Student table in our database.
 
     Attributes:
-        username (str): This is the username of the Student.
-        password (str): This is the password of the Student.
-        first_name (str): This is the first name of the Student.
-        last_name (str): This is the last name of the Student.
+        user (oneToOneField with default user): This contains attibutes
+                                                such as username, email,
+                                                password, name and more.
 
     Methods:
     __str__ : Returns the username of the Student. This makes debugging easier.
@@ -56,6 +46,7 @@ class Course(models.Model):
         courseName (str): This is the name of the Course.
         createdBy (str): This is the username of the Teacher that created the Course.
         students (list of strings): This is a list of the usernames of the Students that have been enrolled on the Course.
+        sluf (slug field): slugifies the field name
 
     Methods:
     __str__ : Returns the name of the Course. This makes debugging easier.
