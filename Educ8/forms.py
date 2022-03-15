@@ -7,25 +7,15 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 
 
-class TeacherForm(UserCreationForm):
+class AccountForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
+        #fields = ('username', 'first_name', 'last_name', 'password1', 'password2')
 
-    def save(self, commit=True):
+    def save(self, is_student=False, is_teacher=False, commit=True):
         user = super().save(commit=False)
-        user.is_teacher = True
-        if commit:
-            user.save()
-        return user
-
-
-class StudentForm(UserCreationForm):
-    class Meta(UserCreationForm.Meta):
-        model = get_user_model()
-
-    def save(self, commit=True):
-        user = super().save(commit=False)
-        user.is_student = True
+        user.is_student = is_student
+        user.is_teacher = is_teacher
         if commit:
             user.save()
         return user

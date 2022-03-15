@@ -1,5 +1,6 @@
+from multiprocessing.sharedctypes import Value
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser#, BaseUserManager
 from django.core.validators import MinLengthValidator
 from django.template.defaultfilters import slugify
 
@@ -38,10 +39,34 @@ MAX_LENGTH_USERNAME = 32
 #     def __str__(self):
 #         return self.user.username
 
+"""
+    We need to have a user manager for the account model because we have custom fields and
+    need to access the .set_password() method in AbstractBaseUser, this is used in the population script
+"""
+"""class AccountManager(BaseUserManager):
+    def create_user(self, username, is_teacher, is_student, password=None):
+        if not is_teacher and not is_student:
+            raise ValueError("Users must be a teacher or a student")
+
+        user = self.model(username, is_teacher, is_student)
+
+        user.set_password(password)
+        user.save()
+        return user
+
+    def create_superuser(self, username, is_teacher, is_student, password=None):
+        user = self.create_user(username, is_teacher, is_student,
+            password
+        )
+        user.is_admin = True
+        user.save()
+        return user"""
+
 class Account(AbstractUser):
     is_teacher = models.BooleanField(default=False)
     is_student = models.BooleanField(default=False)
 
+    #objects = AccountManager()
 
     def __str__(self):
         return self.username

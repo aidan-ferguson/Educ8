@@ -6,7 +6,7 @@ django.setup()
 from django.contrib.auth.models import User
 from django.core.files import File
 
-from Educ8.models import CourseFile, Student, Teacher, Course, Flashcard, CourseFile
+from Educ8.models import CourseFile, Course, Flashcard, CourseFile, Account#, AccountManager
 
 """
 Things to do:
@@ -76,26 +76,26 @@ def populate() -> None:
 """
     For both student and teacher first create the underlying user object and then add a student object to the database
 """
-def add_student(Username: str, Password: str, first_name: str, last_name: str) -> Student:
-    user = User.objects.get_or_create(username=Username,
-                                    first_name = first_name,
-                                    last_name = last_name,
-                                    password = Password)[0]
-    s = Student.objects.get_or_create(user=user)[0]
-    return s
+def add_student(Username: str, Password: str, first_name: str, last_name: str) -> Account:
+    student = Account.objects.create_user(username=Username, 
+                                        password=Password, 
+                                        first_name=first_name, 
+                                        last_name=last_name,
+                                        is_student=True)
+    return student
 
-def add_teacher(Username: str, Password: str, first_name: str, last_name: str) -> Teacher:
-    user = User.objects.get_or_create(username=Username,
-                            first_name = first_name,
-                            last_name = last_name,
-                            password = Password)[0]
-    t = Teacher.objects.get_or_create(user=user)[0]
-    return t
+def add_teacher(Username: str, Password: str, first_name: str, last_name: str) -> Account:
+    teacher = Account.objects.create_user(username=Username, 
+                                        password=Password, 
+                                        first_name=first_name, 
+                                        last_name=last_name,
+                                        is_teacher=True)
+    return teacher
 
 """
     Create a course in the database and add the students to it
 """
-def add_course(CourseName: str, createdBy: Teacher, studentsToAdd: list) -> Course:
+def add_course(CourseName: str, createdBy: Account, studentsToAdd: list) -> Course:
     c = Course.objects.get_or_create(courseName=CourseName, createdBy=createdBy)[0]
     for student in studentsToAdd:
         c.students.add(student)
@@ -105,7 +105,7 @@ def add_course(CourseName: str, createdBy: Teacher, studentsToAdd: list) -> Cour
 """
     Create a flashcard in the database
 """
-def add_flashcard(title: str, question: str, answer: str, createdBy: Student, Course: Course) -> Flashcard:
+def add_flashcard(title: str, question: str, answer: str, createdBy: Account, Course: Course) -> Flashcard:
     f = Flashcard.objects.get_or_create(createdBy=createdBy, course=Course)[0]
     f.title = title
     f.question = question

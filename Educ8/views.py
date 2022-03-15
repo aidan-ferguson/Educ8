@@ -7,7 +7,7 @@ from django.shortcuts import redirect, render
 from django.template import RequestContext
 from django.template.defaultfilters import slugify
 from datetime import datetime
-from Educ8.forms import CourseForm, FlashcardForm, TeacherForm, StudentForm, CourseFileForm
+from Educ8.forms import CourseForm, FlashcardForm, AccountForm, CourseFileForm
 from Educ8.models import Course, Flashcard, CourseFile
 from Educ8.decorators import is_teacher, is_student
 
@@ -27,17 +27,18 @@ def index(request):
 def my_courses(request):
     context_dict = {}
 
-    form = StudentForm()
-    if request.method == 'GET':
-        form = StudentForm(request.GET)
+    # TODO
+    # form = StudentForm()
+    # if request.method == 'GET':
+    #     form = StudentForm(request.GET)
 
-        if form.is_valid():
-            student = form.save()
-            course_list = []
-            for course in Course.objects.get():
-                if student.username in course.students:
-                    course_list.append(course)
-            context_dict['courses'] = course_list
+    #     if form.is_valid():
+    #         student = form.save()
+    #         course_list = []
+    #         for course in Course.objects.get():
+    #             if student.username in course.students:
+    #                 course_list.append(course)
+    #         context_dict['courses'] = course_list
 
     return render(request, 'Educ8/my_courses.html', context=context_dict)
 
@@ -140,32 +141,32 @@ def add_students(request, course_name_slug):
 
     """conditional to check course exists.
     code to add students to specific courses"""
+    # TODO
+    # try:
+    #     course = Course.objects.get(slug=course_name_slug)
+    # except Course.DoesNotExist:
+    #     course = None
 
-    try:
-        course = Course.objects.get(slug=course_name_slug)
-    except Course.DoesNotExist:
-        course = None
+    # if course is None:
+    #     return redirect('/Educ8/')
 
-    if course is None:
-        return redirect('/Educ8/')
+    # form = StudentForm()
 
-    form = StudentForm()
+    # if request.method == 'POST':
+    #     form = StudentForm(request.POST)
 
-    if request.method == 'POST':
-        form = StudentForm(request.POST)
+    #     if form.is_valid():
+    #         if course:
+    #             student = form.save(commit=False)
+    #             student.course = course
+    #             student.save()
 
-        if form.is_valid():
-            if course:
-                student = form.save(commit=False)
-                student.course = course
-                student.save()
+    #             return redirect('/Educ8/')
 
-                return redirect('/Educ8/')
+    #     else:
+    #         print(form.errors)
 
-        else:
-            print(form.errors)
-
-    return render(request, 'Educ8/add_students.html', {'form' : form})
+    # return render(request, 'Educ8/add_students.html', {'form' : form})
 
 # Need to verify passwords are the same and return any form errors
 def register(request):
@@ -174,42 +175,25 @@ def register(request):
     check if the form is valid and
     direct them to the signup page
     """
-    registered = False
 
     if request.method == 'POST':
-        userType = request.POST.get('user_type')
-        if userType == 'teacher':
-            teacher_form = TeacherForm(request.POST)
+        user_type = request.POST.get('user_type')
+        form = AccountForm(request.POST)
+        if form.is_valid() and user_type in ['student', 'teacher']:
+            user = None
+            if user_type == 'student':
+                user = form.save(is_student=True)
+            elif user_type == 'teacher':
+                user = form.save(is_teacher=True)
 
-            if teacher_form.is_valid():
-                teacher = teacher_form.save()
-                teacher.set_password(teacher.password)
-                teacher.save()
+            # Now user has been created, login and redirect to home page
+            login(request, user)
 
-                registered = True
-                return redirect(reverse('Educ8:index'))
-            else:
-                print(teacher_form.errors)
+            return redirect(reverse('Educ8:index'))
+        else:
+            print(form.errors.as_data())
 
-        elif userType == 'student':
-            student_form = StudentForm(request.POST)
-
-            if student_form.is_valid():
-                student = student_form.save()
-                student.set_password(student.password)
-                student.save()
-
-                registered = True
-                return redirect(reverse('Educ8:index'))
-            else:
-                print(student_form.errors)
-
-
-    else:
-        teacher_form = TeacherForm()
-        student_form = StudentForm()
-
-    return render(request, 'Educ8/forms/register.html', context={'registered' : registered})
+    return render(request, 'Educ8/forms/register.html')
 
 # Can we pass the 'next' GET variable to the register view?
 def user_login(request):
