@@ -28,25 +28,15 @@ def index(request):
 def my_courses(request):
     context_dict = {}
 
-    # This took too long
+    # Display all courses in which this user is enrolled in (can only be students)
     courses = Course.objects.filter(students__username=request.user.username)
     if len(courses) > 0:
-        context_dict["courses"] = []
-        for course in courses:
-            context_dict["courses"].append(course)
+        context_dict["courses"] = [course for course in courses]
 
-    # TODO
-    # form = StudentForm()
-    # if request.method == 'GET':
-    #     form = StudentForm(request.GET)
-
-    #     if form.is_valid():
-    #         student = form.save()
-    #         course_list = []
-    #         for course in Course.objects.get():
-    #             if student.username in course.students:
-    #                 course_list.append(course)
-    #         context_dict['courses'] = course_list
+    # Display all courses created by this user (can only be teachers)
+    courses = Course.objects.filter(createdBy__username__exact=request.user.username)
+    if len(courses) > 0:
+        context_dict["courses"] = [course for course in courses]
 
     return render(request, 'Educ8/my_courses.html', context=context_dict)
 
@@ -64,9 +54,7 @@ def show_course(request, course_name_slug):
         context_dict['flashCards'] = flashCards
         context_dict['course'] = course
     except Course.DoesNotExist:
-        context_dict['course'] = None
-        context_dict['flashCards'] = None
-        context_dict['files'] = None
+        page_not_found(request, "Course not found")
 
     return render(request, 'Educ8/course.html', context=context_dict)
 
