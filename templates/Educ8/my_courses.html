@@ -28,7 +28,7 @@
 
       {% for course in courses %}
         <div class="tile">
-          <a href='course.html'>
+          <a href="{% url 'Educ8:show_course' course_name_slug=course.slug %}">
             <h2>{{ course.courseName }}</h2>
             <hr>
             <p>{{ course.createdBy }}</p>

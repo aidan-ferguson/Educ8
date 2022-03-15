@@ -66,8 +66,6 @@ class Account(AbstractUser):
     is_teacher = models.BooleanField(default=False)
     is_student = models.BooleanField(default=False)
 
-    #objects = AccountManager()
-
     def __str__(self):
         return self.username
 
@@ -86,7 +84,7 @@ class Course(models.Model):
     """
     courseName = models.CharField(max_length=256, primary_key=True, validators=[MinLengthValidator(4)])
     createdBy = models.ForeignKey(Account, related_name='course_creator', on_delete=models.CASCADE, null=True)
-    students = models.ManyToManyField(Account, blank=True)
+    students = models.ManyToManyField(Account, related_name='course')
     slug = models.SlugField(unique=True)
     
     def save(self, *args, **kwargs):

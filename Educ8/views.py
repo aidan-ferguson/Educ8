@@ -1,3 +1,4 @@
+from cgi import test
 from xml.dom.domreg import registered
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -8,7 +9,7 @@ from django.template import RequestContext
 from django.template.defaultfilters import slugify
 from datetime import datetime
 from Educ8.forms import CourseForm, FlashcardForm, AccountForm, CourseFileForm
-from Educ8.models import Course, Flashcard, CourseFile
+from Educ8.models import Course, Flashcard, CourseFile, Account
 from Educ8.decorators import is_teacher, is_student
 
 def index(request):
@@ -21,11 +22,18 @@ def index(request):
     return response
 
 
-#Method for getting all of the courses a student is enrolled into
-#and then returns the list to the my_courses page.
+# Method for getting all of the courses a student is enrolled into
+# and then returns the list to the my_courses page.
 @login_required
 def my_courses(request):
     context_dict = {}
+
+    # This took too long
+    courses = Course.objects.filter(students__username='Dom1')
+    if len(courses) > 0:
+        context_dict["courses"] = []
+        for course in courses:
+            context_dict["courses"].append(course)
 
     # TODO
     # form = StudentForm()
@@ -141,6 +149,9 @@ def add_students(request, course_name_slug):
 
     """conditional to check course exists.
     code to add students to specific courses"""
+    # Will be useful for querying current students:
+    # test1 = Account.objects.filter(course__)
+    
     # TODO
     # try:
     #     course = Course.objects.get(slug=course_name_slug)
