@@ -63,6 +63,7 @@ MAX_LENGTH_USERNAME = 32
         return user"""
 
 class Account(AbstractUser):
+    # We have both boolean flags so that the code is easier to read
     is_teacher = models.BooleanField(default=False)
     is_student = models.BooleanField(default=False)
 
