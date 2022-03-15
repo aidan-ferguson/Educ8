@@ -21,7 +21,8 @@
     <h1 class="panel_title">Add a Student</h1>
     <hr>
 
-    <form class="" action="index.html" method="post">
+    <form class="" action="" method="post">
+      {% csrf_token %}
 
       <p class="error_message"><b>Error:</b> meh.</p>
 
@@ -29,19 +30,19 @@
         <label for="add">Add Students:</label><br>
         <select name="add">
           {% for student in students %}
-          <option value= {{ student.first_name }} {{ student.last_name }} >Aiden Ferguson</option>
+            <option value="{{ student.username }}">{{ student.first_name }} {{ student.last_name }} - {{ student.username }}</option>
           {% endfor %}
         </select>
         <input class="btn add" type="submit" value="Add">
       </div>
-
+<!-- 
       <div class="field">
         <label>Students to Add:</label><br>
         <ul>
           <li>Cameron McDonald</li>
           <li>Dom Jina</li>
         </ul>
-      </div>
+      </div> -->
 
       <hr class="form_hr">
 

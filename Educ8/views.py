@@ -1,4 +1,5 @@
 from cgi import test
+from difflib import context_diff
 from xml.dom.domreg import registered
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -148,8 +149,16 @@ def add_students(request, course_name_slug):
 
     """conditional to check course exists.
     code to add students to specific courses"""
-    # Will be useful for querying current students:
-    # test1 = Account.objects.filter(course__)
+    context_dict = {}
+    
+    students = Account.objects.filter(is_student=True)
+    context_dict["students"] = students
+
+    # Need to validate user exists etc...
+    if request.method == 'POST':
+        student_to_add = request.POST.get('add')
+        course = Course.objects.get(slug=course_name_slug)
+        course.students.add(Account.objects.get(username=student_to_add))
 
     # TODO
     # try:
@@ -176,7 +185,7 @@ def add_students(request, course_name_slug):
     #     else:
     #         print(form.errors)
 
-    # return render(request, 'Educ8/add_students.html', {'form' : form})
+    return render(request, 'Educ8/forms/add_students.html', context=context_dict)
 
 # Need to verify passwords are the same and return any form errors
 def register(request):
