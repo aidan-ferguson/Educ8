@@ -29,7 +29,7 @@ def my_courses(request):
     context_dict = {}
 
     # This took too long
-    courses = Course.objects.filter(students__username='Dom1')
+    courses = Course.objects.filter(students__username=request.user.username)
     if len(courses) > 0:
         context_dict["courses"] = []
         for course in courses:
