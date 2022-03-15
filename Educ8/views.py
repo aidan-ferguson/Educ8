@@ -38,6 +38,13 @@ def my_courses(request):
     if len(courses) > 0:
         context_dict["courses"] = [course for course in courses]
 
+    # User's First name
+    if request.user.username == "":
+        name = "Your"
+    else:
+        name = request.user.username
+    context_dict["name"] = name + "'s"
+
     return render(request, 'Educ8/my_courses.html', context=context_dict)
 
 #Method for getting all of the flashcards and files for a single course
@@ -143,7 +150,7 @@ def add_students(request, course_name_slug):
     code to add students to specific courses"""
     # Will be useful for querying current students:
     # test1 = Account.objects.filter(course__)
-    
+
     # TODO
     # try:
     #     course = Course.objects.get(slug=course_name_slug)

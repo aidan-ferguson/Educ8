@@ -1,0 +1,42 @@
+/* WAD2 Team Project "Educ8" | 404 Page Styles */
+
+.content_panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 75vh;
+  /* Image styles */
+  background-image: url("https://i.kym-cdn.com/photos/images/original/001/431/201/40f.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+	background-color: white;
+  background-blend-mode: lighten;
+  transition: all 4s ease-in-out;
+}
+.content_panel:active {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.content_panel:active > div {
+  filter: opacity(0);
+}
+
+.content_panel div {
+  transition: all 3s ease-in-out;
+}
+h1 {
+  font-size: 160px;
+  margin: 0;
+  cursor: default;
+}
+h2 {
+  font-size: 32px;
+  cursor: default;
+}
+p {
+  font-size: 20px;
+}
+a {
+  font-weight: bold;
+}

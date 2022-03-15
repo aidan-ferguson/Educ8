@@ -8,8 +8,8 @@
 
 
 {% block asset_block %}
-  <link rel="stylesheet" href="{% static 'assets/styles/styles_404.css' %}">
-  <script src="{% static 'assets/scripts/scripts_404.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'assets/styles/styles_error.css' %}">
+  <script src="{% static 'assets/scripts/scripts_error.js' %}"></script>
 {% endblock %}
 
 
@@ -18,11 +18,11 @@
   <!-- Main page content -->
   <div class="content_panel">
 
-    <h1 class="panel_title">404</h1>
-    <hr>
-    
-    <br><p>you're lost mate.</p><br>
-
+    <div>
+      <h1>404</h1>
+      <h2>The page you requested could not be found</h2>
+      <p>Click <a href="{% url 'Educ8:index' %}">here</a> to return Home</p>
+    </div>
 
   </div>
 
