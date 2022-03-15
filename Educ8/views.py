@@ -48,7 +48,7 @@ def show_course(request, course_name_slug):
 
     try:
         course = Course.objects.get(slug=course_name_slug)
-        flashCards = Flashcard.objects.get(course=course)
+        flashCards = Flashcard.objects.filter(course=course)
         files = CourseFile.objects.filter(course=course)
         context_dict['files'] = files
         context_dict['flashCards'] = flashCards
@@ -60,6 +60,7 @@ def show_course(request, course_name_slug):
 
 #method for allowing a teacher to create a course
 @login_required
+@user_passes_test(is_teacher)
 def add_course(request):
     form = CourseForm()
     if request.method == 'POST':
@@ -89,6 +90,7 @@ def add_files(request, course_name_slug):
     return render(request, 'Educ8/forms/add_files.html')
 
 @login_required
+@user_passes_test(is_student)
 def add_or_edit_flashcard(request, course_name_slug):
     try:
         course = Course.objects.get(slug=course_name_slug)
@@ -133,6 +135,8 @@ def show_flashcard(request, course_name_slug, flashcardID):
         context_dict['course'] = None
     return render(request, 'Educ8/course/flashCards', context=context_dict)
 
+@login_required
+@user_passes_test(is_teacher)
 def add_students(request, course_name_slug):
 
     """conditional to check course exists.
