@@ -23,7 +23,6 @@ class AccountForm(UserCreationForm):
 
 class CourseForm(forms.ModelForm):
     courseName = forms.CharField(max_length=128)
-    slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     class Meta:
         model = Course

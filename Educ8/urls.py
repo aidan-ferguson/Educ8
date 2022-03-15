@@ -9,7 +9,7 @@ urlpatterns = [ #Maps a url to its respective view and form
          views.my_courses, name='my_courses'),
     path('my_courses/<slug:course_name_slug>/',
          views.show_course, name='show_course'),
-    path('my_courses/add_course/',
+    path('add_course/',
          views.add_course, name='forms/add_course'),
     path('my_courses/<slug:course_name_slug>/add_file/',
          views.add_files, name='forms/add_files'),

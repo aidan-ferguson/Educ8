@@ -21,17 +21,18 @@
     <h1 class="panel_title">Create a Course</h1>
     <hr>
 
-    <form class="" action="index.html" method="post">
+    <form class="" action="" method="post">
+      {% csrf_token %}
 
       <p class="error_message"><b>Error:</b> Contains nuts.</p>
 
       <div class="field">
         <label for="name">Course Name:</label>
         <br>
-        <input type="text" name="name" minlength="4" maxlength="256" required placeholder="Enter course name...">
+        <input type="text" name="courseName" minlength="4" maxlength="256" required placeholder="Enter course name...">
       </div>
 
-      <div class="field">
+      <!-- <div class="field">
         <label for="add">Add Students:</label><br>
         <select name="add">
           {% for student in students %}
@@ -47,7 +48,7 @@
           <li>Cameron McDonald</li>
           <li>Dom Jina</li>
         </ul>
-      </div>
+      </div> -->
 
       <hr class="form_hr">
 

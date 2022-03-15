@@ -27,7 +27,7 @@ def index(request):
 # and then returns the list to the my_courses page.
 @login_required
 def my_courses(request):
-    context_dict = {}
+    context_dict = {"current_user":request.user}
 
     # Display all courses in which this user is enrolled in (can only be students)
     courses = Course.objects.filter(students__username=request.user.username)
@@ -70,17 +70,21 @@ def show_course(request, course_name_slug):
 @login_required
 @user_passes_test(is_teacher)
 def add_course(request):
-    form = CourseForm()
+    context_dict = {}
+
     if request.method == 'POST':
         form = CourseForm(request.POST)
 
         if form.is_valid():
-            form.save(commit=True)
-            return redirect('/Educ8/')
+            form.save()
+            course = Course.objects.get(courseName=request.POST["courseName"])
+            course.createdBy = request.user
+            course.save()
+            return redirect(reverse('Educ8:show_course', kwargs={'course_name_slug' : course.slug}))
         else:
             print(form.errors)
 
-    return render(request, 'rango/add_course.html', {'form' : form})
+    return render(request, 'Educ8/forms/add_course.html')
 
 # TODO: Error handling, max file size?
 @login_required

@@ -36,6 +36,11 @@
         </div>
       {% endfor %}
 
+      <!-- temporary -->
+      {% if current_user.is_teacher %}
+        <a href="{% url 'Educ8:forms/add_course' %}">add course</a>
+      {% endif %}
+
       {% if not courses %}
         <p>You are not enrolled in any courses.</p>
       {% endif %}
