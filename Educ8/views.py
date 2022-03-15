@@ -40,11 +40,11 @@ def my_courses(request):
         context_dict["courses"] = [course for course in courses]
 
     # User's First name
-    if request.user.username == "":
+    if request.user.first_name == "":
         name = "Your"
     else:
-        name = request.user.username
-    context_dict["name"] = name + "'s"
+        name = request.user.first_name
+    context_dict["name"] = name
 
     return render(request, 'Educ8/my_courses.html', context=context_dict)
 
