@@ -123,3 +123,4 @@ def add_file(filename: str, course: Course):
 if __name__ == '__main__':
     print('Starting Educ8 population script...')
     populate()
+    print("Finished populating")
