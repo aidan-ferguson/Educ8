@@ -96,6 +96,7 @@ def add_teacher(Username: str, Password: str, first_name: str, last_name: str) -
     Create a course in the database and add the students to it
 """
 def add_course(CourseName: str, createdBy: Account, studentsToAdd: list) -> Course:
+    print(type(createdBy))
     c = Course.objects.get_or_create(courseName=CourseName, createdBy=createdBy)[0]
     for student in studentsToAdd:
         c.students.add(student)

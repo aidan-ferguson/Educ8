@@ -22,8 +22,11 @@
     <hr>
 
     <form class="" method="post" action="{% url 'Educ8:forms/login' %}">
-
       {% csrf_token %}
+
+      {% if request.GET.next %}
+      <input type="hidden" name="next" value="{{ request.GET.next }}">
+      {% endif %}
 
       <p class="error_message"><b>Error:</b> Weight limit exceeded.</p>
 
