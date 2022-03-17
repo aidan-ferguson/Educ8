@@ -66,6 +66,11 @@ class Account(AbstractUser):
     # We have both boolean flags so that the code is easier to read
     is_teacher = models.BooleanField(default=False)
     is_student = models.BooleanField(default=False)
+    
+    def save(self, *args, **kwargs):
+        if self.is_teacher and self.is_student:
+            self.is_teacher = False
+            self.is_student = False
 
     def __str__(self):
         return self.username

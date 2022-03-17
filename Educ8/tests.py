@@ -2,6 +2,7 @@ from django.test import TestCase
 from Educ8.models import Course
 from django.urls import reverse
 from Educ8.models import Flashcard
+from Educ8.models import Account
 
 ### method tests ###
 class CourseMethodTests(TestCase):
@@ -11,7 +12,14 @@ class CourseMethodTests(TestCase):
         course.save()
         
         self.assertEqual(course.slug, 'example-course')
-                
+    
+class AccountMethodTests(TestCase):
+    def test_account_is_not_both_student_and_teacher(self):
+        account = Account(is_student=True, is_teacher=True)
+        account.save()
+        
+        self.assertFalse(account.is_student and account.is_teacher)
+        
 ### view tests ###
 class IndexViewTests(TestCase):
     def test_index_view(self):
