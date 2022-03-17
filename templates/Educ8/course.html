@@ -64,35 +64,38 @@
 
       <div class="flashcard_container">
 
-        <!-- MICHAEL THIS IS THE BIT THAT ALSO NEEDS LOOPED THROUGH -->
-        <div class="flashcard_tile">
-          <h2>Knitting & Purling</h2>
-          <hr>
-          <p>What is the difference between a knit stitch and a purl stitch?</p>
-          <hr>
-          <button type="button" name="edit"><i class="fa fa-pen-to-square"></i> Edit</button>
-          <button type="button" name="delete"><i class="fa fa-trash-can"></i> Delete</button>
-        </div>
-        <!-- TO HERE -->
+        {% for flashCard in flashCards %}
+          <div class="flashcard_tile">
+            <h2>{{ flashCard.title }}</h2>
+            <hr>
+            <p>{{ flashCard.question }}</p>
+            <hr>
+            <button type="button" name="edit"><i class="fa fa-pen-to-square"></i> Edit</button>
+            <button type="button" name="delete"><i class="fa fa-trash-can"></i> Delete</button>
+          </div>
+        {% endfor %}
 
-        <!-- MICHAEL THIS ONLY APPEARS IF THE USER IS A STUDENT AND THERE IS AT LEAST ONE CREATED CARD -->
-        <div class="flashcard_tile button_tile">
-          <a class="revise_button" href="#">
-            <i class="fa fa-circle-arrow-right"></i>
-            <br>
-            <p>Revise Flashcards</p>
-          </a>
-        </div>
-        <!-- TO HERE -->
+        {% if current_user.is_student %}
+          {% if flashCards|length > 0 %}
+            <div class="flashcard_tile button_tile">
+              <a class="revise_button" href="#">
+                <i class="fa fa-circle-arrow-right"></i>
+                <br>
+                <p>Revise Flashcards</p>
+              </a>
+            </div>
+          {% endif %}
+        {% endif %}
 
-        <!-- MICHAEL THIS ONLY APPEARS IF THE USER IS A STUDENT -->
-        <div class="flashcard_tile button_tile">
-          <a class="add_button" href="add_or_edit_flashcard.html">
-            <i class="fa fa-circle-plus"></i>
-            <br>
-            <p>Create a New Flashcard</p>
-          </a>
-        </div>
+        {% if current_user.is_student %}
+          <div class="flashcard_tile button_tile">
+            <a class="add_button" href="add_or_edit_flashcard.html">
+              <i class="fa fa-circle-plus"></i>
+              <br>
+              <p>Create a New Flashcard</p>
+            </a>
+          </div>
+        {% endif %}
 
       </div>
 

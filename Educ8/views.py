@@ -61,6 +61,7 @@ def show_course(request, course_name_slug):
         context_dict['files'] = files
         context_dict['flashCards'] = flashCards
         context_dict['course'] = course
+        context_dict['current_user'] = request.user
     except Course.DoesNotExist:
         page_not_found(request, "Course not found")
 
