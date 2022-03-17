@@ -11,7 +11,8 @@ class AccountForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
         fields = ('username', 'first_name', 'last_name', 'password1', 'password2')
-
+        f = forms.CharField(required=True)
+        
     def save(self, is_student=False, is_teacher=False, commit=True):
         user = super().save(commit=False)
         user.is_student = is_student

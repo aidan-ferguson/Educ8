@@ -29,7 +29,7 @@
       <div class="field">
         <label for="add">Add Students:</label><br>
         <select name="add">
-          {% for student in students %}
+          {% for student in available_students %}
             <option value="{{ student.username }}">{{ student.first_name }} {{ student.last_name }} - {{ student.username }}</option>
           {% endfor %}
         </select>
@@ -43,6 +43,13 @@
           <li>Dom Jina</li>
         </ul>
       </div> -->
+
+      <p>Currently enrolled:</p>
+      <ul>
+        {% for student in enrolled_students %}
+          <li>{{ student.first_name }} {{ student.last_name }} - {{ student.username }}</li>
+        {% endfor %}
+      </ul>
 
       <hr class="form_hr">
 
