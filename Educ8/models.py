@@ -71,6 +71,8 @@ class Account(AbstractUser):
         if self.is_teacher and self.is_student:
             self.is_teacher = False
             self.is_student = False
+        super(Account, self).save(*args, **kwargs)    
+            
 
     def __str__(self):
         return self.username
