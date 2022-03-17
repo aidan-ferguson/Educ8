@@ -3,7 +3,7 @@
 
 
 {% block title_block %}
-  THE COURSE NAME
+  {{ course.courseName }}
 {% endblock %}
 
 
@@ -18,21 +18,22 @@
 <!-- Main page content -->
 <div class="content_panel">
 
-  <h1 class="panel_title">Knitting Essentials</h1>
-  <h2 class="panel_subtitle">The Rt Hon. Bobby McBobson Jr. MBE</h2>
-  <hr>
+  <h1 class="panel_title">{{ course.courseName }}</h1>
+  <h2 class="panel_subtitle">{{ course.createdBy.first_name }} {{ course.createdBy.last_name }}</h2>
+  
 
-  <!-- MICHAEL THIS BIT ONLY APPEARS IF THE USER IS A TEACHER -->
-  <!-- Administration section -->
-  <section class="admin">
-    <h2 class="panel_heading">Administration</h2>
+  {% if current_user.is_teacher %}
+    <!-- Administration section -->
+    <hr>
+    <section class="admin">
+      <h2 class="panel_heading">Administration</h2>
 
-    <div class="admin_container">
-      <button class="btn" type="button" name="add_files">Add File(s)</button>
-      <button class="btn" type="button" name="add_files">Add Student(s)</button>
-    </div>
-  </section>
-  <!-- TO HERE -->
+      <div class="admin_container">
+        <button class="btn" type="button" name="add_files">Add File(s)</button>
+        <button class="btn" type="button" name="add_files">Add Student(s)</button>
+      </div>
+    </section>
+  {% endif %}
 
   <hr>
 
@@ -42,14 +43,14 @@
 
     <div class="files_container">
 
-      <!-- MICHAEL THIS IS THE BIT THAT NEEDS LOOPED THROUGH -->
-      <div class="file">
-        <p>guide_to_yarn.pdf</p>
-        <a title="Download File" class="tooltip">
-          <button type="button" name="download"><i class="fa fa-download"></i></button>
-        </a>
-      </div>
-      <!-- TO HERE -->
+      {% for file in files %}
+        <div class="file">
+          <p>{{ courseFile.file.filename }}</p>
+          <a title="Download File" class="tooltip">
+            <button type="button" name="download"><i class="fa fa-download"></i></button>
+          </a>
+        </div>
+      {% endfor %}
 
     </div>
 
