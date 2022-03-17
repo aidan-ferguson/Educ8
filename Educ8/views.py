@@ -70,7 +70,6 @@ def show_course(request, course_name_slug):
 @login_required
 @user_passes_test(is_teacher)
 def add_course(request):
-    context_dict = {}
 
     if request.method == 'POST':
         form = CourseForm(request.POST)
@@ -150,44 +149,21 @@ def show_flashcard(request, course_name_slug, flashcardID):
 @login_required
 @user_passes_test(is_teacher)
 def add_students(request, course_name_slug):
-
+    context_dict = {}
     """conditional to check course exists.
     code to add students to specific courses"""
-    context_dict = {}
-    
-    students = Account.objects.filter(is_student=True)
-    context_dict["students"] = students
 
     # Need to validate user exists etc...
     if request.method == 'POST':
         student_to_add = request.POST.get('add')
         course = Course.objects.get(slug=course_name_slug)
         course.students.add(Account.objects.get(username=student_to_add))
-
-    # TODO
-    # try:
-    #     course = Course.objects.get(slug=course_name_slug)
-    # except Course.DoesNotExist:
-    #     course = None
-
-    # if course is None:
-    #     return redirect('/Educ8/')
-
-    # form = StudentForm()
-
-    # if request.method == 'POST':
-    #     form = StudentForm(request.POST)
-
-    #     if form.is_valid():
-    #         if course:
-    #             student = form.save(commit=False)
-    #             student.course = course
-    #             student.save()
-
-    #             return redirect('/Educ8/')
-
-    #     else:
-    #         print(form.errors)
+    
+    # Return all available users we can add and all users already in the course
+    enrolled_students = Course.objects.get(slug=course_name_slug).students.all()
+    all_students = Account.objects.filter(is_student=True)
+    context_dict["available_students"] = set(all_students) - set(enrolled_students)
+    context_dict["enrolled_students"] = enrolled_students
 
     return render(request, 'Educ8/forms/add_students.html', context=context_dict)
 
@@ -200,9 +176,11 @@ def register(request):
     """
 
     if request.method == 'POST':
-        user_type = request.POST.get('user_type')
+        user_type = request.POST.get('user_type', None)
+        terms_conditions = request.POST.get('terms', None)
+
         form = AccountForm(request.POST)
-        if form.is_valid() and user_type in ['student', 'teacher']:
+        if (form.is_valid()) and (user_type in ['student', 'teacher']) and (terms_conditions != None):
             user = None
             if user_type == 'student':
                 user = form.save(is_student=True)
@@ -221,15 +199,18 @@ def register(request):
 # Can we pass the 'next' GET variable to the register view?
 def user_login(request):
     if request.method == 'POST':
+        # Determine if we should redirect the user based on GET parameters
         username = request.POST.get('username')
         password = request.POST.get('password')
 
         user = authenticate(username=username, password=password)
 
+        redirect_to = request.POST.get('next', reverse('Educ8:index'))
+
         if user:
             if user.is_active:
                 login(request, user)
-                return redirect(reverse('Educ8:index'))
+                return redirect(redirect_to)
             else:
                 return HttpResponse("Your Educ8 account is disabled.")
 
