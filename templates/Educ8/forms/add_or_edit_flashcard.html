@@ -21,32 +21,33 @@
     <h1 class="panel_title">Create Flashcard</h1>
     <hr>
 
-    <form class="" action="index.html" method="post">
+    <form class="" action="" method="post">
+      {% csrf_token %}
 
       <p class="error_message"><b>Error:</b> Too many geese.</p>
 
       <div class="field">
         <label for="title">Title:</label>
         <br>
-        <input type="text" name="title" minlength="1" maxlength="128" required>
+        <input type="text" name="title" minlength="1" maxlength="128" value="{{ existing_flashcard.title }}" required>
       </div>
 
       <div class="field">
-        <label for="qtext">Question Text:</label>
+        <label for="question">Question Text:</label>
         <br>
-        <textarea name="qtext" minlength="1" maxlength="1024" required></textarea>
+        <textarea name="question" minlength="1" maxlength="1024" required>{{ existing_flashcard.question }}</textarea>
       </div>
 
       <div class="field">
-        <label for="atext">Answer Text:</label>
+        <label for="answer">Answer Text:</label>
         <br>
-        <textarea name="qtext" minlength="1" maxlength="1024" required></textarea>
+        <textarea name="answer" minlength="1" maxlength="1024" required>{{ existing_flashcard.answer }}</textarea>
       </div>
 
       <hr class="form_hr">
 
       <div class="field">
-        <input class="btn" type="submit" value="Create Card">
+        <input class="btn" type="submit" value="Save Card">
         <input class="btn cancel" type="submit" value="Cancel">
       </div>
 

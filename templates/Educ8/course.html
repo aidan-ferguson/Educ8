@@ -70,8 +70,13 @@
             <hr>
             <p>{{ flashCard.question }}</p>
             <hr>
-            <button type="button" name="edit"><i class="fa fa-pen-to-square"></i> Edit</button>
-            <button type="button" name="delete"><i class="fa fa-trash-can"></i> Delete</button>
+            {% if current_user == flashCard.createdBy %}
+              <a href="{% url 'Educ8:forms/edit_flashcard' course_name_slug=course.slug flashcard_id=flashCard.id %}" type="button" name="edit"><i class="fa fa-pen-to-square"></i> Edit</a>
+              <a href="{% url 'Educ8:delete_flashcard' course_name_slug=course.slug flashcard_id=flashCard.id %}" type="button" name="delete"><i class="fa fa-trash-can"></i> Delete</a>
+            {% endif %}
+            {% if current_user.is_teacher %}
+              <a href="{% url 'Educ8:delete_flashcard' course_name_slug=course.slug flashcard_id=flashCard.id %}" type="button" name="delete"><i class="fa fa-trash-can"></i> Delete</a>
+            {% endif %}
           </div>
         {% endfor %}
 
@@ -89,7 +94,7 @@
 
         {% if current_user.is_student %}
           <div class="flashcard_tile button_tile">
-            <a class="add_button" href="add_or_edit_flashcard.html">
+            <a class="add_button" href="{% url 'Educ8:forms/add_flashcard' course_name_slug=course.slug %}">
               <i class="fa fa-circle-plus"></i>
               <br>
               <p>Create a New Flashcard</p>
