@@ -24,7 +24,9 @@
     <form class="" action="" method="post">
       {% csrf_token %}
 
-      <p class="error_message"><b>Error:</b> Too many geese.</p>
+      {% for error in errors %}
+        <p class="error_message">{{ error }}</p>
+      {% endfor %}
 
       <div class="field">
         <label for="title">Title:</label>
