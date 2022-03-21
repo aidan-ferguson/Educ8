@@ -33,9 +33,17 @@
   justify-content: center;
   align-items: center;
 }
-.button_container button {
+.button_container a {
   margin: 0 20px;
   width: 50%;
+  text-align: center;
+}
+.button_container a:hover {
+  text-decoration: none;
+  color: white;
+}
+.button_container a:visited {
+  color: white;
 }
 p#answer {
   display: none;
