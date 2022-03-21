@@ -96,7 +96,7 @@ def populate() -> None:
         "synthetic_vs_natural_fabrics.pdf": {"course":"Knitting Essentials"},
         "top_10_knitting_needles_of_all_time.pdf": {"course":"Knitting Essentials"},
         "jumper_knitting_finalist_showdown.mov": {"course":"Knitting Essentials"},
-        
+
         }
 
     """
@@ -159,7 +159,7 @@ def add_course(CourseName: str, createdBy: Account, studentsToAdd: list) -> Cour
     Create a flashcard in the database
 """
 def add_flashcard(title: str, question: str, answer: str, createdBy: Account, Course: Course) -> Flashcard:
-    f = Flashcard.objects.get_or_create(createdBy=createdBy, course=Course)[0]
+    f = Flashcard.objects.get_or_create(title=title, question=question, createdBy=createdBy, course=Course)[0]
     f.title = title
     f.question = question
     f.answer = answer

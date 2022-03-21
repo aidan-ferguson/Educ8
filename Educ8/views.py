@@ -172,7 +172,10 @@ def add_students(request, course_name_slug):
         course.students.add(Account.objects.get(username=student_to_add))
     
     # Return all available users we can add and all users already in the course
-    enrolled_students = Course.objects.get(slug=course_name_slug).students.all()
+    try:
+        enrolled_students = Course.objects.get(slug=course_name_slug).students.all()
+    except Course.DoesNotExist:
+        return page_not_found(request, "meh")
     all_students = Account.objects.filter(is_student=True)
     context_dict["available_students"] = set(all_students) - set(enrolled_students)
     context_dict["enrolled_students"] = enrolled_students
@@ -208,30 +211,31 @@ def register(request):
 
     return render(request, 'Educ8/forms/register.html')
 
-# Can we pass the 'next' GET variable to the register view?
 def user_login(request):
+    context_dict = {"errors":[]}
+
     if request.method == 'POST':
         # Determine if we should redirect the user based on GET parameters
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        username = request.POST.get('username', None)
+        password = request.POST.get('password', None)
 
-        user = authenticate(username=username, password=password)
+        if username != None and password != None:
+            user = authenticate(username=username, password=password)
 
-        redirect_to = request.POST.get('next', reverse('Educ8:index'))
+            redirect_to = request.POST.get('next', reverse('Educ8:my_courses'))
 
-        if user:
-            if user.is_active:
-                login(request, user)
-                return redirect(redirect_to)
+            if user:
+                if user.is_active:
+                    login(request, user)
+                    return redirect(redirect_to)
+                else:
+                    context_dict["errors"].append("Your account has been disabled")
             else:
-                return HttpResponse("Your Educ8 account is disabled.")
-
+                context_dict["errors"].append("Invalid login details")
         else:
-            print(f"Invalid login detals: {username}, {password}")
-            return HttpResponse("Invalid login details supplied.")
-
-    else:
-        return render(request, 'Educ8/forms/login.html')
+            context_dict["errors"].append("Please enter both a username and password")
+    
+    return render(request, 'Educ8/forms/login.html', context=context_dict)
 
 @login_required
 def user_logout(request):
