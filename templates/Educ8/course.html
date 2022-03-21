@@ -35,8 +35,8 @@
         <form action="{% url 'Educ8:forms/add_files' course_name_slug=course.slug %}">
           <input class="btn" type="submit" value="Add File(s)"/>
         </form>
-
       </div>
+      
     </section>
   {% endif %}
 
@@ -88,7 +88,7 @@
         {% if current_user.is_student %}
           {% if flashCards|length > 0 %}
             <div class="flashcard_tile button_tile">
-              <a class="revise_button" href="#">
+              <a class="revise_button" href="{% url 'Educ8:show_flashcard' course_name_slug=course.slug flashcard_id=flashCards.0.id %}">
                 <i class="fa fa-circle-arrow-right"></i>
                 <br>
                 <p>Revise Flashcards</p>
