@@ -159,7 +159,7 @@ def add_course(CourseName: str, createdBy: Account, studentsToAdd: list) -> Cour
     Create a flashcard in the database
 """
 def add_flashcard(title: str, question: str, answer: str, createdBy: Account, Course: Course) -> Flashcard:
-    f = Flashcard.objects.get_or_create(createdBy=createdBy, course=Course)[0]
+    f = Flashcard.objects.get_or_create(title=title, question=question, createdBy=createdBy, course=Course)[0]
     f.title = title
     f.question = question
     f.answer = answer
