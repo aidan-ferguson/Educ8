@@ -83,7 +83,7 @@
         {% if current_user.is_student %}
           {% if flashCards|length > 0 %}
             <div class="flashcard_tile button_tile">
-              <a class="revise_button" href="{% url 'Educ8:show_flashcard' course_name_slug=course.slug flashcard_id=flashCards.0.id %}">
+              <a class="revise_button" href="{% url 'Educ8:show_flashcard' course_name_slug=course.slug flashcard_id=flashCards[0].id %}">
                 <i class="fa fa-circle-arrow-right"></i>
                 <br>
                 <p>Revise Flashcards</p>

@@ -144,19 +144,19 @@ def delete_flashcard(request, course_name_slug, flashcard_id):
         return HttpResponseForbidden('You are not allowed to perform this action')
 
 @login_required
-def show_flashcard(request, course_name_slug, flashcardID):
+def show_flashcard(request, course_name_slug, flashcard_id):
     context_dict={}
     try:
         course = Course.objects.get(slug=course_name_slug)
-        flashcard = Course.objects.get(slug=flashcardID)
-        context_dict['flashCards'] = flashcard
+        flashcard = Flashcard.objects.get(id=flashcard_id)
+        context_dict['flashCard'] = flashcard
         context_dict['course'] = course
     except Course.DoesNotExist:
         course = None
         flashcard = None
         context_dict['flashCards'] = None
         context_dict['course'] = None
-    return render(request, 'Educ8/course/flashCards', context=context_dict)
+    return render(request, 'Educ8/flashcard.html', context=context_dict)
 
 @login_required
 @user_passes_test(is_teacher)
