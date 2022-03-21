@@ -217,7 +217,7 @@ def user_login(request):
 
         user = authenticate(username=username, password=password)
 
-        redirect_to = request.POST.get('next', reverse('Educ8:index'))
+        redirect_to = request.POST.get('next', reverse('Educ8:my_courses'))
 
         if user:
             if user.is_active:
