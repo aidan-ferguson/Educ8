@@ -108,7 +108,8 @@ a.add_button {
 .admin_container {
   margin-bottom: 40px;
 }
-.admin_container button {
+.admin_container input {
+  float: left;
   margin-right: 16px;
 }
 

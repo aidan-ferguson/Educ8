@@ -122,6 +122,10 @@ nav li a:hover {
   text-decoration: none;
 	transform: scale(1.08);
 }
+.logged {
+	color: pink;
+	font-size: 100px;
+}
 
 /* Main Panel */
 .content_panel {

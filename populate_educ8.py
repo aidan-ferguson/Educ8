@@ -96,7 +96,7 @@ def populate() -> None:
         "synthetic_vs_natural_fabrics.pdf": {"course":"Knitting Essentials"},
         "top_10_knitting_needles_of_all_time.pdf": {"course":"Knitting Essentials"},
         "jumper_knitting_finalist_showdown.mov": {"course":"Knitting Essentials"},
-        
+
         }
 
     """
