@@ -29,14 +29,9 @@
       <h2 class="panel_heading">Administration</h2>
 
       <div class="admin_container">
-        <form action="{% url 'Educ8:forms/add_students' course_name_slug=course.slug %}">
-          <input class="btn" type="submit" value="Add Student(s)"/>
-        </form>
-        <form action="{% url 'Educ8:forms/add_files' course_name_slug=course.slug %}">
-          <input class="btn" type="submit" value="Add File(s)"/>
-        </form>
+        <button class="btn" type="button" name="add_files">Add File(s)</button>
+        <button class="btn" type="button" name="add_files">Add Student(s)</button>
       </div>
-      
     </section>
   {% endif %}
 
@@ -50,7 +45,7 @@
 
       {% for file in files %}
         <div class="file">
-          <p>{{ file.filename }}</p>
+          <p>{{ courseFile.file.filename }}</p>
           <a title="Download File" class="tooltip">
             <button type="button" name="download"><i class="fa fa-download"></i></button>
           </a>
@@ -88,7 +83,7 @@
         {% if current_user.is_student %}
           {% if flashCards|length > 0 %}
             <div class="flashcard_tile button_tile">
-              <a class="revise_button" href="{% url 'Educ8:show_flashcard' course_name_slug=course.slug flashcard_id=flashCards.0.id %}">
+              <a class="revise_button" href="{% url 'Educ8:show_flashcard' course_name_slug=course.slug flashcard_id=flashCards[0].id %}">
                 <i class="fa fa-circle-arrow-right"></i>
                 <br>
                 <p>Revise Flashcards</p>
