@@ -3,41 +3,10 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser#, BaseUserManager
 from django.core.validators import MinLengthValidator
 from django.template.defaultfilters import slugify
+import os
 
 MINIMUM_LENGTH = 4
 MAX_LENGTH_USERNAME = 32
-
-# class Teacher(models.Model):
-#     """Teacher class: This is a model for our Teacher table in our database.
-
-#     Attributes:
-#         user (oneToOneField with default user): This contains attibutes
-#                                                 such as username, email,
-#                                                 password, name and more.
-
-#     Methods:
-#     __str__ : Returns the username of the Teacher. This makes debugging easier.
-#     """
-#     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, validators=[MinLengthValidator(MINIMUM_LENGTH)], max_length=MAX_LENGTH_USERNAME)
-
-#     def __str__(self):
-#         return self.user.username
-
-# class Student(models.Model):
-#     """Student class: This is a model for our Student table in our database.
-
-#     Attributes:
-#         user (oneToOneField with default user): This contains attibutes
-#                                                 such as username, email,
-#                                                 password, name and more.
-
-#     Methods:
-#     __str__ : Returns the username of the Student. This makes debugging easier.
-#     """
-#     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, validators=[MinLengthValidator(MINIMUM_LENGTH)], max_length=MAX_LENGTH_USERNAME)
-
-#     def __str__(self):
-#         return self.user.username
 
 """
     We need to have a user manager for the account model because we have custom fields and
@@ -140,3 +109,6 @@ class CourseFile(models.Model):
 
     file = models.FileField(upload_to=generate_file_path)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
+
+    def filename(self):
+        return os.path.basename(self.file.name)
