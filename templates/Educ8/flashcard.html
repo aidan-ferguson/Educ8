@@ -24,10 +24,11 @@
     <div class="card_panel">
       <h2>{{ flashCard.title }}</h2>
       <hr>
-      <p>{{ flashCard.question }}</p>
+      <p id="question">{{ flashCard.question }}</p>
+      <p id="answer">{{ flashCard.answer }}</p>
     </div>
     <div class="button_container">
-      <button class="btn" type="button" name="answer"><i class="fa fa-repeat"></i> Reveal Answer</button>
+      <button class="btn" id="toggle" type="button" name="answer"><i class="fa fa-repeat"></i> <span>Reveal Answer</span></button>
       <button class="btn" type="button" name="next"><i class="fa-solid fa-arrow-right"></i> Next Card</button>
     </div>
 

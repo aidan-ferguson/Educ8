@@ -37,6 +37,9 @@
   margin: 0 20px;
   width: 50%;
 }
+p#answer {
+  display: none;
+}
 
 
 
