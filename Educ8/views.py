@@ -1,13 +1,8 @@
-from cgi import test
-from difflib import context_diff
-from xml.dom.domreg import registered
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.shortcuts import redirect, render
-from django.template import RequestContext
-from django.template.defaultfilters import slugify
 from datetime import datetime
 from Educ8.forms import CourseForm, FlashcardForm, AccountForm, CourseFileForm
 from Educ8.models import Course, Flashcard, CourseFile, Account
@@ -61,6 +56,7 @@ def show_course(request, course_name_slug):
         context_dict['files'] = files
         context_dict['flashCards'] = flashCards
         context_dict['course'] = course
+        context_dict['current_user'] = request.user
     except Course.DoesNotExist:
         page_not_found(request, "Course not found")
 
@@ -102,34 +98,50 @@ def add_files(request, course_name_slug):
 
 @login_required
 @user_passes_test(is_student)
-def add_or_edit_flashcard(request, course_name_slug):
-    try:
-        course = Course.objects.get(slug=course_name_slug)
-    except Course.DoesNotExist:
-        course = None
-
-    if course is None:
-        return redirect('/Educ8/')
-
+def add_or_edit_flashcard(request, course_name_slug, flashcard_id=None):
     form = FlashcardForm()
+    user_can_edit_flashcard = False
+    if flashcard_id != None:
+        existing_flashcard = Flashcard.objects.get(id=flashcard_id)
+        user_can_edit_flashcard = existing_flashcard.createdBy == request.user
 
     if request.method == 'POST':
         form = FlashcardForm(request.POST)
 
         if form.is_valid():
-            if course:
+            if user_can_edit_flashcard:
+                Flashcard.objects.filter(id=flashcard_id).update(title=request.POST['title'], 
+                                                                question=request.POST['question'], 
+                                                                answer=request.POST['answer']) 
+            else:
                 flashCard = form.save(commit=False)
-                flashCard.course  = course
-                flashCard.views = 0
+                flashCard.course  = Course.objects.get(slug=course_name_slug)
+                flashCard.createdBy = request.user
                 flashCard.save()
 
-                return redirect(reverse('Educ8:show_course', kwargs={'course_name_slug' : course_name_slug}))
+            return redirect(reverse('Educ8:show_course', kwargs={'course_name_slug' : course_name_slug}))
 
         else:
             print(form.errors)
 
-    context_dict = {'form' : form, 'course' : course}
-    return render(request, 'Educ8/add_or_edit_flashcard.html', context=context_dict)
+    context_dict = {'flashcard_id':flashcard_id, 'form' : form, 'existing_flashcard':None}
+    if user_can_edit_flashcard:
+        context_dict['existing_flashcard'] = existing_flashcard
+
+    return render(request, 'Educ8/forms/add_or_edit_flashcard.html', context=context_dict)
+
+@login_required
+def delete_flashcard(request, course_name_slug, flashcard_id):
+    # Check that the user has the authority to delete the flashcard
+    flashcard = Flashcard.objects.get(id=flashcard_id)
+    course = Course.objects.get(slug=course_name_slug)
+    
+    # If either the teacher of the course or the student that created the flashcard, then allow deletion
+    if (request.user.is_teacher and course.createdBy == request.user) or (flashcard.createdBy == request.user):
+        Flashcard.objects.filter(id=flashcard_id).delete()
+        return redirect(reverse('Educ8:show_course', kwargs={'course_name_slug' : course_name_slug}))
+    else:
+        return HttpResponseForbidden('You are not allowed to perform this action')
 
 @login_required
 def show_flashcard(request, course_name_slug, flashcardID):

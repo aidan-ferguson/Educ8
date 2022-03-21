@@ -21,15 +21,14 @@
     <h1 class="panel_title">Revise Flashcards</h1>
     <hr>
 
-    <!-- MICHAEL THIS IS THE BIT THAT NEEDS CHANGED -->
     <div class="card_panel">
-      <h2>Needle Length</h2>
+      <h2>{{ flashCard.title }}</h2>
       <hr>
-      <p>What is the correct length of needle according to "Gunther's Sock Guide" for children-size socks?</p>
+      <p id="question">{{ flashCard.question }}</p>
+      <p id="answer">{{ flashCard.answer }}</p>
     </div>
-    <!-- TO HERE -->
     <div class="button_container">
-      <button class="btn" type="button" name="answer"><i class="fa fa-repeat"></i> Reveal Answer</button>
+      <button class="btn" id="toggle" type="button" name="answer"><i class="fa fa-repeat"></i> <span>Reveal Answer</span></button>
       <button class="btn" type="button" name="next"><i class="fa-solid fa-arrow-right"></i> Next Card</button>
     </div>
 
