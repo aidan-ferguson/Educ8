@@ -41,7 +41,7 @@ def my_courses(request):
         else:
             name = request.user.first_name
         context_dict["name"] = name
-        
+
     except Course.DoesNotExist:
         return page_not_found(request, "meh")
     
@@ -63,7 +63,7 @@ def show_course(request, course_name_slug):
         context_dict['course'] = course
         context_dict['current_user'] = request.user
     except Course.DoesNotExist:
-        page_not_found(request, "Course not found")
+        return page_not_found(request, "Course not found")
 
     return render(request, 'Educ8/course.html', context=context_dict)
 
