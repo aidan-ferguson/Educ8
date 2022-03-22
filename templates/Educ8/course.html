@@ -91,7 +91,9 @@
             </div>
           {% endfor %}
         {% else %}
+          {% if current_user.is_teacher %}
             <p class="no_content">No flashcards have been added to this course yet.</p>
+          {% endif %}
         {% endif %}
 
         {% if current_user.is_student %}
