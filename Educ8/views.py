@@ -86,6 +86,7 @@ def add_course(request):
 @user_passes_test(is_teacher)
 def add_files(request, course_name_slug):
     context_dict = {"errors":[]}
+    context_dict["course"] = course_name_slug
 
     if request.method == 'POST':
         form = CourseFileForm(request.POST, request.FILES)
@@ -99,7 +100,8 @@ def add_files(request, course_name_slug):
         else:
             context_dict["errors"] = flatten_error_dict(form.errors)
 
-    return render(request, 'Educ8/forms/add_files.html')
+
+    return render(request, 'Educ8/forms/add_files.html', context=context_dict)
 
 @login_required
 @user_passes_test(is_student)
@@ -188,6 +190,7 @@ def add_students(request, course_name_slug):
     all_students = Account.objects.filter(is_student=True)
     context_dict["available_students"] = set(all_students) - set(enrolled_students)
     context_dict["enrolled_students"] = enrolled_students
+    context_dict["course"] = course_name_slug
 
     return render(request, 'Educ8/forms/add_students.html', context=context_dict)
 
