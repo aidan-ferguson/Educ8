@@ -123,8 +123,13 @@ nav li a:hover {
 	transform: scale(1.08);
 }
 .logged {
-	margin-top: 20px;
 	margin-right: 10px;
+}
+.logged a:hover {
+	text-decoration: none;
+	transform: none;
+	color: white;
+	cursor: default;
 }
 
 /* Main Panel */

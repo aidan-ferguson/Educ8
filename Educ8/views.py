@@ -180,7 +180,7 @@ def add_students(request, course_name_slug):
     # Need to validate user exists etc...
     if request.method == 'POST':
         student_to_add = request.POST.get('add', None)
-        if student_to_add != None:
+        if student_to_add == None:
             context_dict["errors"].append("You must select a student")
         else:
             course = Course.objects.get(slug=course_name_slug)
