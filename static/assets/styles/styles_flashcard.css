@@ -37,6 +37,7 @@
   margin: 0 20px;
   width: 50%;
   text-align: center;
+  color: white;
 }
 .button_container a:hover {
   text-decoration: none;

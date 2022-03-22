@@ -12,5 +12,10 @@ $(document).ready(function(){
     $(this).find("span").text($(this).find("span").text() == 'Hide Answer' ? 'Reveal Answer' : 'Hide Answer');
   });
 
+  // Next card
+  $("#next").click(function() {
+    
+  });
+
 
 });
