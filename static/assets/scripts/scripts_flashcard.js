@@ -7,14 +7,9 @@ $(document).ready(function(){
 
   // Toggle answers
   $("#toggle").click(function() {
-    $("#question").toggle();
-    $("#answer").toggle();
+    $("#question").slideToggle("slow");
+    $("#answer").slideToggle("slow");
     $(this).find("span").text($(this).find("span").text() == 'Hide Answer' ? 'Reveal Answer' : 'Hide Answer');
-  });
-
-  // Next card
-  $("#next").click(function() {
-    
   });
 
 

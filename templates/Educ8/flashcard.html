@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="{% static 'assets/styles/styles_flashcard.css' %}">
   <script src="{% static 'assets/scripts/scripts_flashcard.js' %}"></script>
   <script src="{% static 'assets/scripts/worlds_worst_algorithm.js' %}"></script>
+  <script src="{% static 'assets/scripts/scripts_flashcard_ajax.js' %}"></script>
 {% endblock %}
 
 
@@ -23,14 +24,14 @@
     <hr>
 
     <div class="card_panel">
-      <h2>{{ flashCards.0.title }}</h2>
+      <h2 id="title">{{ flashCards.0.title }}</h2>
       <hr>
       <p id="question">{{ flashCards.0.question }}</p>
       <p id="answer">{{ flashCards.0.answer }}</p>
     </div>
     <div class="button_container">
       <a class="btn" id="toggle"><i class="fa fa-repeat"></i> <span>Reveal Answer</span></a>
-      <a class="btn" id="next"><i class="fa-solid fa-arrow-right"></i> <span>Next Card</span></a>
+      <a class="btn" id="next" data-courseId="{{ course }}"><i class="fa-solid fa-arrow-right"></i> <span>Next Card</span></a>
     </div>
 
 

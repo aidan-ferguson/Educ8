@@ -10,7 +10,7 @@
   padding: 30px 50px;
   min-height: 40vh;
   box-shadow: 0 0 6px #CCCCCC;
-  transition: all 0.1s ease-in-out;
+  transition: all 0.7263s ease-in-out;
 }
 .card_panel:hover {
   filter: brightness(1.02);
