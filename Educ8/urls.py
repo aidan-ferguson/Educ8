@@ -19,7 +19,7 @@ urlpatterns = [ #Maps a url to its respective view and form
          views.add_or_edit_flashcard, name='forms/edit_flashcard'),
      path('my_courses/<slug:course_name_slug>/delete_flashcard/<flashcard_id>',
          views.delete_flashcard, name='delete_flashcard'),
-     path('my_courses/<slug:course_name_slug>/<flashcard_id>',
+     path('my_courses/<slug:course_name_slug>/flashcard/<flashcard_id>',
          views.show_flashcard, name='show_flashcard'),
      path('my_courses/<slug:course_name_slug>/add_students',
          views.add_students, name='forms/add_students'),
