@@ -22,10 +22,10 @@
     <hr>
 
     <div class="card_panel">
-      <h2>{{ flashCards.0.title }}</h2>
+      <h2>{{ flashCard.title }}</h2>
       <hr>
-      <p id="question">{{ flashCards.0.question }}</p>
-      <p id="answer">{{ flashCards.0.answer }}</p>
+      <p id="question">{{ flashCard.question }}</p>
+      <p id="answer">{{ flashCard.answer }}</p>
     </div>
     <div class="button_container">
       <a class="btn" id="toggle"><i class="fa fa-repeat"></i> <span>Reveal Answer</span></a>
