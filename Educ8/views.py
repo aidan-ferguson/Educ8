@@ -21,24 +21,30 @@ def index(request):
 # and then returns the list to the my_courses page.
 @login_required
 def my_courses(request):
-    context_dict = {"current_user":request.user}
+    
+    try:
+        context_dict = {"current_user":request.user}
 
-    # Display all courses in which this user is enrolled in (can only be students)
-    courses = Course.objects.filter(students__username=request.user.username)
-    if len(courses) > 0:
-        context_dict["courses"] = [course for course in courses]
+        # Display all courses in which this user is enrolled in (can only be students)
+        courses = Course.objects.filter(students__username=request.user.username)
+        if len(courses) > 0:
+            context_dict["courses"] = [course for course in courses]
 
-    # Display all courses created by this user (can only be teachers)
-    courses = Course.objects.filter(createdBy__username__exact=request.user.username)
-    if len(courses) > 0:
-        context_dict["courses"] = [course for course in courses]
+        # Display all courses created by this user (can only be teachers)
+        courses = Course.objects.filter(createdBy__username__exact=request.user.username)
+        if len(courses) > 0:
+            context_dict["courses"] = [course for course in courses]
 
-    # User's First name
-    if request.user.first_name == "":
-        name = "Your"
-    else:
-        name = request.user.first_name
-    context_dict["name"] = name
+        # User's First name
+        if request.user.first_name == "":
+            name = "Your"
+        else:
+            name = request.user.first_name
+        context_dict["name"] = name
+
+    except Course.DoesNotExist:
+        return page_not_found(request, "meh")
+    
 
     return render(request, 'Educ8/my_courses.html', context=context_dict)
 
@@ -57,7 +63,7 @@ def show_course(request, course_name_slug):
         context_dict['course'] = course
         context_dict['current_user'] = request.user
     except Course.DoesNotExist:
-        page_not_found(request, "Course not found")
+        return page_not_found(request, "Course not found")
 
     return render(request, 'Educ8/course.html', context=context_dict)
 
@@ -86,6 +92,7 @@ def add_course(request):
 @user_passes_test(is_teacher)
 def add_files(request, course_name_slug):
     context_dict = {"errors":[]}
+    context_dict["course"] = course_name_slug
 
     if request.method == 'POST':
         form = CourseFileForm(request.POST, request.FILES)
@@ -99,7 +106,8 @@ def add_files(request, course_name_slug):
         else:
             context_dict["errors"] = flatten_error_dict(form.errors)
 
-    return render(request, 'Educ8/forms/add_files.html')
+
+    return render(request, 'Educ8/forms/add_files.html', context=context_dict)
 
 @login_required
 @user_passes_test(is_student)
@@ -188,6 +196,7 @@ def add_students(request, course_name_slug):
     all_students = Account.objects.filter(is_student=True)
     context_dict["available_students"] = set(all_students) - set(enrolled_students)
     context_dict["enrolled_students"] = enrolled_students
+    context_dict["course"] = course_name_slug
 
     return render(request, 'Educ8/forms/add_students.html', context=context_dict)
 
