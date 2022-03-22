@@ -10,6 +10,7 @@
 {% block asset_block %}
   <link rel="stylesheet" href="{% static 'assets/styles/styles_form.css' %}">
   <script src="{% static 'assets/scripts/scripts_form.js' %}"></script>
+  <script src="{% static 'assets/scripts/scripts_add_students.js' %}"></script>
 {% endblock %}
 
 
@@ -21,7 +22,7 @@
     <h1 class="panel_title">Add a Student</h1>
     <hr>
 
-    <form class="" action="" method="post">
+    <form onsubmit="test">
       {% csrf_token %}
 
       {% for error in errors %}

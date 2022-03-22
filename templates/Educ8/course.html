@@ -53,7 +53,7 @@
         {% for file in files %}
           <div class="file">
             <p>{{ file.filename }}</p>
-            <a title="Download File" class="tooltip">
+            <a title="Download File" href="{{ file.file.url }}" class="tooltip">
               <button type="button" name="download"><i class="fa fa-download"></i></button>
             </a>
           </div>
