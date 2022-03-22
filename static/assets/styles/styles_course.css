@@ -63,7 +63,7 @@
 .flashcard_container p {
   font-size: 20px;
 }
-.flashcard_container button {
+.flashcard_container a.flashcard_button {
   float: left;
   font-size: 18px;
   background: none;
@@ -73,11 +73,13 @@
   padding: 12px;
   border-radius: 5px;
   transition: all 0.1s ease-in-out;
+  color: black;
 }
-.flashcard_container button:hover {
+.flashcard_container a:hover {
   transform: scale(1.1);
   filter: brightness(1.1);
   background-color: inherit;
+  text-decoration: none;
 }
 .flashcard_container .button_tile {
   min-height: 250px;
@@ -111,6 +113,15 @@ a.add_button {
 .admin_container input {
   float: left;
   margin-right: 16px;
+}
+
+/* No content to display */
+p.no_content {
+  display: inline;
+  font-size: 20px;
+  font-family: 'Open Sans', sans-serif;
+  margin-bottom: 40px;
+  float: none;
 }
 
 

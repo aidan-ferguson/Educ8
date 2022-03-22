@@ -21,24 +21,30 @@ def index(request):
 # and then returns the list to the my_courses page.
 @login_required
 def my_courses(request):
-    context_dict = {"current_user":request.user}
+    
+    try:
+        context_dict = {"current_user":request.user}
 
-    # Display all courses in which this user is enrolled in (can only be students)
-    courses = Course.objects.filter(students__username=request.user.username)
-    if len(courses) > 0:
-        context_dict["courses"] = [course for course in courses]
+        # Display all courses in which this user is enrolled in (can only be students)
+        courses = Course.objects.filter(students__username=request.user.username)
+        if len(courses) > 0:
+            context_dict["courses"] = [course for course in courses]
 
-    # Display all courses created by this user (can only be teachers)
-    courses = Course.objects.filter(createdBy__username__exact=request.user.username)
-    if len(courses) > 0:
-        context_dict["courses"] = [course for course in courses]
+        # Display all courses created by this user (can only be teachers)
+        courses = Course.objects.filter(createdBy__username__exact=request.user.username)
+        if len(courses) > 0:
+            context_dict["courses"] = [course for course in courses]
 
-    # User's First name
-    if request.user.first_name == "":
-        name = "Your"
-    else:
-        name = request.user.first_name
-    context_dict["name"] = name
+        # User's First name
+        if request.user.first_name == "":
+            name = "Your"
+        else:
+            name = request.user.first_name
+        context_dict["name"] = name
+        
+    except Course.DoesNotExist:
+        return page_not_found(request, "meh")
+    
 
     return render(request, 'Educ8/my_courses.html', context=context_dict)
 
