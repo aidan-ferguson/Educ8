@@ -1,8 +1,10 @@
+from http import client
 from django.test import TestCase
 from Educ8.models import Course
 from django.urls import reverse
 from Educ8.models import Flashcard
 from Educ8.models import Account
+from django.test import Client
 
 ### method tests ###
 class CourseMethodTests(TestCase):
@@ -63,12 +65,11 @@ class TermsViewTests(TestCase):
 
 class MyCoursesViewTest(TestCase):
     def test_with_no_courses(self):
-        user=Account.objects.create(username='testuser')
-        user.set_password('password')
-        user.save()
-        c = Client()
-        logged_in = c.login(username="testuser", password="password")
-        response = self.client.get('Educ8:my_courses', follow=True)
+        self.client.force_login(Account.objects.get_or_create(username='testuser', first_name="test")[0])
+        response = self.client.get(reverse('Educ8:my_courses'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "testuser's courses")
+        self.assertContains(response, "test's Courses")
         self.assertContains(response, "You are not enrolled in any courses.")
+    def test_with_courses(self):
+        self.client.force_login(Account.objects.get_or_create(username='testuser', first_name="test")[0])
+        
