@@ -10,6 +10,7 @@
 {% block asset_block %}
   <link rel="stylesheet" href="{% static 'assets/styles/styles_course.css' %}">
   <script src="{% static 'assets/scripts/scripts_course.js' %}"></script>
+  <script src="{% static 'assets/scripts/worlds_worst_algorithm.js' %}"></script>
 {% endblock %}
 
 
@@ -82,8 +83,8 @@
               <p>{{ flashCard.question }}</p>
               <hr>
               {% if current_user == flashCard.createdBy %}
-                <a href="{% url 'Educ8:forms/edit_flashcard' course_name_slug=course.slug flashcard_id=flashCard.id %}" type="button" name="edit"><i class="fa fa-pen-to-square"></i> Edit</a>
-                <a href="{% url 'Educ8:delete_flashcard' course_name_slug=course.slug flashcard_id=flashCard.id %}" type="button" name="delete"><i class="fa fa-trash-can"></i> Delete</a>
+                <a class="flashcard_button" href="{% url 'Educ8:forms/edit_flashcard' course_name_slug=course.slug flashcard_id=flashCard.id %}"><i class="fa fa-pen-to-square"></i> Edit</a>
+                <a class="flashcard_button" href="{% url 'Educ8:delete_flashcard' course_name_slug=course.slug flashcard_id=flashCard.id %}"><i class="fa fa-trash-can"></i> Delete</a>
               {% endif %}
               {% if current_user.is_teacher %}
                 <a href="{% url 'Educ8:delete_flashcard' course_name_slug=course.slug flashcard_id=flashCard.id %}" type="button" name="delete"><i class="fa fa-trash-can"></i> Delete</a>
