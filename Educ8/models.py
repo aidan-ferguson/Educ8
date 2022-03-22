@@ -97,7 +97,7 @@ class Flashcard(models.Model):
     Method for generating filepaths based on the course they are uploaded to
 """
 def generate_file_path(instance, filename):
-    return f'files/{instance.course.courseName}/{filename}'
+    return f'files/{instance.course.slug}/{filename}'
 
 class CourseFile(models.Model):
     """CourseFile class: This is a model for the File table in the database
