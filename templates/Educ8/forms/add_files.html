@@ -25,7 +25,9 @@
     <form class="" action="" method="post" enctype="multipart/form-data">
       {% csrf_token %}
 
-      <p class="error_message"><b>Error:</b> Failed to learn French.</p>
+      {% for error in errors %}
+        <p class="error_message">{{ error }}</p>
+      {% endfor %}
 
       <div class="field">
         <label for="upload">Upload a File:</label><br>

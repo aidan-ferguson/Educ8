@@ -60,3 +60,15 @@ class TermsViewTests(TestCase):
     def test_terms_view(self):
         response = self.client.get(reverse('Educ8:terms'))
         self.assertEqual(response.status_code, 200)
+
+class MyCoursesViewTest(TestCase):
+    def test_with_no_courses(self):
+        user=Account.objects.create(username='testuser')
+        user.set_password('password')
+        user.save()
+        c = Client()
+        logged_in = c.login(username="testuser", password="password")
+        response = self.client.get('Educ8:my_courses', follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "testuser's courses")
+        self.assertContains(response, "You are not enrolled in any courses.")

@@ -9,7 +9,6 @@ from Educ8.models import Course, Flashcard, CourseFile, Account
 from Educ8.decorators import is_teacher, is_student
 
 def index(request):
-
     """calls cookie handling function,
     renders a response template."""
 
@@ -66,6 +65,7 @@ def show_course(request, course_name_slug):
 @login_required
 @user_passes_test(is_teacher)
 def add_course(request):
+    context_dict = {"errors":[]}
 
     if request.method == 'POST':
         form = CourseForm(request.POST)
@@ -77,14 +77,16 @@ def add_course(request):
             course.save()
             return redirect(reverse('Educ8:show_course', kwargs={'course_name_slug' : course.slug}))
         else:
-            print(form.errors)
+            context_dict["errors"] = flatten_error_dict(form.errors)
 
-    return render(request, 'Educ8/forms/add_course.html')
+    return render(request, 'Educ8/forms/add_course.html', context=context_dict)
 
 # TODO: Error handling, max file size?
 @login_required
 @user_passes_test(is_teacher)
 def add_files(request, course_name_slug):
+    context_dict = {"errors":[]}
+
     if request.method == 'POST':
         form = CourseFileForm(request.POST, request.FILES)
         if form.is_valid():
@@ -94,6 +96,9 @@ def add_files(request, course_name_slug):
             course_file.file.save(file.name, file)
             course_file.save()
             return redirect(f'/Educ8/my_courses/{course_name_slug}')
+        else:
+            context_dict["errors"] = flatten_error_dict(form.errors)
+
     return render(request, 'Educ8/forms/add_files.html')
 
 @login_required
@@ -104,6 +109,8 @@ def add_or_edit_flashcard(request, course_name_slug, flashcard_id=None):
     if flashcard_id != None:
         existing_flashcard = Flashcard.objects.get(id=flashcard_id)
         user_can_edit_flashcard = existing_flashcard.createdBy == request.user
+
+    context_dict = {'flashcard_id':flashcard_id, 'form' : form, 'existing_flashcard':None, "errors":[]}
 
     if request.method == 'POST':
         form = FlashcardForm(request.POST)
@@ -122,9 +129,8 @@ def add_or_edit_flashcard(request, course_name_slug, flashcard_id=None):
             return redirect(reverse('Educ8:show_course', kwargs={'course_name_slug' : course_name_slug}))
 
         else:
-            print(form.errors)
+            context_dict["errors"] = flatten_error_dict(form.errors)
 
-    context_dict = {'flashcard_id':flashcard_id, 'form' : form, 'existing_flashcard':None}
     if user_can_edit_flashcard:
         context_dict['existing_flashcard'] = existing_flashcard
 
@@ -144,32 +150,35 @@ def delete_flashcard(request, course_name_slug, flashcard_id):
         return HttpResponseForbidden('You are not allowed to perform this action')
 
 @login_required
-def show_flashcard(request, course_name_slug, flashcardID):
+def show_flashcard(request, course_name_slug, flashcard_id):
     context_dict={}
     try:
         course = Course.objects.get(slug=course_name_slug)
-        flashcard = Course.objects.get(slug=flashcardID)
-        context_dict['flashCards'] = flashcard
+        flashcard = Flashcard.objects.get(id=flashcard_id)
+        context_dict['flashCard'] = flashcard
         context_dict['course'] = course
     except Course.DoesNotExist:
         course = None
         flashcard = None
         context_dict['flashCards'] = None
         context_dict['course'] = None
-    return render(request, 'Educ8/course/flashCards', context=context_dict)
+    return render(request, 'Educ8/flashcard.html', context=context_dict)
 
 @login_required
 @user_passes_test(is_teacher)
 def add_students(request, course_name_slug):
-    context_dict = {}
+    context_dict = {"errors":[]}
     """conditional to check course exists.
     code to add students to specific courses"""
 
     # Need to validate user exists etc...
     if request.method == 'POST':
-        student_to_add = request.POST.get('add')
-        course = Course.objects.get(slug=course_name_slug)
-        course.students.add(Account.objects.get(username=student_to_add))
+        student_to_add = request.POST.get('add', None)
+        if student_to_add != None:
+            context_dict["errors"].append("You must select a student")
+        else:
+            course = Course.objects.get(slug=course_name_slug)
+            course.students.add(Account.objects.get(username=student_to_add))
     
     # Return all available users we can add and all users already in the course
     try:
@@ -189,6 +198,7 @@ def register(request):
     check if the form is valid and
     direct them to the signup page
     """
+    context_dict = {"errors":[]}
 
     if request.method == 'POST':
         user_type = request.POST.get('user_type', None)
@@ -207,9 +217,13 @@ def register(request):
 
             return redirect(reverse('Educ8:index'))
         else:
-            print(form.errors.as_data())
+            context_dict["errors"] = flatten_error_dict(form.errors)
+            if (user_type not in ['student', 'teacher']):
+                context_dict["errors"].append("Account type not selected")
+            if (terms_conditions == None):
+                context_dict["errors"].append("You must selected the terms and conditions")
 
-    return render(request, 'Educ8/forms/register.html')
+    return render(request, 'Educ8/forms/register.html', context=context_dict)
 
 def user_login(request):
     context_dict = {"errors":[]}
@@ -266,3 +280,9 @@ def terms(request):
 # HTTP 404 Error (Page not found)
 def page_not_found(request, exception):
     return render(request, "Educ8/404.html")
+
+def flatten_error_dict(errors):
+    new_errors = []
+    for error in errors:
+        new_errors += errors[error]
+    return new_errors

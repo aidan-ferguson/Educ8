@@ -25,7 +25,9 @@
 
       {% csrf_token %}
 
-      <p class="error_message"><b>Error:</b> You are not worthy of an Educ8&trade; account.</p>
+      {% for error in errors %}
+        <p class="error_message">{{ error }}</p>
+      {% endfor %}
 
       <div class="field">
         <label for="fname">Forename(s):</label>
