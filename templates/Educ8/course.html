@@ -48,15 +48,20 @@
 
     <div class="files_container">
 
-      {% for file in files %}
-        <div class="file">
-          <p>{{ file.filename }}</p>
-          <a title="Download File" class="tooltip">
-            <button type="button" name="download"><i class="fa fa-download"></i></button>
-          </a>
-        </div>
-      {% endfor %}
+      {% if files %}
+        {% for file in files %}
+          <div class="file">
+            <p>{{ file.filename }}</p>
+            <a title="Download File" class="tooltip">
+              <button type="button" name="download"><i class="fa fa-download"></i></button>
+            </a>
+          </div>
+        {% endfor %}
+      {% else %}
+          <p>No files have been added to this course yet.</p>
+      {% endif %}
 
+      <br><br><br>
     </div>
 
   </section>
@@ -69,21 +74,25 @@
 
       <div class="flashcard_container">
 
-        {% for flashCard in flashCards %}
-          <div class="flashcard_tile">
-            <h2>{{ flashCard.title }}</h2>
-            <hr>
-            <p>{{ flashCard.question }}</p>
-            <hr>
-            {% if current_user == flashCard.createdBy %}
-              <a href="{% url 'Educ8:forms/edit_flashcard' course_name_slug=course.slug flashcard_id=flashCard.id %}" type="button" name="edit"><i class="fa fa-pen-to-square"></i> Edit</a>
-              <a href="{% url 'Educ8:delete_flashcard' course_name_slug=course.slug flashcard_id=flashCard.id %}" type="button" name="delete"><i class="fa fa-trash-can"></i> Delete</a>
-            {% endif %}
-            {% if current_user.is_teacher %}
-              <a href="{% url 'Educ8:delete_flashcard' course_name_slug=course.slug flashcard_id=flashCard.id %}" type="button" name="delete"><i class="fa fa-trash-can"></i> Delete</a>
-            {% endif %}
-          </div>
-        {% endfor %}
+        {% if flashCards %}
+          {% for flashCard in flashCards %}
+            <div class="flashcard_tile">
+              <h2>{{ flashCard.title }}</h2>
+              <hr>
+              <p>{{ flashCard.question }}</p>
+              <hr>
+              {% if current_user == flashCard.createdBy %}
+                <a href="{% url 'Educ8:forms/edit_flashcard' course_name_slug=course.slug flashcard_id=flashCard.id %}" type="button" name="edit"><i class="fa fa-pen-to-square"></i> Edit</a>
+                <a href="{% url 'Educ8:delete_flashcard' course_name_slug=course.slug flashcard_id=flashCard.id %}" type="button" name="delete"><i class="fa fa-trash-can"></i> Delete</a>
+              {% endif %}
+              {% if current_user.is_teacher %}
+                <a href="{% url 'Educ8:delete_flashcard' course_name_slug=course.slug flashcard_id=flashCard.id %}" type="button" name="delete"><i class="fa fa-trash-can"></i> Delete</a>
+              {% endif %}
+            </div>
+          {% endfor %}
+        {% else %} 
+            <p>No flashcards have been added to this course yet.</p>
+        {% endif %}
 
         {% if current_user.is_student %}
           {% if flashCards|length > 0 %}
