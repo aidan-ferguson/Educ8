@@ -36,7 +36,7 @@
           <input class="btn" type="submit" value="Add File(s)"/>
         </form>
       </div>
-      
+
     </section>
   {% endif %}
 
@@ -58,7 +58,7 @@
           </div>
         {% endfor %}
       {% else %}
-          <p>No files have been added to this course yet.</p>
+          <p class="no_content">No files have been added to this course yet.</p>
       {% endif %}
 
       <br><br><br>
@@ -90,8 +90,8 @@
               {% endif %}
             </div>
           {% endfor %}
-        {% else %} 
-            <p>No flashcards have been added to this course yet.</p>
+        {% else %}
+            <p class="no_content">No flashcards have been added to this course yet.</p>
         {% endif %}
 
         {% if current_user.is_student %}
