@@ -22,18 +22,19 @@
     <h1 class="panel_title">Add a Student</h1>
     <hr>
 
-    <form onsubmit="test">
+    <form>
       {% csrf_token %}
 
       {% for error in errors %}
         <p class="error_message">{{ error }}</p>
       {% endfor %}
+      <p class="error_message" id="ajax_error"></p>
 
       <div class="field">
         <label for="add">Add Students:</label><br>
-        <select name="add">
+        <select name="add" id="selection_field">
           {% for student in available_students %}
-            <option value="{{ student.username }}">{{ student.first_name }} {{ student.last_name }} - {{ student.username }}</option>
+            <option value="{{ student.username }}" username="{{ student.username }}">{{ student.first_name }} {{ student.last_name }} - {{ student.username }}</option>
           {% endfor %}
         </select>
 
@@ -49,7 +50,7 @@
       <hr class="form_hr">
 
       <div class="field">
-        <input class="btn" type="submit" value="Add Student(s)">
+        <a class="btn" id="add_student">Add Student(s)</a>
       </div>
       <a class="btn" type="submit" href="{% url 'Educ8:show_course' course_name_slug=course %}">Back</a>
 

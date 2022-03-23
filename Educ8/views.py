@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseForbidden
+from django.http import Http404, HttpResponse, HttpResponseForbidden
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
@@ -171,6 +171,7 @@ def show_flashcard(request, course_name_slug):
         context_dict['course'] = None
     return render(request, 'Educ8/flashcard.html', context=context_dict)
 
+# TODO: pass in course name slug through urls
 @login_required
 def next_card(request):
     # Get random flashcard
@@ -195,15 +196,6 @@ def add_students(request, course_name_slug):
     """conditional to check course exists.
     code to add students to specific courses"""
 
-    # Need to validate user exists etc...
-    if request.method == 'POST':
-        student_to_add = request.POST.get('add', None)
-        if student_to_add == None:
-            context_dict["errors"].append("You must select a student")
-        else:
-            course = Course.objects.get(slug=course_name_slug)
-            course.students.add(Account.objects.get(username=student_to_add))
-
     # Return all available users we can add and all users already in the course
     try:
         enrolled_students = Course.objects.get(slug=course_name_slug).students.all()
@@ -215,6 +207,21 @@ def add_students(request, course_name_slug):
     context_dict["course"] = course_name_slug
 
     return render(request, 'Educ8/forms/add_students.html', context=context_dict)
+
+@login_required
+@user_passes_test(is_teacher)
+def add_student(request, course_name_slug):
+    # Need to validate user exists etc...
+    student_to_add = request.GET.get('student', None)
+    print(request.GET)
+    try:
+        course = Course.objects.get(slug=course_name_slug)
+        course.students.add(Account.objects.get(username=student_to_add))
+        return HttpResponse()
+    except Course.DoesNotExist:
+        return Http404("Course could not be found")
+    except Account.DoesNotExist:
+        return Http404("Account could not be found")
 
 # Need to verify passwords are the same and return any form errors
 def register(request):

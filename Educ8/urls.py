@@ -27,5 +27,6 @@ urlpatterns = [ #Maps a url to its respective view and form
      path('login/', views.user_login, name='forms/login'),
      path('logout/', views.user_logout, name='forms/logout'),
      path('terms/', views.terms, name='terms'),
-     path('next_card/', views.next_card, name='next_card')
+     path('next_card/', views.next_card, name='next_card'),
+     path('my_courses/<slug:course_name_slug>/add_student/', views.add_student, name='add_student'),
 ]
