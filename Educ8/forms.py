@@ -1,8 +1,6 @@
-
-from dataclasses import fields
-from pyexpat import model
+from django.core.exceptions import ValidationError
 from django import forms 
-from Educ8.models import Account, Course, Flashcard, CourseFile
+from Educ8.models import Course, Flashcard, CourseFile
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 
@@ -37,8 +35,14 @@ class FlashcardForm(forms.ModelForm):
         model = Flashcard
         fields = ('title', 'question', 'answer')
         
+# For checking that the file size is not too large
+def file_size_validator(file):
+    max_file_size = 100 * 1024 * 1024
+    if file.size > max_file_size:
+        raise ValidationError('File too large. Size should not exceed 100 MB.')
+
 class CourseFileForm(forms.ModelForm):
-    file = forms.FileField()
+    file = forms.FileField(validators=[file_size_validator])
 
     class Meta:
         model = CourseFile
