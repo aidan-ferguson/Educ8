@@ -196,7 +196,6 @@ def show_flashcard(request, course_name_slug):
         context_dict['course'] = None
     return render(request, 'Educ8/flashcard.html', context=context_dict)
 
-# TODO: pass in course name slug through urls
 @login_required
 @can_access_course
 def next_card_ajax(request, course_name_slug):
@@ -234,7 +233,6 @@ def add_students(request, course_name_slug):
 
     return render(request, 'Educ8/forms/add_students.html', context=context_dict)
 
-# TODO: check if people have the correct permissions to do stuff, add students, add/edit flashcards, revising flashcards, etc...
 @login_required
 @user_passes_test(is_teacher)
 @can_access_course
