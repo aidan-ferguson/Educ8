@@ -18,23 +18,22 @@
 
     <marquee scrollamount="2.5"><sub>🍆🍆🍆🍆🍆</sub></marquee>
 
-    {%if not request.user %}
-      <hr>
-      <form action = "{%url 'Educ8:forms/register'%}">
-        <input class = "btn" type="submit" value="Register">
-      </form>
-
-      <form action = "{%url 'Educ8:forms/login'%}">
-        <input class = "btn" type="submit" value="Login">
-      </form>
-
-    {% elif request.user%}
     <hr>
+
+    {% if user.is_authenticated %}
       <form action = "{%url 'Educ8:my_courses'%}">
         <input class = "btn" type="submit" value="My Courses">
       </form>
 
-    {%endif%}
+    {% else %}
+    <form action = "{%url 'Educ8:forms/register'%}">
+      <input class = "btn" type="submit" value="Register">
+    </form>
+
+    <form action = "{%url 'Educ8:forms/login'%}">
+      <input class = "btn" type="submit" value="Login">
+    </form>
+    {% endif %}
 
     <hr>
     <h1> About us </h1>
