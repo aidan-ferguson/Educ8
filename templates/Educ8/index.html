@@ -9,6 +9,7 @@
 
 {% block asset_block %}
   <link rel="stylesheet" href="{% static 'assets/styles/styles_index.css' %}">
+  <script src="{% static 'assets/scripts/scripts_index.js' %}"></script>
 {% endblock %}
 
 
@@ -24,7 +25,7 @@
     <marquee><sub>🍆🍆🍆🍆🍆</sub></marquee>
 
     <hr>
-
+    <h1>Get Educ8'd</h1>
     <!-- Buttons Section -->
     <section class="index_buttons">
 
@@ -39,39 +40,19 @@
 
 
     <hr>
-    <h1>About us</h1>
-    <p>We are a group of second year university students, operating to create and implement
-    next generation technologies to rapidly accelerate the rate of learning and to easen
-    the burden of teaching or something.</p>
-
-    <!--
-    <h1>Quick Navigation (for debugging use)</h1>
-    <h3>Main Pages:</h3>
-    <ul>
-      <li>Home (you are here!)</li>
-      <li><a href="{% url 'Educ8:my_courses' %}">My Courses</a></li>
-      <li><a href="#">Course</a> (Link not working)</li>
-      <li><a href="#">Revise Flashcard</a> (Link not working)</li>
-    </ul>
-    <h3>Forms:</h3>
-    <ul>
-      <li><a href="{% url 'Educ8:forms/login' %}">Login</a></li>
-      <li><a href="{% url 'Educ8:forms/register' %}">Register</a></li>
-      <li><a href="{% url 'Educ8:forms/add_course' %}">Add Course</a></li>
-      <li><a href="#">Add Students</a> (Link not working)</li>
-      <li><a href="#">Add Files</a> (Link not working)</li>
-      <li><a href="#">Add/Edit Flashcard</a>(Link not working)</li>
-    </ul>
-    <h3>"Other":</h3>
-    <ul>
-      <li><a href="{% url 'Educ8:terms' %}">Terms & Conditions</a></li>
-    </ul>
-    <br>
-  -->
+    <section>
+      <h1>About us</h1>
+      <p>We are a group of second year university students, operating to create and implement
+      next generation technologies to rapidly accelerate the rate of learning and to easen
+      the burden of teaching or something.</p>
+      <p><a id="activate_cat">.</a></p>
+    </section>
 
     <hr>
-    <h1>Cat (for cat use)</h1>
-    <img src="{% static 'assets/images/important_content.jpg' %}" alt="Important Content" width="500">
+    <section class="cat_use">
+      <h1>Cat (for cat use)</h1>
+      <img src="{% static 'assets/images/important_content.jpg' %}" alt="Important Content" width="500">
+    </section>
     <br>
 
 
