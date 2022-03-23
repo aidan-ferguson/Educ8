@@ -44,7 +44,12 @@
       {% endif %}
 
       {% if not courses %}
-        <p>You are not enrolled in any courses.</p>
+        {% if current_user.is_student %}
+          <p>You are not enrolled in any courses.</p>
+        {% endif %}
+        {% if current_user.is_teacher %}
+          <p>You have not created any courses.</p>
+        {% endif %}
       {% endif %}
 
 

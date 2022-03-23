@@ -76,7 +76,7 @@ hr {
 
 /* Navigation/Header Bar */
 nav {
-  height: 6vh;
+  height: 60px;
   background-color: #60a7ce;
   padding-left: 3vw;
   padding-right: 3vw;
@@ -105,10 +105,10 @@ nav li {
 nav li a {
 	font-family: 'Barlow Semi Condensed', sans-serif;
 	font-weight: normal;
-	font-size: 2vh;
+	font-size: 22px;
 	display: block;
 	text-align: center;
-	padding: 1.8vh;
+	padding: 16px;
 	text-decoration: none;
   transition: all 0.1s ease-in-out;
 }
@@ -246,4 +246,27 @@ footer p {
   .content_panel {
     width: 96vw;
   }
+	.logged {
+		display: none;
+	}
+	#back2top {
+		width: 80px;
+		height: 80px;
+		border-radius: 8px;
+	}
+	nav img {
+		display: none;
+	}
+	nav {
+		display: grid;
+		grid-template-columns: auto auto auto;
+		align-content: space-evenly;
+		width: 100%;
+		height: 80px;
+		padding-right: 6vw;
+	}
+	nav li a {
+		font-size: 26px;
+		margin: 0 20px;
+	}
 }

@@ -75,7 +75,7 @@
   transition: all 0.1s ease-in-out;
   color: black;
 }
-.flashcard_container a:hover {
+.flashcard_container a.flashcard_button:hover {
   transform: scale(1.1);
   filter: brightness(1.1);
   background-color: inherit;
@@ -147,5 +147,17 @@ p.no_content {
   }
   .flashcard_container .flashcard_tile {
     width: 100%;
+  }
+  .files_container .file {
+    height: 70px;
+  }
+  .files_container p {
+    font-size: 20px;
+  }
+  .files_container button {
+    font-size: 30px;
+  }
+  .flashcard_container a.flashcard_button {
+    font-size: 20px;
   }
 }

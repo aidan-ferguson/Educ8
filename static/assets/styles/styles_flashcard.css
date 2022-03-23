@@ -10,7 +10,7 @@
   padding: 30px 50px;
   min-height: 40vh;
   box-shadow: 0 0 6px #CCCCCC;
-  transition: all 0.7263s ease-in-out;
+  transition: all 0.5263s ease-in-out;
 }
 .card_panel:hover {
   filter: brightness(1.02);
@@ -56,7 +56,6 @@ p#answer {
 
 /* Split screen desktop/tablets */
 @media screen and (max-width: 1500px) {
-
 }
 
 /* Phones */
@@ -64,8 +63,11 @@ p#answer {
   .button_container {
     display: block;
   }
-  .button_container button {
+  .button_container a {
+    display: block;
     width: 100%;
+    height: 8vh;
     margin: 10px 0;
+    padding: 2.5vh 0;
   }
 }
