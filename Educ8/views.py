@@ -200,6 +200,7 @@ def show_flashcard(request, course_name_slug):
 @can_access_course
 def next_card_ajax(request, course_name_slug):
     # Get random flashcard
+    print(course_name_slug)
     current_flashcard_num = int(request.GET["current_flashcard_num"])
     try:
         flashcards = Flashcard.objects.filter(course__slug=course_name_slug)

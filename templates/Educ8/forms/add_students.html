@@ -32,7 +32,7 @@
 
       <div class="field">
         <label for="add">Add Students:</label><br>
-        <select name="add" id="selection_field">
+        <select name="add" id="selection_field" add_student_url="{% url 'Educ8:add_student' course_name_slug=course %}">
           {% for student in available_students %}
             <option value="{{ student.username }}" username="{{ student.username }}">{{ student.first_name }} {{ student.last_name }} - {{ student.username }}</option>
           {% endfor %}
@@ -43,7 +43,8 @@
       <p>Currently enrolled:</p>
       <ul id="current_students">
         {% for student in enrolled_students %}
-          <li>{{ student.first_name }} {{ student.last_name }} - {{ student.username }}</li>
+          <!-- TODO: Bin icon -->
+          <li><p>{{ student.first_name }} {{ student.last_name }} - {{ student.username }}</p><a student_username="{{ student.username }}" href="{% url 'Educ8:remove_student' course_name_slug=course %}">Remove</a></li>
         {% endfor %}
       </ul>
 

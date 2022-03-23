@@ -31,7 +31,7 @@
     </div>
     <div class="button_container">
       <a class="btn" id="toggle"><i class="fa fa-repeat"></i> <span>Reveal Answer</span></a>
-      <a class="btn" id="next" data-flashcard-num="0"><i class="fa-solid fa-arrow-right"></i> <span>Next Card</span></a>
+      <a class="btn" id="next" next_card_url="{% url 'Educ8:next_card' course_name_slug=course.slug %}" data-flashcard-num="0"><i class="fa-solid fa-arrow-right"></i> <span>Next Card</span></a>
     </div>
 
 
