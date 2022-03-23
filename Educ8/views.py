@@ -1,4 +1,4 @@
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, HttpResponseServerError
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
@@ -6,7 +6,7 @@ from django.shortcuts import redirect, render
 from datetime import datetime
 from Educ8.forms import CourseForm, FlashcardForm, AccountForm, CourseFileForm
 from Educ8.models import Course, Flashcard, CourseFile, Account
-from Educ8.decorators import is_teacher, is_student
+from Educ8.decorators import *
 import json
 
 def index(request):
@@ -52,9 +52,10 @@ def my_courses(request):
 #Method for getting all of the flashcards and files for a single course
 #and then returning them to "course"
 @login_required
+@can_access_course
 def show_course(request, course_name_slug):
-    context_dict = {}
 
+    context_dict = {}
     try:
         course = Course.objects.get(slug=course_name_slug)
         flashCards = Flashcard.objects.filter(course=course)
@@ -90,6 +91,7 @@ def add_course(request):
 
 @login_required
 @user_passes_test(is_teacher)
+@can_access_course
 def add_files(request, course_name_slug):
     context_dict = {"errors":[]}
     context_dict["course"] = course_name_slug
@@ -111,10 +113,9 @@ def add_files(request, course_name_slug):
 #TODO: add deleting accounts
 #TODO: delete students from course
 #TODO: delete courses
-#TODO: pass information into 500 error page (for database erorrs (functions that call page_not_found))
-#TODO: redirect to forbidden page instead of HttpResponseForbidden()
 @login_required
 @user_passes_test(is_teacher)
+@can_access_course
 def delete_file(request, course_name_slug, file_id):
     # Check that the current teacher owns the course that the file is in
     try:
@@ -133,6 +134,7 @@ def delete_file(request, course_name_slug, file_id):
 
 @login_required
 @user_passes_test(is_student)
+@can_access_course
 def add_or_edit_flashcard(request, course_name_slug, flashcard_id=None):
     form = FlashcardForm()
     user_can_edit_flashcard = False
@@ -167,6 +169,7 @@ def add_or_edit_flashcard(request, course_name_slug, flashcard_id=None):
     return render(request, 'Educ8/forms/add_or_edit_flashcard.html', context=context_dict)
 
 @login_required
+@can_access_course
 def delete_flashcard(request, course_name_slug, flashcard_id):
     # Check that the user has the authority to delete the flashcard
     flashcard = Flashcard.objects.get(id=flashcard_id)
@@ -180,6 +183,7 @@ def delete_flashcard(request, course_name_slug, flashcard_id):
         return resource_forbidden(request)
 
 @login_required
+@can_access_course
 def show_flashcard(request, course_name_slug):
     context_dict={}
     try:
@@ -194,6 +198,7 @@ def show_flashcard(request, course_name_slug):
 
 # TODO: pass in course name slug through urls
 @login_required
+@can_access_course
 def next_card_ajax(request, course_name_slug):
     # Get random flashcard
     current_flashcard_num = int(request.GET["current_flashcard_num"])
@@ -211,6 +216,7 @@ def next_card_ajax(request, course_name_slug):
 
 @login_required
 @user_passes_test(is_teacher)
+@can_access_course
 def add_students(request, course_name_slug):
     context_dict = {"errors":[]}
     """conditional to check course exists.
@@ -231,6 +237,7 @@ def add_students(request, course_name_slug):
 # TODO: check if people have the correct permissions to do stuff, add students, add/edit flashcards, revising flashcards, etc...
 @login_required
 @user_passes_test(is_teacher)
+@can_access_course
 def add_student_ajax(request, course_name_slug):
     # Need to validate user exists etc...
     student_to_add = request.GET.get('student', None)
@@ -239,9 +246,9 @@ def add_student_ajax(request, course_name_slug):
         course.students.add(Account.objects.get(username=student_to_add))
         return HttpResponse()
     except Course.DoesNotExist:
-        return Http404("Course could not be found")
+        return HttpResponseServerError("Course does not exist")
     except Account.DoesNotExist:
-        return Http404("Account could not be found")
+        return HttpResponseServerError("Student does not exist")
 
 # Need to verify passwords are the same and return any form errors
 def register(request):
@@ -332,14 +339,6 @@ def terms(request):
 # HTTP 404 Error (Page not found)
 def page_not_found(request, exception):
     return render(request, "Educ8/404.html")
-
-# For 500 server errors (mainly for database not found errors)
-def internal_server_error(request, exception):
-    return render(request, "Educ8/500.html", context={"error_message":exception})
-
-# For 500 server errors (mainly for database not found errors)
-def resource_forbidden(request):
-    return render(request, "Educ8/403.html")
 
 def flatten_error_dict(errors):
     new_errors = []
