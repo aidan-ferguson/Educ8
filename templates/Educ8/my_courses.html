@@ -25,18 +25,22 @@
     <!-- Course tiles -->
     <section class="course_tiles">
 
-
+      <!-- Courses enrolled in/created -->
       {% for course in courses %}
         <div class="tile">
           <a href="{% url 'Educ8:show_course' course_name_slug=course.slug %}">
             <h2>{{ course.courseName }}</h2>
             <hr>
-            <p>{{ course.createdBy.first_name }} {{ course.createdBy.last_name }}</p>
+            {% if current_user.is_student %}
+              <p>{{ course.createdBy.first_name }} {{ course.createdBy.last_name }}</p>
+            {% elif current_user.is_teacher %}
+              <p>{{ course.students.count }} Student(s)</p>
+            {% endif %}
           </a>
         </div>
       {% endfor %}
 
-      <!-- temporary -->
+      <!-- Add course button -->
       {% if current_user.is_teacher %}
         <div class="tile create_tile">
           <a href="{% url 'Educ8:forms/add_course'%}">
@@ -47,11 +51,11 @@
         </div>
       {% endif %}
 
+      <!-- No content to display -->
       {% if not courses %}
         {% if current_user.is_student %}
           <p>You are not enrolled in any courses.</p>
-        {% endif %}
-        {% if current_user.is_teacher %}
+        {% elif current_user.is_teacher %}
           <p>You have not created any courses.</p>
         {% endif %}
       {% endif %}

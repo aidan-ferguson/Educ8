@@ -9,10 +9,13 @@ $(document).ready(function(){
     timGenerator($(this).find("h2").text(), $(this));
 
     // Course title truncator
-    if ($(this).find("h2").text().length > 32) {
-      var text = $(this).find("h2").text();
+    var text = $(this).find("h2").text();
+    if (text.length > 32) {
       text = text.substr(0,32) + '...';
       $(this).find("h2").text(text);
+    } else if (text.length < 28) {
+      text += "<br>&nbsp;";
+      $(this).find("h2").html(text);
     }
 
 
