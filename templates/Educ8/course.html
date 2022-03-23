@@ -30,7 +30,7 @@
       <h2 class="panel_heading">Administration</h2>
 
       <div class="admin_container">
-        <form action="{% url 'Educ8:forms/add_students' course_name_slug=course.slug %}">
+        <form action="{% url 'Educ8:forms/view_students' course_name_slug=course.slug %}">
           <input class="btn" type="submit" value="Add Student(s)"/>
         </form>
         <form action="{% url 'Educ8:forms/add_files' course_name_slug=course.slug %}">

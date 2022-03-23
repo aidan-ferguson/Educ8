@@ -217,7 +217,7 @@ def next_card_ajax(request, course_name_slug):
 @login_required
 @user_passes_test(is_teacher)
 @can_access_course
-def add_students(request, course_name_slug):
+def view_students(request, course_name_slug):
     context_dict = {"errors":[]}
     """conditional to check course exists.
     code to add students to specific courses"""
@@ -248,6 +248,9 @@ def add_student_ajax(request, course_name_slug):
         return HttpResponseServerError("Course does not exist")
     except Account.DoesNotExist:
         return HttpResponseServerError("Student does not exist")
+
+def remove_student_ajax(request, course_name_slug):
+    pass
 
 # Need to verify passwords are the same and return any form errors
 def register(request):
