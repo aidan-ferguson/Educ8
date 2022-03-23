@@ -1,5 +1,6 @@
 /* WAD2 Team Project "Educ8" | Homepage Styles */
 
+/*  Main button */
 .index_buttons {
   display: flex;
   align-items: center;
@@ -13,6 +14,18 @@
   height: 100px;
   font-size: 40px;
   padding: 24px;
+}
+h1 {
+  font-size: 28px;
+}
+
+/* Cat */
+#activate_cat {
+  cursor: progress;
+  color: white;
+}
+.cat_use {
+  display: none;
 }
 
 
