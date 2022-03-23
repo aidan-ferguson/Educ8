@@ -41,7 +41,7 @@
       </div>
 
       <p>Currently enrolled:</p>
-      <ul>
+      <ul id="current_students">
         {% for student in enrolled_students %}
           <li>{{ student.first_name }} {{ student.last_name }} - {{ student.username }}</li>
         {% endfor %}
