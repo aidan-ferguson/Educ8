@@ -8,8 +8,14 @@ admin_username = "admin"
 admin_password = "password"
 db_path = "./db.sqlite3"
 migrations_dir = "./Educ8/migrations"
+media_files_dir = "./media/files"
 
-# TODO: delete media files
+for root, dirs, files in os.walk(media_files_dir, topdown=False):
+    for name in files:
+        os.remove(os.path.join(root, name))
+    for name in dirs:
+        os.rmdir(os.path.join(root, name))
+
 if os.path.exists(db_path):
     os.remove(db_path)
 

@@ -208,12 +208,12 @@ def add_students(request, course_name_slug):
 
     return render(request, 'Educ8/forms/add_students.html', context=context_dict)
 
+# TODO: check if people have the correct permissions to do stuff, add students, add/edit flashcards, revising flashcards, etc...
 @login_required
 @user_passes_test(is_teacher)
-def add_student(request, course_name_slug):
+def add_student_ajax(request, course_name_slug):
     # Need to validate user exists etc...
     student_to_add = request.GET.get('student', None)
-    print(request.GET)
     try:
         course = Course.objects.get(slug=course_name_slug)
         course.students.add(Account.objects.get(username=student_to_add))
