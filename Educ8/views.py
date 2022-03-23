@@ -106,8 +106,30 @@ def add_files(request, course_name_slug):
         else:
             context_dict["errors"] = flatten_error_dict(form.errors)
 
-
     return render(request, 'Educ8/forms/add_files.html', context=context_dict)
+
+#TODO: add deleting accounts
+#TODO: delete students from course
+#TODO: delete courses
+#TODO: pass information into 500 error page (for database erorrs (functions that call page_not_found))
+#TODO: redirect to forbidden page instead of HttpResponseForbidden()
+@login_required
+@user_passes_test(is_teacher)
+def delete_file(request, course_name_slug, file_id):
+    # Check that the current teacher owns the course that the file is in
+    try:
+        file_to_delete = CourseFile.objects.get(id=file_id)
+    except CourseFile.DoesNotExist:
+        return page_not_found(request, "That file could not be found")
+
+    if(file_to_delete.course.createdBy != request.user):
+        return HttpResponseForbidden()
+
+    # Now verified that the user can delete
+    file_to_delete.file.delete()
+    file_to_delete.delete()
+
+    return redirect(reverse("Educ8:show_course", kwargs={"course_name_slug": course_name_slug}))
 
 @login_required
 @user_passes_test(is_student)

@@ -53,9 +53,8 @@
         {% for file in files %}
           <div class="file">
             <p>{{ file.filename }}</p>
-            <a title="Download File" target="_blank" href="{{ file.file.url }}" class="tooltip">
-              <button type="button" name="download"><i class="fa fa-download"></i></button>
-            </a>
+            <a title="Download File" target="_blank" href="{{ file.file.url }}" class="tooltip"><i class="fa fa-download"></i></a>
+            <a class="flashcard_button" href="{% url 'Educ8:delete_file' course_name_slug=course.slug file_id=file.id  %}"><i class="fa fa-trash-can"></i></a>
           </div>
         {% endfor %}
       {% else %}
