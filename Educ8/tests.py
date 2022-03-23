@@ -5,6 +5,8 @@ from django.urls import reverse
 from Educ8.models import Flashcard
 from Educ8.models import Account
 from django.test import Client
+from Educ8.models import CourseFile
+from django.core.files import File
 
 ### method tests ###
 class CourseMethodTests(TestCase):
@@ -90,3 +92,23 @@ class AddCourseViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Create a Course")
         self.assertContains(response, "Course Name:")
+        
+
+class ShowCourseViewTests(TestCase):
+    def test_without_files(self):
+        c = Course.objects.get_or_create(courseName="testcourse")[0]
+        self.client.force_login(Account.objects.get_or_create(username='testuser', first_name="test", is_student=True)[0])
+        response = self.client.get(reverse('Educ8:show_course', kwargs={'course_name_slug' : "testcourse"}))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "No files have been added to this course yet.")
+    
+    def test_with_files(self):
+        c = Course.objects.get_or_create(courseName="testcourse")[0]
+        courseFile = CourseFile(course=c)
+        courseFile.file.save('why_crochet_sucks', File(open('static/population_files/why_crochet_sucks.docx', 'rb')))
+        courseFile.save()
+        
+        self.client.force_login(Account.objects.get_or_create(username='testuser', first_name="test", is_student=True)[0])
+        response = self.client.get(reverse('Educ8:show_course', kwargs={'course_name_slug' : "testcourse"}))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "why_crochet_sucks")
