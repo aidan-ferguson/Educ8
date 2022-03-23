@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.shortcuts import redirect, render
-from django.views.generic import View
 from datetime import datetime
 from Educ8.forms import CourseForm, FlashcardForm, AccountForm, CourseFileForm
 from Educ8.models import Course, Flashcard, CourseFile, Account
@@ -175,21 +174,21 @@ def show_flashcard(request, course_name_slug):
         context_dict['course'] = None
     return render(request, 'Educ8/flashcard.html', context=context_dict)
 
-class next_card(View):
-    def get(self, request):
-        # Get random flashcard
-        courseId = request.GET["courseId"]
-        try:
-            flashcards = Flashcard.objects.filter(course=courseId)
-        except Course.DoesNotExist:
-            return HttpResponse(-1)
-        except Flashcard.DoesNotExist:
-            return HttpResponse(-1)
+@login_required
+def next_card(request):
+    # Get random flashcard
+    courseId = request.GET["courseId"]
+    try:
+        flashcards = Flashcard.objects.filter(course=courseId)
+    except Course.DoesNotExist:
+        return HttpResponse(-1)
+    except Flashcard.DoesNotExist:
+        return HttpResponse(-1)
 
-        card = flashcards[randint(0, len(flashcards)-1)]
+    card = flashcards[randint(0, len(flashcards)-1)]
 
-        data_dict = {"titleText":card.title, "questionText":card.question, "answerText":card.answer}
-        return HttpResponse(json.dumps(data_dict))
+    data_dict = {"titleText":card.title, "questionText":card.question, "answerText":card.answer}
+    return HttpResponse(json.dumps(data_dict))
 
 
 @login_required

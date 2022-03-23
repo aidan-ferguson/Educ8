@@ -13,7 +13,7 @@ $(document).ready(function(){
     if (text.length > 32) {
       text = text.substr(0,32) + '...';
       $(this).find("h2").text(text);
-    } else if (text.length < 28) {
+    } else if (text.length < 22) {
       text += "<br>&nbsp;";
       $(this).find("h2").html(text);
     }
