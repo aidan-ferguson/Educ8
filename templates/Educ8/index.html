@@ -7,6 +7,11 @@
 {% endblock %}
 
 
+{% block asset_block %}
+  <link rel="stylesheet" href="{% static 'assets/styles/styles_index.css' %}">
+{% endblock %}
+
+
 {% block content_block %}
 
   <!-- Main page content -->
@@ -16,30 +21,28 @@
     <h2 class="panel_subtitle">The Greatest Online Learning Platform (GOLP)</h2>
     <hr>
 
-    <marquee scrollamount="2.5"><sub>🍆🍆🍆🍆🍆</sub></marquee>
+    <marquee><sub>🍆🍆🍆🍆🍆</sub></marquee>
 
     <hr>
 
-    {% if user.is_authenticated %}
-      <form action = "{%url 'Educ8:my_courses'%}">
-        <input class = "btn" type="submit" value="My Courses">
-      </form>
+    <!-- Buttons Section -->
+    <section class="index_buttons">
 
-    {% else %}
-    <form action = "{%url 'Educ8:forms/register'%}">
-      <input class = "btn" type="submit" value="Register">
-    </form>
+      {% if user.is_authenticated %}
+        <a class="btn" href="{%url 'Educ8:my_courses'%}">My Courses</a>
+      {% else %}
+        <a class="btn" href="{%url 'Educ8:forms/login'%}">Login</a>
+        <a class="btn" href="{%url 'Educ8:forms/register'%}">Register</a>
+      {% endif %}
 
-    <form action = "{%url 'Educ8:forms/login'%}">
-      <input class = "btn" type="submit" value="Login">
-    </form>
-    {% endif %}
+    </section>
+
 
     <hr>
-    <h1> About us </h1>
-    We are a group of second year university students, operating to create and implement
+    <h1>About us</h1>
+    <p>We are a group of second year university students, operating to create and implement
     next generation technologies to rapidly accelerate the rate of learning and to easen
-    the burden of teaching.
+    the burden of teaching or something.</p>
 
     <!--
     <h1>Quick Navigation (for debugging use)</h1>
