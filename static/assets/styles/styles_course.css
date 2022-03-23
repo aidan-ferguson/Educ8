@@ -45,7 +45,7 @@
   display: inline-block;
   border-radius: 10px;
   padding: 6px 30px 12px 30px;
-  margin: 0px;
+  margin: 8px 0;
   transform: scale(0.95);
   box-shadow: 0 0 6px gray;
   transition: all 0.1s ease-in-out;
@@ -82,11 +82,11 @@
   text-decoration: none;
 }
 .flashcard_container .button_tile {
-  min-height: 250px;
   text-align: center;
+  padding-bottom: 54px;
 }
 .flashcard_container .button_tile a {
-  font-size: 140px;
+  font-size: 94px;
   transition: all 0.1s ease-in-out;
 }
 .flashcard_container .button_tile a:hover {
@@ -97,7 +97,7 @@
   color: black;
   font-family: 'Barlow Semi Condensed', sans-serif;
   font-size: 26px;
-  margin: 0 auto 20px auto;
+  margin: 0;
 }
 a.revise_button {
   color: #EEEE11;

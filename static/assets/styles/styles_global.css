@@ -173,6 +173,14 @@ h2.panel_heading {
 	cursor: pointer;
 	filter: brightness(1.04);
 }
+a.btn {
+	color: white;
+}
+a.btn:hover {
+	text-decoration: none;
+	transform: scale(1.04);
+	filter: brightness(1.04);
+}
 
 /* Footer */
 footer {

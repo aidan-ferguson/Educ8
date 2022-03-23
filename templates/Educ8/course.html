@@ -87,7 +87,7 @@
                 <a class="flashcard_button" href="{% url 'Educ8:delete_flashcard' course_name_slug=course.slug flashcard_id=flashCard.id %}"><i class="fa fa-trash-can"></i> Delete</a>
               {% endif %}
               {% if current_user.is_teacher %}
-                <a href="{% url 'Educ8:delete_flashcard' course_name_slug=course.slug flashcard_id=flashCard.id %}" type="button" name="delete"><i class="fa fa-trash-can"></i> Delete</a>
+                <a class="flashcard_button" href="{% url 'Educ8:delete_flashcard' course_name_slug=course.slug flashcard_id=flashCard.id %}"><i class="fa fa-trash-can"></i> Delete</a>
               {% endif %}
             </div>
           {% endfor %}

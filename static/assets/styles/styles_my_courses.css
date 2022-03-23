@@ -9,7 +9,7 @@
   display: inline-block;
   border-radius: 10px;
   padding: 30px 30px 0 30px;
-  margin: 0px;
+  margin: 8px 0;
   transform: scale(0.95);
   box-shadow: 0 0 6px gray;
   transition: all 0.1s ease-in-out;
@@ -23,6 +23,7 @@
   font-family: 'Barlow Semi Condensed', sans-serif;
   font-size: 38px;
   color: black;
+  overflow-wrap: break-word;
 }
 .course_tiles p {
   font-size: 22px;
@@ -38,11 +39,10 @@
 
 /* "Create a Course" Button */
 .create_tile {
-  min-height: 250px;
   text-align: center;
 }
 .create_tile a {
-  font-size: 140px;
+  font-size: 110px;
   color: #C8FF8C;
   transition: all 0.1s ease-in-out;
 }
@@ -54,7 +54,7 @@
   color: black;
   font-family: 'Barlow Semi Condensed', sans-serif;
   font-size: 26px;
-  margin: 0 auto 40px auto;
+  margin-bottom: 22px;
 }
 
 
@@ -72,6 +72,5 @@
 @media screen and (max-width: 850px) {
   .course_tiles .tile {
     width: 100%;
-    margin: 12px auto;
   }
 }
