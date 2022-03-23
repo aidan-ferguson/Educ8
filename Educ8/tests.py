@@ -65,11 +65,12 @@ class TermsViewTests(TestCase):
 
 class MyCoursesViewTest(TestCase):
     def test_with_no_courses(self):
-        self.client.force_login(Account.objects.get_or_create(username='testuser', first_name="test")[0])
+        self.client.force_login(Account.objects.get_or_create(username='testuser', first_name="test", is_student=True)[0])
         response = self.client.get(reverse('Educ8:my_courses'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "test's Courses")
         self.assertContains(response, "You are not enrolled in any courses.")
+        
     def test_with_courses(self):
         user = Account.objects.get_or_create(username='testuser', first_name="test")[0]
         user.save()
