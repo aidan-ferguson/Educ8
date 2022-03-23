@@ -88,7 +88,6 @@ def add_course(request):
 
     return render(request, 'Educ8/forms/add_course.html', context=context_dict)
 
-# TODO: Error handling, max file size?
 @login_required
 @user_passes_test(is_teacher)
 def add_files(request, course_name_slug):
