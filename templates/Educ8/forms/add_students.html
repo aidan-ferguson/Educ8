@@ -36,9 +36,9 @@
             <option value="{{ student.username }}">{{ student.first_name }} {{ student.last_name }} - {{ student.username }}</option>
           {% endfor %}
         </select>
-        
+
       </div>
-<!-- 
+<!--
       <div class="field">
         <label>Students to Add:</label><br>
         <ul>
@@ -59,12 +59,12 @@
       <div class="field">
         <input class="btn" type="submit" value="Add Student(s)">
       </div>
+      <form action="{% url 'Educ8:show_course' course_name_slug=course%}">
+        <input class="btn" type="submit" value="Back">
+      </form>
 
     </form>
 
-    <form action="{% url 'Educ8:show_course' course_name_slug=course%}">
-      <input class="btn" type="submit" value="Back">
-    </form>
 
   </div>
 

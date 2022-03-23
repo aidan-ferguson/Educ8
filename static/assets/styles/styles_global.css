@@ -269,4 +269,8 @@ footer p {
 		font-size: 26px;
 		margin: 0 20px;
 	}
+	.btn {
+		width: 100%;
+		display: block;
+	}
 }

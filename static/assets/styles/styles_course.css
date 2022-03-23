@@ -139,14 +139,19 @@ p.no_content {
 
 /* Phones */
 @media screen and (max-width: 850px) {
+
+  .flashcard_container .flashcard_tile {
+    width: 100%;
+  }
+  .flashcard_container a.flashcard_button {
+    font-size: 20px;
+  }
+
   .course_files .file {
     width: 100%;
   }
   .course_files p {
     max-width: 60vw;
-  }
-  .flashcard_container .flashcard_tile {
-    width: 100%;
   }
   .files_container .file {
     height: 70px;
@@ -157,7 +162,13 @@ p.no_content {
   .files_container button {
     font-size: 30px;
   }
-  .flashcard_container a.flashcard_button {
-    font-size: 20px;
+
+  .admin_container {
+    margin-bottom: 220px;
   }
+  .admin_container input {
+    height: 60px;
+    margin: 10px 0;
+  }
+
 }

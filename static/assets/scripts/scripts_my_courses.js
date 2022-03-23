@@ -18,4 +18,9 @@ $(document).ready(function(){
 
  });
 
+ // Remove colour from create course tile
+ $(".create_tile").each(function() {
+   $(this).css("background-color", "white");
+ });
+
 });

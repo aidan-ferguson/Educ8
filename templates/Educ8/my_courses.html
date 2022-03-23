@@ -38,9 +38,13 @@
 
       <!-- temporary -->
       {% if current_user.is_teacher %}
-        <form action="{% url 'Educ8:forms/add_course'%}">
-          <input class="btn" type="submit" value="Add Course" />
-        </form>
+        <div class="tile create_tile">
+          <a href="{% url 'Educ8:forms/add_course'%}">
+            <i class="fa fa-circle-plus"></i>
+            <br>
+            <p>Create a New Course</p>
+          </a>
+        </div>
       {% endif %}
 
       {% if not courses %}
