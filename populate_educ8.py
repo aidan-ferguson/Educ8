@@ -70,12 +70,24 @@ def populate() -> None:
         # "" : {"question":"", "answer": "", "createdBy":"", "Course":""},
 
         # Intro to Knitting
-        "Knitting & Purling" : {"question":"What is the difference between a knit stitch and a purl stitch?", "answer": "fill this in later tim", "createdBy":"ALLTHECOURSES", "Course":"Knitting Essentials"},
-        "crotchet bad" : {"question":"What are the main 25 disadvantages of crochet compared to knitting?", "answer": "fill this in later tim", "createdBy":"ALLTHECOURSES", "Course":"Knitting Essentials"},
-        "Needle Length" : {"question":"What is the correct length of needle according to 'Gunther's Sock Guide' for children-size socks?", "answer": "fill this in later tim", "createdBy":"ALLTHECOURSES", "Course":"Knitting Essentials"},
-        "Showdown Winner" : {"question":"Who won the 2008 Jumper Knitting competition?", "answer": "fill this in later tim", "createdBy":"ALLTHECOURSES", "Course":"Knitting Essentials"},
-        "Cochet is 4 nerdz" : {"question":"Why is crochet objectively worse than knitting?", "answer": "fill this in later tim", "createdBy":"ALLTHECOURSES", "Course":"Knitting Essentials"},
-        "Dangers of Crotchet" : {"question":"How many accidents are caused by crochet each month globally?", "answer": "fill this in later tim", "createdBy":"ALLTHECOURSES", "Course":"Knitting Essentials"},
+        "Knitting & Purling" : {"question":"What is the difference between a knit stitch and a purl stitch?", "answer": "Knit stiches and purl stitches are similar, a purl stitch is like a knit stich, but sewn from the back.", "createdBy":"ALLTHECOURSES", "Course":"Knitting Essentials"},
+        "crotchet bad" : {"question":"What are the main 25 disadvantages of crochet compared to knitting?", "answer": "1. Crochet does not use needles because it bad. 2. hands are suck 7. corchet is done 25. than", "createdBy":"ALLTHECOURSES", "Course":"Knitting Essentials"},
+        "Needle Length" : {"question":"What is the correct length of needle according to 'Gunther's Sock Guide' for children-size socks?", "answer": "7-10mm Width, With a length of at least 24cm", "createdBy":"ALLTHECOURSES", "Course":"Knitting Essentials"},
+        "Showdown Winner" : {"question":"Who won the 2008 Jumper Knitting competition?", "answer": "Nancy Stichens (4 time world champion)", "createdBy":"ALLTHECOURSES", "Course":"Knitting Essentials"},
+        "Cochet is 4 nerdz" : {"question":"Why is crochet objectively worse than knitting?", "answer": "no one who is important likes crochet", "createdBy":"ALLTHECOURSES", "Course":"Knitting Essentials"},
+        "Dangers of Crotchet" : {"question":"How many accidents are caused by crochet each month globally?", "answer": "Probably millions", "createdBy":"ALLTHECOURSES", "Course":"Knitting Essentials"},
+
+        # Advanced chair building
+        "Chair Legs" : {"question":"How many legs does the standard chair have (not including stabilisers)", "answer": "Four to five legs", "createdBy":"ChairLover87", "Course":"Advanced Chair Building"},
+        "Wood types" : {"question":"What are the ideal wood types to use when constructing a new chair", "answer": "Sustainable, fast-growing woods for everyday chairs, hardwoords for special occasions", "createdBy":"ChairLover87", "Course":"Advanced Chair Building"},
+        "Amount of Polish" : {"question":"How many layers of polish should be applied to a newly constructed bare-wood chair", "answer": "At least 2, preferably 4-8 layers", "createdBy":"ChairLover87", "Course":"Advanced Chair Building"},
+        "History of Chairs" : {"question":"Who was the inventor of the modern-day chair", "answer": "The chair was invented in 2007 by Alan Chair", "createdBy":"ChairLover87", "Course":"Advanced Chair Building"},
+
+        # Horse Assembly
+        "Assembly order" : {"question":"In what order are the limbs attatched?", "answer": "Back-left leg, front-right leg, front-left leg, and finally back-right leg", "createdBy":"ALLTHECOURSES", "Course":"Horse Assembly (Intermediate)"},
+        "Tail length" : {"question":"What length should the tail be measured to?", "answer": "About one-two feet long", "createdBy":"ALLTHECOURSES", "Course":"Horse Assembly (Intermediate)"},
+        "Number of Eyes" : {"question":"How many eyes should be attached to the head?", "answer": "At least one, no more than five", "createdBy":"ALLTHECOURSES", "Course":"Horse Assembly (Intermediate)"},
+        "Noise functions" : {"question":"What noise should a standard model horse make", "answer": "Neigh or whinnie (woof not accepted)", "createdBy":"ALLTHECOURSES", "Course":"Horse Assembly (Intermediate)"},
 
         }
 
@@ -96,6 +108,22 @@ def populate() -> None:
         "synthetic_vs_natural_fabrics.pdf": {"course":"Knitting Essentials"},
         "top_10_knitting_needles_of_all_time.pdf": {"course":"Knitting Essentials"},
         "jumper_knitting_finalist_showdown.mov": {"course":"Knitting Essentials"},
+
+        # Advanced Chair Building
+        "Structure Diagram.png": {"course":"Advanced Chair Building"},
+        "Leg shaping tutorial.mp4": {"course":"Advanced Chair Building"},
+        "Guide to Efficient Woodwork.mov": {"course":"Advanced Chair Building"},
+        "Chairs for the modern day.pdf": {"course":"Advanced Chair Building"},
+        "History of Furniture.docx": {"course":"Advanced Chair Building"},
+        "Laquer Prices.txt": {"course":"Advanced Chair Building"},
+
+        # Horse Assembly
+        "Building the Elbow.pptx": {"course":"Horse Assembly (Intermediate)"},
+        "Nose shaping guide.jpg": {"course":"Horse Assembly (Intermediate)"},
+        "Foot Tips.pdf": {"course":"Horse Assembly (Intermediate)"},
+        "Internal wiring diagram.pdf": {"course":"Horse Assembly (Intermediate)"},
+        "Sound track samples.wav": {"course":"Horse Assembly (Intermediate)"},
+        "Full assembly guide.pdf": {"course":"Horse Assembly (Intermediate)"},
 
         }
 
