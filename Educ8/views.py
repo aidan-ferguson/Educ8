@@ -173,14 +173,13 @@ def show_flashcard(request, course_name_slug):
 
 # TODO: pass in course name slug through urls
 @login_required
-def next_card(request):
+def next_card_ajax(request, course_name_slug):
     # Get random flashcard
-    courseId = request.GET["courseId"]
     current_flashcard_num = int(request.GET["current_flashcard_num"])
     try:
-        flashcards = Flashcard.objects.filter(course=courseId)
+        flashcards = Flashcard.objects.filter(course__slug=course_name_slug)
     except Course.DoesNotExist:
-        return HttpResponse(-1)
+        return Http404()
 
     new_flashcard_num = (current_flashcard_num+1)%len(flashcards)
     card = flashcards[new_flashcard_num]

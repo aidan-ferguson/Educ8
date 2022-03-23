@@ -4,9 +4,8 @@ $(document).ready(function(){
 
   $("#next").click(function() {
 
-    var courseIdVar = $(this).attr("data-courseId");
     $.get(
-      '/Educ8/next_card/', {'courseId': courseIdVar, 'current_flashcard_num': $("#next").attr("data-flashcard-num")},
+      './flashcard/next_card/', {'current_flashcard_num': $("#next").attr("data-flashcard-num")},
       function(data) {
         $("#title").html(JSON.parse(data)["titleText"]);
         $("#question").html(JSON.parse(data)["questionText"]);
