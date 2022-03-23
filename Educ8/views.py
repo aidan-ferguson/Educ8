@@ -1,4 +1,4 @@
-from django.http import Http404, HttpResponse, HttpResponseForbidden
+from django.http import Http404, HttpResponse
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
@@ -44,7 +44,7 @@ def my_courses(request):
         context_dict["name"] = name
 
     except Course.DoesNotExist:
-        return page_not_found(request, "meh")
+        return internal_server_error(request, "That course could not be found")
 
 
     return render(request, 'Educ8/my_courses.html', context=context_dict)
@@ -64,7 +64,7 @@ def show_course(request, course_name_slug):
         context_dict['course'] = course
         context_dict['current_user'] = request.user
     except Course.DoesNotExist:
-        return page_not_found(request, "Course not found")
+        return internal_server_error(request, "That course could not found")
 
     return render(request, 'Educ8/course.html', context=context_dict)
 
@@ -120,10 +120,10 @@ def delete_file(request, course_name_slug, file_id):
     try:
         file_to_delete = CourseFile.objects.get(id=file_id)
     except CourseFile.DoesNotExist:
-        return page_not_found(request, "That file could not be found")
+        return internal_server_error(request, "That file could not be found")
 
     if(file_to_delete.course.createdBy != request.user):
-        return HttpResponseForbidden()
+        return resource_forbidden(request)
 
     # Now verified that the user can delete
     file_to_delete.file.delete()
@@ -177,7 +177,7 @@ def delete_flashcard(request, course_name_slug, flashcard_id):
         Flashcard.objects.filter(id=flashcard_id).delete()
         return redirect(reverse('Educ8:show_course', kwargs={'course_name_slug' : course_name_slug}))
     else:
-        return HttpResponseForbidden('You are not allowed to perform this action')
+        return resource_forbidden(request)
 
 @login_required
 def show_flashcard(request, course_name_slug):
@@ -220,7 +220,7 @@ def add_students(request, course_name_slug):
     try:
         enrolled_students = Course.objects.get(slug=course_name_slug).students.all()
     except Course.DoesNotExist:
-        return page_not_found(request, "meh")
+        return internal_server_error(request, "That course could not be found")
     all_students = Account.objects.filter(is_student=True)
     context_dict["available_students"] = set(all_students) - set(enrolled_students)
     context_dict["enrolled_students"] = enrolled_students
@@ -332,6 +332,14 @@ def terms(request):
 # HTTP 404 Error (Page not found)
 def page_not_found(request, exception):
     return render(request, "Educ8/404.html")
+
+# For 500 server errors (mainly for database not found errors)
+def internal_server_error(request, exception):
+    return render(request, "Educ8/500.html", context={"error_message":exception})
+
+# For 500 server errors (mainly for database not found errors)
+def resource_forbidden(request):
+    return render(request, "Educ8/403.html")
 
 def flatten_error_dict(errors):
     new_errors = []
