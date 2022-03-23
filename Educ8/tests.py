@@ -122,3 +122,15 @@ class AddFilesViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Add Files")
         self.assertContains(response, "Upload a File:")
+
+class AddStudentsViewTests(TestCase):
+    def test_add_students_view(self):
+        self.client.force_login(Account.objects.get_or_create(username='testuser', first_name="test", is_teacher=True)[0])
+        c = Course.objects.get_or_create(courseName="testcourse")[0]
+        c.save()
+        response = self.client.get(reverse('Educ8:forms/add_students', kwargs={'course_name_slug' : "testcourse"}))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Add a Student")
+        self.assertContains(response, "Add Students:")
+        self.assertContains(response, "Currently enrolled:")
+        
