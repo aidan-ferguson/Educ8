@@ -1,0 +1,29 @@
+{% extends 'Educ8/base.html' %}
+{% load staticfiles %}
+
+
+{% block title_block %}
+  Forbidden
+{% endblock %}
+
+
+{% block asset_block %}
+  <link rel="stylesheet" href="{% static 'assets/styles/styles_error.css' %}">
+  <script src="{% static 'assets/scripts/scripts_error.js' %}"></script>
+{% endblock %}
+
+
+{% block content_block %}
+
+  <!-- Main page content -->
+  <div class="content_panel">
+
+    <div>
+      <h1>404</h1>
+      <h2>You do not have permission to view this page.</h2>
+      <p>Click <a href="{% url 'Educ8:index' %}">here</a> to return Home</p>
+    </div>
+
+  </div>
+
+{% endblock %}
