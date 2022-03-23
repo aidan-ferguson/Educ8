@@ -20,11 +20,12 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-right: -30px;
 }
-.files_container button {
+.files_container a {
   float: right;
   font-size: 20px;
-  margin-top: 4px;
+  margin-top: 2px;
   padding: 10px 12px;
   background: none;
   border-radius: 5px;
@@ -33,7 +34,7 @@
   cursor: pointer;
   transition: all 0.1s ease-in-out;
 }
-.files_container button:hover {
+.files_container a:hover {
   color: #6bb2d9;
   transform: scale(1.1);
   background-color: #EEEEEE;
@@ -159,7 +160,7 @@ p.no_content {
   .files_container p {
     font-size: 20px;
   }
-  .files_container button {
+  .files_container a {
     font-size: 30px;
   }
 
