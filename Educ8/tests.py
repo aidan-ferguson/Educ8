@@ -82,3 +82,11 @@ class MyCoursesViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "test's Courses")
         self.assertContains(response, "testcourse")
+
+class AddCourseViewTest(TestCase):
+    def test_add_course_view(self):
+        self.client.force_login(Account.objects.get_or_create(username='testuser', first_name="test", is_teacher=True)[0])
+        response = self.client.get(reverse('Educ8:forms/add_course'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Create a Course")
+        self.assertContains(response, "Course Name:")
