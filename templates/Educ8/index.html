@@ -17,8 +17,32 @@
     <hr>
 
     <marquee scrollamount="2.5"><sub>🍆🍆🍆🍆🍆</sub></marquee>
-    <hr>
 
+    {%if not request.user %}
+      <hr>
+      <form action = "{%url 'Educ8:forms/register'%}">
+        <input class = "btn" type="submit" value="Register">
+      </form>
+
+      <form action = "{%url 'Educ8:forms/login'%}">
+        <input class = "btn" type="submit" value="Login">
+      </form>
+
+    {% elif request.user%}
+    <hr>
+      <form action = "{%url 'Educ8:my_courses'%}">
+        <input class = "btn" type="submit" value="My Courses">
+      </form>
+
+    {%endif%}
+
+    <hr>
+    <h1> About us </h1>
+    We are a group of second year university students, operating to create and implement
+    next generation technologies to rapidly accelerate the rate of learning and to easen
+    the burden of teaching.
+
+    <!--
     <h1>Quick Navigation (for debugging use)</h1>
     <h3>Main Pages:</h3>
     <ul>
@@ -41,6 +65,7 @@
       <li><a href="{% url 'Educ8:terms' %}">Terms & Conditions</a></li>
     </ul>
     <br>
+  -->
 
     <hr>
     <h1>Cat (for cat use)</h1>
