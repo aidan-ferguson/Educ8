@@ -8,7 +8,6 @@ from Educ8.forms import CourseForm, FlashcardForm, AccountForm, CourseFileForm
 from Educ8.models import Course, Flashcard, CourseFile, Account
 from Educ8.decorators import is_teacher, is_student
 import json
-from random import randint
 
 def index(request):
     """calls cookie handling function,
@@ -168,8 +167,6 @@ def show_flashcard(request, course_name_slug):
         context_dict['flashCards'] = flashcards
         context_dict['course'] = course
     except Course.DoesNotExist:
-        course = None
-        flashcard = None
         context_dict['flashCards'] = None
         context_dict['course'] = None
     return render(request, 'Educ8/flashcard.html', context=context_dict)
@@ -178,16 +175,16 @@ def show_flashcard(request, course_name_slug):
 def next_card(request):
     # Get random flashcard
     courseId = request.GET["courseId"]
+    current_flashcard_num = int(request.GET["current_flashcard_num"])
     try:
         flashcards = Flashcard.objects.filter(course=courseId)
     except Course.DoesNotExist:
         return HttpResponse(-1)
-    except Flashcard.DoesNotExist:
-        return HttpResponse(-1)
 
-    card = flashcards[randint(0, len(flashcards)-1)]
+    new_flashcard_num = (current_flashcard_num+1)%len(flashcards)
+    card = flashcards[new_flashcard_num]
 
-    data_dict = {"titleText":card.title, "questionText":card.question, "answerText":card.answer}
+    data_dict = {"titleText":card.title, "questionText":card.question, "answerText":card.answer, "new_flashcard_num":new_flashcard_num}
     return HttpResponse(json.dumps(data_dict))
 
 

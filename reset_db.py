@@ -2,7 +2,6 @@ import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_group_project.settings')
 import django
 from django.contrib.auth import get_user_model
-
 print("Re-migrating database")
 
 admin_username = "admin"
@@ -10,6 +9,7 @@ admin_password = "password"
 db_path = "./db.sqlite3"
 migrations_dir = "./Educ8/migrations"
 
+# TODO: delete media files
 if os.path.exists(db_path):
     os.remove(db_path)
 
