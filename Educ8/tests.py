@@ -65,7 +65,7 @@ class TermsViewTests(TestCase):
         response = self.client.get(reverse('Educ8:terms'))
         self.assertEqual(response.status_code, 200)
 
-class MyCoursesViewTest(TestCase):
+class MyCoursesViewTests(TestCase):
     def test_with_no_courses(self):
         self.client.force_login(Account.objects.get_or_create(username='testuser', first_name="test", is_student=True)[0])
         response = self.client.get(reverse('Educ8:my_courses'))
@@ -85,7 +85,7 @@ class MyCoursesViewTest(TestCase):
         self.assertContains(response, "test's Courses")
         self.assertContains(response, "testcourse")
 
-class AddCourseViewTest(TestCase):
+class AddCourseViewTests(TestCase):
     def test_add_course_view(self):
         self.client.force_login(Account.objects.get_or_create(username='testuser', first_name="test", is_teacher=True)[0])
         response = self.client.get(reverse('Educ8:forms/add_course'))
