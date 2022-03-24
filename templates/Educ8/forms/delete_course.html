@@ -1,0 +1,48 @@
+{% extends 'Educ8/base.html' %}
+{% load staticfiles %}
+
+
+{% block title_block %}
+  Add a Course
+{% endblock %}
+
+
+{% block asset_block %}
+  <link rel="stylesheet" href="{% static 'assets/styles/styles_form.css' %}">
+  <script src="{% static 'assets/scripts/scripts_form.js' %}"></script>
+{% endblock %}
+
+
+{% block content_block %}
+
+  <!-- Main page content -->
+  <div class="content_panel">
+
+    <h1 class="panel_title">Delete Course</h1>
+    <hr>
+
+    <form class="" action="" method="post">
+      {% csrf_token %}
+
+      {% for error in errors %}
+        <p class="error_message">{{ error }}</p>
+      {% endfor %}
+
+      <div class="field">
+        <h2 for="name">Are you sure you want to delete this course?</h2>
+        <p>If so, please copy the following text and press delete to confirm: <b>{{ course_name_slug }}</b></p>
+        <br>
+        <input type="text" name="confirm_name" minlength="4" maxlength="256" required placeholder="Confirm deletion...">
+      </div>
+
+      <hr class="form_hr">
+
+      <div class="field">
+        <input class="btn btn-danger" type="submit" value="Delete Course">
+      </div>
+
+    </form>
+
+  </div>
+
+{% endblock %}

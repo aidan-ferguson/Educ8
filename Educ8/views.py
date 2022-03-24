@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.http import Http404, HttpResponse, HttpResponseServerError
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import authenticate, login, logout
@@ -92,6 +93,29 @@ def add_course(request):
 @login_required
 @user_passes_test(is_teacher)
 @can_access_course
+def delete_course(request, course_name_slug):
+    context_dict = {"course_name_slug": course_name_slug}
+    
+    if request.method == "POST":
+        confirmation_text = request.POST.get("confirm_name", None)
+        if confirmation_text == course_name_slug:
+            try:
+                course = Course.objects.get(slug=course_name_slug)
+            except Course.DoesNotExist:
+                return internal_server_error(request, "Course could not be found")
+
+            course.delete()
+            return redirect(reverse("Educ8:my_courses"))
+        else:
+            context_dict["errors"] = ["You did not enter the correct text"]
+
+    return render(request, "Educ8/forms/delete_course.html", context=context_dict)
+
+    
+
+@login_required
+@user_passes_test(is_teacher)
+@can_access_course
 def add_files(request, course_name_slug):
     context_dict = {"errors":[]}
     context_dict["course"] = course_name_slug
@@ -111,7 +135,6 @@ def add_files(request, course_name_slug):
     return render(request, 'Educ8/forms/add_files.html', context=context_dict)
 
 #TODO: add deleting accounts
-#TODO: delete students from course
 #TODO: delete courses
 @login_required
 @user_passes_test(is_teacher)
@@ -217,7 +240,7 @@ def next_card_ajax(request, course_name_slug):
 @login_required
 @user_passes_test(is_teacher)
 @can_access_course
-def view_students(request, course_name_slug):
+def edit_students(request, course_name_slug):
     context_dict = {"errors":[]}
     """conditional to check course exists.
     code to add students to specific courses"""
@@ -265,6 +288,7 @@ def remove_student_ajax(request, course_name_slug):
         return HttpResponseServerError("Student does not exist")
 
 # Need to verify passwords are the same and return any form errors
+#TODO: on failure, auto fill fields which don't need to be changed
 def register(request):
 
     """view to register a student/teacher,

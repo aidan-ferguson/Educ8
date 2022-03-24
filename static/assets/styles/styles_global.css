@@ -182,6 +182,10 @@ a.btn:hover {
 	filter: brightness(1.04);
 }
 
+.btn-danger {
+	background-color: #dc3545  !important;
+}
+
 /* Footer */
 footer {
 	height: 100px;
