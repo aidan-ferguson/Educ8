@@ -94,7 +94,7 @@ def add_course(request):
 @user_passes_test(is_teacher)
 @can_access_course
 def delete_course(request, course_name_slug):
-    context_dict = {"course_name_slug": course_name_slug}
+    context_dict = {"course": course_name_slug}
     
     if request.method == "POST":
         confirmation_text = request.POST.get("confirm_name", None)
@@ -165,7 +165,7 @@ def add_or_edit_flashcard(request, course_name_slug, flashcard_id=None):
         existing_flashcard = Flashcard.objects.get(id=flashcard_id)
         user_can_edit_flashcard = existing_flashcard.createdBy == request.user
 
-    context_dict = {'flashcard_id':flashcard_id, 'form' : form, 'existing_flashcard':None, "errors":[]}
+    context_dict = {'flashcard_id':flashcard_id, 'form' : form, 'existing_flashcard':None, "errors":[], "course": course_name_slug}
 
     if request.method == 'POST':
         form = FlashcardForm(request.POST)
@@ -213,17 +213,15 @@ def show_flashcard(request, course_name_slug):
         course = Course.objects.get(slug=course_name_slug)
         flashcards = Flashcard.objects.filter(course=course)
         context_dict['flashCards'] = flashcards
-        context_dict['course'] = course
+        context_dict['course'] = course_name_slug
     except Course.DoesNotExist:
-        context_dict['flashCards'] = None
-        context_dict['course'] = None
+        return internal_server_error(request, "That course does not exist")
+
     return render(request, 'Educ8/flashcard.html', context=context_dict)
 
 @login_required
 @can_access_course
 def next_card_ajax(request, course_name_slug):
-    # Get random flashcard
-    print(course_name_slug)
     current_flashcard_num = int(request.GET["current_flashcard_num"])
     try:
         flashcards = Flashcard.objects.filter(course__slug=course_name_slug)
@@ -241,7 +239,7 @@ def next_card_ajax(request, course_name_slug):
 @user_passes_test(is_teacher)
 @can_access_course
 def edit_students(request, course_name_slug):
-    context_dict = {"errors":[]}
+    context_dict = {"errors":[], "course": course_name_slug}
     """conditional to check course exists.
     code to add students to specific courses"""
 
@@ -253,7 +251,6 @@ def edit_students(request, course_name_slug):
     all_students = Account.objects.filter(is_student=True)
     context_dict["available_students"] = set(all_students) - set(enrolled_students)
     context_dict["enrolled_students"] = enrolled_students
-    context_dict["course"] = course_name_slug
 
     return render(request, 'Educ8/forms/add_students.html', context=context_dict)
 
@@ -288,7 +285,7 @@ def remove_student_ajax(request, course_name_slug):
         return HttpResponseServerError("Student does not exist")
 
 # Need to verify passwords are the same and return any form errors
-#TODO: on failure, auto fill fields which don't need to be changed
+#TODO: on failure, auto fill fields which don't need to be changed 
 def register(request):
 
     """view to register a student/teacher,

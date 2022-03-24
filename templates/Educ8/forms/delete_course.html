@@ -30,7 +30,7 @@
 
       <div class="field">
         <h2 for="name">Are you sure you want to delete this course?</h2>
-        <p>If so, please copy the following text and press delete to confirm: <b>{{ course_name_slug }}</b></p>
+        <p>If so, please copy the following text and press delete to confirm: <b>{{ course }}</b></p>
         <br>
         <input type="text" name="confirm_name" minlength="4" maxlength="256" required placeholder="Confirm deletion...">
       </div>
@@ -40,6 +40,7 @@
       <div class="field">
         <input class="btn danger" type="submit" value="Delete Course">
       </div>
+      <a class="btn" type="submit" href="{% url 'Educ8:show_course' course_name_slug=course %}">Back</a>
 
     </form>
 
