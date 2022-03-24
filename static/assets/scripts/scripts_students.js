@@ -24,7 +24,7 @@ $(document).ready(function(){
     function remove_student(button) {
         let clicked_element = $(this);
         let remove_student_url = $(this).parent().parent().parent().attr("remove_student_url");
-        console.log("click")
+        
         $.ajax({
             url: remove_student_url,
             data: {'student': clicked_element.attr("student_username")},

@@ -24,7 +24,7 @@
     <h1 class="panel_title">Revise Flashcards</h1>
     <hr>
 
-    <div class="card_panel">
+    <div class="card_panel" next_card_url="{% url 'Educ8:next_card' course_name_slug=course %}" id="card_panel" data-flashcard-num="0">
       <h2 id="title"></h2>
       <hr>
       <p id="question"></p>
@@ -33,7 +33,7 @@
     <div class="button_container">
       <a class="btn" id="toggle"><i class="fa fa-repeat"></i> <span>Reveal Answer</span></a>
       {% if numOfFlashcards > 1 %}
-        <a class="btn" id="next" next_card_url="{% url 'Educ8:next_card' course_name_slug=course %}" data-flashcard-num="0"><i class="fa-solid fa-arrow-right"></i> <span>Next Card</span></a>
+        <a class="btn" id="next" ><i class="fa-solid fa-arrow-right"></i> <span>Next Card</span></a>
       {% endif %}
     </div>
     <a class="btn" type="submit" href="{% url 'Educ8:show_course' course_name_slug=course %}">Back</a>
