@@ -44,7 +44,7 @@
   text-align: center;
 }
 .create_tile a {
-  font-size: 110px;
+  font-size: 120px;
   color: #C8FF8C;
   transition: all 0.1s ease-in-out;
 }
@@ -52,11 +52,13 @@
   transform: scale(1.2);
   filter: brightness(1.1);
 }
+.create_tile a:link:hover {
+  text-decoration: underline;
+}
 .create_tile p {
   color: black;
   font-family: 'Barlow Semi Condensed', sans-serif;
   font-size: 26px;
-  margin-bottom: 22px;
 }
 
 

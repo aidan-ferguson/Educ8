@@ -1,9 +1,6 @@
 /* WAD2 Team Project "Educ8" | Course Page Styles */
 
 /* Files section */
-.files_container {
-  margin-bottom: 30px;
-}
 .files_container .file {
   display: inline-block;
   border: 1px solid gray;
@@ -41,6 +38,9 @@
 }
 
 /* Flashcard tiles */
+.flashcard_container {
+  margin-bottom: 30px;
+}
 .flashcard_container .flashcard_tile {
   overflow: hidden;
   height: 280px;
@@ -111,9 +111,9 @@ a.add_button {
 
 /* Administration section */
 .admin_container {
-  margin-bottom: 100px;
+  margin-bottom: 70px;
 }
-.admin_container input {
+.admin_container .btn {
   float: left;
   margin-right: 16px;
 }

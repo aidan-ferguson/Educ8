@@ -181,8 +181,7 @@ a.btn:hover {
 	transform: scale(1.04);
 	filter: brightness(1.04);
 }
-
-.btn-danger {
+.danger {
 	background-color: #dc3545  !important;
 }
 

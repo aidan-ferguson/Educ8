@@ -17,7 +17,6 @@ form {
   padding: 10px;
 }
 .field input[type=submit].cancel {
-  background-color: #FF7777;
   margin-left: 16px;
 }
 .field input[type=submit].add {
@@ -58,7 +57,7 @@ form {
 
 /* Error message */
 p.error_message {
-  color: #FF4444;
+  color: #dc3545;
   font-size: 20px;
 }
 
