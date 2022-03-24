@@ -2,9 +2,7 @@
 
 $(document).ready(function(){
 
-  
-  
-  function next_card() {
+  $("#next").click(function() {
 
     let next_card_url = $(this).attr("next_card_url");
     $.get(next_card_url, {'current_flashcard_num': $("#next").attr("data-flashcard-num")},
@@ -22,10 +20,8 @@ $(document).ready(function(){
 
       });
 
-  }
-  
-  $("#next").click(next_card);
+  });
 
-  next_card();
+  $("#next").trigger("click");
 
 });
