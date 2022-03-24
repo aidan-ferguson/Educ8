@@ -9,8 +9,8 @@ $(document).ready(function(){
 
     // Flashcard question truncator
     var questionText = $(this).find("p").text();
-    if (questionText.length > 50) {
-      questionText = questionText.substr(0,50) + '...';
+    if (questionText.length > 76) {
+      questionText = questionText.substr(0,76) + '...';
       $(this).find("p").text(questionText);
     } else if (questionText.length < 40) {
       questionText += "<br>&nbsp;";

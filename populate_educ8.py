@@ -8,12 +8,6 @@ from django.core.files import File
 
 from Educ8.models import CourseFile, Course, Flashcard, CourseFile, Account#, AccountManager
 
-"""
-Things to do:
-    Comment functions.
-    Create 4 loops for filling database in populate().
-    Get someone to check everything.
-"""
 
 def populate() -> None:
 
@@ -40,10 +34,10 @@ def populate() -> None:
         }
 
     teachers = {
-        "Bob1" : {"password":"Password", "first_name":"Dom", "last_name":"Jina", "object":None},
-        "Bob2" : {"password":"Password", "first_name":"Dom", "last_name":"Jina", "object":None},
-        "Bob3" : {"password":"Password", "first_name":"Dom", "last_name":"Jina", "object":None},
-        "Bob4" : {"password":"Password", "first_name":"Dom", "last_name":"Jina", "object":None},
+        "Bob1" : {"password":"Password", "first_name":"Bob", "last_name":"the First", "object":None},
+        "Bob2" : {"password":"Password", "first_name":"Bob", "last_name":"the Second", "object":None},
+        "Bob3" : {"password":"Password", "first_name":"Bob", "last_name":"the Third", "object":None},
+        "Bob4" : {"password":"Password", "first_name":"Bob", "last_name":"the Fourth", "object":None},
         # "": {"password":"", "first_name":"", "last_name":"", "object":None},
         "Henry79": {"password":"sucks_to_be_m3", "first_name":"Henry", "last_name":"Hoover (Not associated)", "object":None},
         "Chairbert": {"password":"chairz_R_gr8", "first_name":"Egbert", "last_name":"Mumples", "object":None},
@@ -52,9 +46,9 @@ def populate() -> None:
         }
 
     courses = {
-        "Maths" : {"createdBy":"TheMadDivisor", "students":["Dom1", "Dom2", "ALLTHECOURSES"], "object":None},
+        "Maths or Something" : {"createdBy":"TheMadDivisor", "students":["Dom1", "Dom2", "ALLTHECOURSES"], "object":None},
         "Extreme Cake Baking" : {"createdBy":"Bob3", "students":["Dom4", "Dom1", "ALLTHECOURSES"], "object":None},
-        "English" : {"createdBy":"Bob4", "students":["ALLTHECOURSES"], "object":None},
+        "English with Bob IV" : {"createdBy":"Bob4", "students":["ALLTHECOURSES"], "object":None},
         # "" : {"createdBy":"", "students":["ALLTHECOURSES"], "object":None},
         "Advanced Chair Building" : {"createdBy":"Chairbert", "students":["ALLTHECOURSES", "ChairLover87", "Flumper1", "Lumperdumper", "catcatcatcat"], "object":None},
         "Knitting Essentials" : {"createdBy":"Henry79", "students":["ALLTHECOURSES", "DolpyWolpy", "Tickles06", "AAAAAAAA", "catcatcatcat", "ChairLover87"], "object":None},
@@ -63,9 +57,7 @@ def populate() -> None:
         }
 
     flashcards = {
-        "Addition Flashcard" : {"question":"What is 1 + 1?", "answer": "2", "createdBy":"Dom1", "Course":"Maths"},
         "Showdown Winner" : {"question":"Who won the 2008 Jumper Knitting competition?", "answer": "My Gran", "createdBy":"Dom4", "Course":"Extreme Cake Baking"},
-        "Crochet is 4 nerdz" : {"question":"What is better crochet or knitting?", "answer": "Knitting", "createdBy":"Dom2", "Course":"Maths"},
         "Best Course" : {"question":"Best 2nd year GofU CS course", "answer": "OOSE2", "createdBy":"Dom1", "Course":"Extreme Cake Baking"},
         # "" : {"question":"", "answer": "", "createdBy":"", "Course":""},
 
@@ -84,17 +76,23 @@ def populate() -> None:
         "History of Chairs" : {"question":"Who was the inventor of the modern-day chair", "answer": "The chair was invented in 2007 by Alan Chair", "createdBy":"ChairLover87", "Course":"Advanced Chair Building"},
 
         # Horse Assembly
-        "Assembly order" : {"question":"In what order are the limbs attatched?", "answer": "Back-left leg, front-right leg, front-left leg, and finally back-right leg", "createdBy":"ALLTHECOURSES", "Course":"Horse Assembly (Intermediate)"},
+        "Assembly order" : {"question":"In what order are the limbs attatched?", "answer": "Back-left leg, front-right leg, front-left leg, and finally back-right leg", "createdBy":"DolpyWolpy", "Course":"Horse Assembly (Intermediate)"},
         "Tail length" : {"question":"What length should the tail be measured to?", "answer": "About one-two feet long", "createdBy":"ALLTHECOURSES", "Course":"Horse Assembly (Intermediate)"},
         "Number of Eyes" : {"question":"How many eyes should be attached to the head?", "answer": "At least one, no more than five", "createdBy":"ALLTHECOURSES", "Course":"Horse Assembly (Intermediate)"},
-        "Noise functions" : {"question":"What noise should a standard model horse make", "answer": "Neigh or whinnie (woof not accepted)", "createdBy":"ALLTHECOURSES", "Course":"Horse Assembly (Intermediate)"},
+        "Noise functions" : {"question":"What noise should a standard model horse make", "answer": "Neigh or whinnie (woof not accepted)", "createdBy":"DolpyWolpy", "Course":"Horse Assembly (Intermediate)"},
+
+        # Maths or Something
+        "Addition (Easy)" : {"question":"What is 5 + 7", "answer": "57", "createdBy":"ALLTHECOURSES", "Course":"Maths or Something"},
+        "Multiplication Challenge" : {"question":"To the nearest digit, what is 6,367,345*0", "answer": "Le zero", "createdBy":"ALLTHECOURSES", "Course":"Maths or Something"},
+        "Gunther's Socks" : {"question":"Gunther has 9 socks and wants to share his socks with 3 friends. How many socks would each person have?", "answer": "A pair each, why would Gunther give his friends 3 socks - that's a terrible idea.", "createdBy":"ALLTHECOURSES", "Course":"Maths or Something"},
+        "Algebra" : {"question":"Who invented algebra in 1593?", "answer": "TRICK QUESTION! algebra is not real it was not invented. algebra. isa li e", "createdBy":"ALLTHECOURSES", "Course":"Maths or Something"},
+        "Chicken question" : {"question":"Sally has 16 chickens, what has Sally done to reach this point in her life?", "answer": "Buy 16 chickens or something.", "createdBy":"ALLTHECOURSES", "Course":"Maths or Something"},
+        "help me" : {"question":"If I had 20 friends, and all of them stopped talking to me, what do I do?", "answer": "cry self to sleep", "createdBy":"ALLTHECOURSES", "Course":"Maths or Something"},
 
         }
 
     files = {
         "important course notice.png": {"course":"Extreme Cake Baking"},
-        "Assignment Instructions.pdf": {"course":"Maths"},
-        "Assessed Excerise 1.txt": {"course":"English"},
         # "": {"course":""},
 
         # Intro to Knitting
@@ -124,6 +122,16 @@ def populate() -> None:
         "Internal wiring diagram.pdf": {"course":"Horse Assembly (Intermediate)"},
         "Sound track samples.wav": {"course":"Horse Assembly (Intermediate)"},
         "Full assembly guide.pdf": {"course":"Horse Assembly (Intermediate)"},
+
+        # Maths or Something
+        "multiplication_table.docx": {"course":"Maths or Something"},
+        "how_to_count.mp4": {"course":"Maths or Something"},
+        "homework_6.pdf": {"course":"Maths or Something"},
+        "gunthers_multiplication_guide.pptx": {"course":"Maths or Something"},
+        "sweet_pi.jpg": {"course":"Maths or Something"},
+        "guide_to_shapes.pdf": {"course":"Maths or Something"},
+        "algebra_for_toddlers.docx": {"course":"Maths or Something"},
+        "why_maths_is_fun.pdf": {"course":"Maths or Something"},
 
         }
 

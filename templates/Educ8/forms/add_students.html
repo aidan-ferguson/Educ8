@@ -43,7 +43,13 @@
       <p>Currently enrolled:</p>
       <ul id="current_students" remove_student_url="{% url 'Educ8:remove_student' course_name_slug=course %}">
         {% for student in enrolled_students %}
-          <li><p>{{ student.first_name }} {{ student.last_name }} - {{ student.username }} <i class="fa fa-trash-can remove_student" student_username="{{ student.username }}"></i></p></li>
+          <li>
+            <p>
+              {{ student.first_name }} {{ student.last_name }} - {{ student.username }}
+              <i class="fa fa-trash-can remove_student" student_username="{{ student.username }}"></i>
+            </p>
+
+          </li>
         {% endfor %}
       </ul>
 
@@ -51,8 +57,9 @@
 
       <div class="field">
         <a class="btn" id="add_student">Add Student(s)</a>
+        <a class="btn" type="submit" href="{% url 'Educ8:show_course' course_name_slug=course %}">Back</a>
       </div>
-      <a class="btn" type="submit" href="{% url 'Educ8:show_course' course_name_slug=course %}">Back</a>
+
 
     </form>
 
