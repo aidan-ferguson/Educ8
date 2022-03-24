@@ -20,15 +20,13 @@ $(document).ready(function(){
     });
 
     $(".remove_student").click(function() {
-        let student_to_remove = $(this).attr("student_username");
+        let clicked_element = $(this);
         let remove_student_url = $(this).attr("remove_student_url");
         $.ajax({
             url: remove_student_url,
-            data: {'student': student_to_remove},
+            data: {'student': clicked_element.attr("student_username")},
             success: function(data, status) {
-                console.log($(this).parent()[0])
-                $(this).parent()[0].remove();
-                // TODO: add back to list
+                clicked_element.parent().remove();
             },
             error: function(xhr, textStatus, errorText){
                 if(xhr.status == 500){
