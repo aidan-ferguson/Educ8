@@ -21,7 +21,36 @@
     <h1 class="panel_title">My Account</h1>
     <hr>
 
-    
+    <form id="information_edit_form" action="" method="post">
+      {% csrf_token %}
+
+      {% for error in errors %}
+        <p class="error_message">{{ error }}</p>
+      {% endfor %}
+
+      <div class="field">
+        <label for="username">Username:</label>
+        <br>
+        <input type="text" name="username" minlength="4" maxlength="32" required value="{{ request.user.username }}">
+      </div>
+
+      <div class="field">
+        <label for="username">First Name:</label>
+        <br>
+        <input type="text" name="first_name" minlength="4" maxlength="32" required value="{{ request.user.first_name }}">
+      </div>
+
+      <div class="field">
+        <label for="username">Last Name:</label>
+        <br>
+        <input type="text" name="last_name" minlength="4" maxlength="32" required value="{{ request.user.last_name }}">
+      </div>
+
+      <div class="field">
+        <input class="btn" type="submit" value="Update">
+      </div>
+
+    </form>
 
   </div>
 

@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 
 
-class AccountForm(UserCreationForm):
+class AccountRegisterForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
         fields = ('username', 'first_name', 'last_name', 'password1', 'password2')
@@ -24,7 +24,6 @@ class CourseForm(forms.ModelForm):
     class Meta:
         model = Course
         fields = ('courseName',)
-
 
 class FlashcardForm(forms.ModelForm):
     title = forms.CharField(max_length=32)

@@ -50,8 +50,8 @@
       <li>
         <a href="{% url 'Educ8:index' %}"><i class="fa fa-home"></i> Home</a>
       </li>
-      <li class="logged">
-        <a>Logged in as: {{ user.first_name }}</a>
+      <li>
+        <a href="{% url 'Educ8:forms/account' %}"><i class="fa fa-user"></i> {{ user.first_name }}</a>
       </li>
     </ul>
     {% else %}

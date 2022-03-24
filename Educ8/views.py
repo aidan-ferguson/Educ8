@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.shortcuts import redirect, render
 from datetime import datetime
-from Educ8.forms import CourseForm, FlashcardForm, AccountForm, CourseFileForm
+from Educ8.forms import CourseForm, FlashcardForm, AccountRegisterForm, CourseFileForm
 from Educ8.models import Course, Flashcard, CourseFile, Account
 from Educ8.decorators import *
 import json
@@ -111,7 +111,40 @@ def delete_course(request, course_name_slug):
 
     return render(request, "Educ8/forms/delete_course.html", context=context_dict)
 
-    
+@login_required
+def edit_account(request):
+    context_dict = {"errors":[]}
+    if request.method == "POST":
+        new_username = request.POST.get("username")
+        new_first_name = request.POST.get("first_name")
+        new_last_name = request.POST.get("last_name")
+
+        current_user = Account.objects.filter(username=request.user.username)
+        if new_username != request.user.username:
+            # Username should be updated
+            if not Account.objects.filter(username=new_username).exists():
+                if len(new_username) > 0: 
+                    current_user.update(username=new_username)
+                else:
+                    context_dict["errors"].append("You must have a username")
+            else:
+                context_dict["errors"].append("A user with that username already exists")
+
+        if new_first_name != request.user.first_name:
+            if new_first_name != None and len(new_first_name) > 0:
+                current_user.update(first_name=request.POST.get("first_name"))
+            else:
+                context_dict["errors"].append("Cannot have an empty first name")
+
+        if new_last_name != request.user.last_name:
+            if new_last_name != None and len(new_last_name) > 0: 
+                current_user.update(last_name=request.POST.get("last_name"))
+            else:
+                context_dict["errors"].append("Cannot have an empty last name")
+        
+        return redirect(reverse("Educ8:forms/account"))
+
+    return render(request, "Educ8/forms/account.html", context=context_dict)    
 
 @login_required
 @user_passes_test(is_teacher)
@@ -134,8 +167,6 @@ def add_files(request, course_name_slug):
 
     return render(request, 'Educ8/forms/add_files.html', context=context_dict)
 
-#TODO: add deleting accounts
-#TODO: delete courses
 @login_required
 @user_passes_test(is_teacher)
 @can_access_course
@@ -300,7 +331,7 @@ def register(request):
         user_type = request.POST.get('user_type', None)
         terms_conditions = request.POST.get('terms', None)
 
-        form = AccountForm(request.POST)
+        form = AccountRegisterForm(request.POST)
         if (form.is_valid()) and (user_type in ['student', 'teacher']) and (terms_conditions != None):
             user = None
             if user_type == 'student':
