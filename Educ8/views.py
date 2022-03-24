@@ -234,6 +234,7 @@ def view_students(request, course_name_slug):
 
     return render(request, 'Educ8/forms/add_students.html', context=context_dict)
 
+# Ajax needs to add the remove button too
 @login_required
 @user_passes_test(is_teacher)
 @can_access_course
@@ -249,8 +250,19 @@ def add_student_ajax(request, course_name_slug):
     except Account.DoesNotExist:
         return HttpResponseServerError("Student does not exist")
 
+@login_required
+@user_passes_test(is_teacher)
+@can_access_course
 def remove_student_ajax(request, course_name_slug):
-    pass
+    student_to_remove = request.GET.get('student', None)
+    try:
+        course = Course.objects.get(slug=course_name_slug)
+        course.students.remove(Account.objects.get(username=student_to_remove))
+        return HttpResponse()
+    except Course.DoesNotExist:
+        return HttpResponseServerError("Course does not exist")
+    except Account.DoesNotExist:
+        return HttpResponseServerError("Student does not exist")
 
 # Need to verify passwords are the same and return any form errors
 def register(request):
@@ -340,7 +352,9 @@ def terms(request):
 
 # HTTP 404 Error (Page not found)
 def page_not_found(request, exception):
-    return render(request, "Educ8/404.html")
+    response = render(request, "Educ8/404.html")
+    response.status_code = 404
+    return response
 
 def flatten_error_dict(errors):
     new_errors = []

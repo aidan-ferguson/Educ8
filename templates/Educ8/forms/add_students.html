@@ -10,7 +10,7 @@
 {% block asset_block %}
   <link rel="stylesheet" href="{% static 'assets/styles/styles_form.css' %}">
   <script src="{% static 'assets/scripts/scripts_form.js' %}"></script>
-  <script src="{% static 'assets/scripts/scripts_add_students.js' %}"></script>
+  <script src="{% static 'assets/scripts/scripts_students.js' %}"></script>
 {% endblock %}
 
 
@@ -33,7 +33,6 @@
       <div class="field">
         <label for="add">Add Students:</label><br>
         <select name="add" id="selection_field" add_student_url="{% url 'Educ8:add_student' course_name_slug=course %}">
-          <option value="test" username="test">test</option>
           {% for student in available_students %}
             <option value="{{ student.username }}" username="{{ student.username }}">{{ student.first_name }} {{ student.last_name }} - {{ student.username }}</option>
           {% endfor %}
@@ -45,7 +44,7 @@
       <ul id="current_students">
         {% for student in enrolled_students %}
           <!-- TODO: Bin icon -->
-          <li><p>{{ student.first_name }} {{ student.last_name }} - {{ student.username }}</p><a student_username="{{ student.username }}" href="{% url 'Educ8:remove_student' course_name_slug=course %}">Remove</a></li>
+          <li><p>{{ student.first_name }} {{ student.last_name }} - {{ student.username }}</p><p student_username="{{ student.username }}" remove_student_url="{% url 'Educ8:remove_student' course_name_slug=course %}" class="remove_student">Remove</p></li>
         {% endfor %}
       </ul>
 

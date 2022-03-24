@@ -30,8 +30,12 @@ def can_access_course(wrapped_function):
 
 # For 500 server errors (mainly for database not found errors)
 def internal_server_error(request, exception):
-    return render(request, "Educ8/500.html", context={"error_message":exception})
+    response = render(request, "Educ8/500.html", context={"error_message":exception})
+    response.status_code = 500
+    return response
 
-# For 500 server errors (mainly for database not found errors)
+# For 403 server errors (mainly for database not found errors)
 def resource_forbidden(request):
-    return render(request, "Educ8/403.html")
+    response = render(request, "Educ8/403.html")
+    response.status_code = 403
+    return response
