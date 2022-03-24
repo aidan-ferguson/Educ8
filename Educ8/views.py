@@ -212,8 +212,10 @@ def show_flashcard(request, course_name_slug):
     try:
         course = Course.objects.get(slug=course_name_slug)
         flashcards = Flashcard.objects.filter(course=course)
+        numOfFlashcards = len(flashcards)
         context_dict['flashCards'] = flashcards
         context_dict['course'] = course_name_slug
+        context_dict['numOfFlashcards'] = numOfFlashcards
     except Course.DoesNotExist:
         return internal_server_error(request, "That course does not exist")
 
