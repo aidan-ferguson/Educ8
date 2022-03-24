@@ -42,6 +42,8 @@
 
 /* Flashcard tiles */
 .flashcard_container .flashcard_tile {
+  overflow: hidden;
+  height: 280px;
   width: calc(99%/3);
   display: inline-block;
   border-radius: 10px;
@@ -84,10 +86,10 @@
 }
 .flashcard_container .button_tile {
   text-align: center;
-  padding-bottom: 54px;
+  padding-top: 30px;
 }
 .flashcard_container .button_tile a {
-  font-size: 94px;
+  font-size: 120px;
   transition: all 0.1s ease-in-out;
 }
 .flashcard_container .button_tile a:hover {

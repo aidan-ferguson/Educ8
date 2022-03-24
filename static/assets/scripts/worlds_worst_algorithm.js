@@ -39,7 +39,6 @@ function timGenerator(seedString, target) {
     while (sum > 109) {
       // The "stuff"
       sum = sum*2+lastThreeDigits(reverseNum(sum)*7);
-      console.log(sum);
       if (lastThreeDigits(sum) <= 109) {
         break;
       } else if (sum > 1000000) {

@@ -5,6 +5,8 @@
   margin: 5vh auto;
 }
 .course_tiles .tile {
+  overflow: hidden;
+  height: 300px;
   width: calc(99%/3);
   display: inline-block;
   border-radius: 10px;

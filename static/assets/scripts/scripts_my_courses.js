@@ -8,6 +8,7 @@ $(document).ready(function(){
     // Generate background colour
     timGenerator($(this).find("h2").text(), $(this));
 
+
     // Course title truncator
     var text = $(this).find("h2").text();
     if (text.length > 32) {
@@ -17,6 +18,7 @@ $(document).ready(function(){
       text += "<br>&nbsp;";
       $(this).find("h2").html(text);
     }
+    
 
 
  });

@@ -7,14 +7,21 @@ $(document).ready(function(){
     // Generate background colour
     timGenerator($(this).find("h2").text(), $(this));
 
-    // Course title truncator
-    var text = $(this).find("p").text();
-    if (text.length > 50) {
-      text = text.substr(0,50) + '...';
-      $(this).find("p").text(text);
-    } else if (text.length < 40) {
-      text += "<br>&nbsp;";
-      $(this).find("p").html(text);
+    // Flashcard question truncator
+    var questionText = $(this).find("p").text();
+    if (questionText.length > 50) {
+      questionText = questionText.substr(0,50) + '...';
+      $(this).find("p").text(questionText);
+    } else if (questionText.length < 40) {
+      questionText += "<br>&nbsp;";
+      $(this).find("p").html(questionText);
+    }
+
+    // Flashcard title truncator
+    var titleText = $(this).find("h2").text();
+    if (titleText.length > 20) {
+      titleText = titleText.substr(0,20) + '...';
+      $(this).find("h2").text(titleText);
     }
 
   });
