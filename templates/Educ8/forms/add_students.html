@@ -46,7 +46,9 @@
           <li>
             <p>
               {{ student.first_name }} {{ student.last_name }} - {{ student.username }}
-              <i class="fa fa-trash-can remove_student" student_username="{{ student.username }}"></i>
+              <a title="Remove Student" class="tooltip remove">
+                <i class="fa fa-trash-can remove_student" student_username="{{ student.username }}"></i>
+              </a>
             </p>
 
           </li>

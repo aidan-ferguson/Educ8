@@ -16,16 +16,6 @@ form {
   font-size: 16px;
   padding: 10px;
 }
-.field input[type=submit].cancel {
-  margin-left: 16px;
-}
-.field input[type=submit].add {
-  font-size: 16px;
-  padding: 6px 12px;
-  margin-left: 10px;
-  background-color: #EEEEEE;
-  color: black;
-}
 .field select {
   font-size: 16px;
   padding: 6px;
@@ -48,6 +38,17 @@ form {
   resize: none;
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
+}
+
+a.remove {
+  color: #60a7ce;
+  transition: all 0.1s ease-in-out;
+  margin-left: 20px;
+  filter: brightness(1.04);
+}
+a.remove:hover {
+  cursor: pointer;
+  transform: scale(1.04);
 }
 
 /* hr between main form content and submit */

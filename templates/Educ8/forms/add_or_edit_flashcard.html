@@ -3,7 +3,7 @@
 
 
 {% block title_block %}
-  Add/Edit Flashcard
+  Create/Edit Flashcard
 {% endblock %}
 
 
@@ -18,7 +18,7 @@
   <!-- Main page content -->
   <div class="content_panel">
 
-    <h1 class="panel_title">Create Flashcard</h1>
+    <h1 class="panel_title">Create/Edit Flashcard</h1>
     <hr>
 
     <form class="" action="" method="post">
@@ -50,8 +50,9 @@
 
       <div class="field">
         <input class="btn" type="submit" value="Save Card">
+        <a class="btn" href="{% url 'Educ8:show_course' course_name_slug=course %}">Back to Course</a>
       </div>
-      <a class="btn" type="submit" href="{% url 'Educ8:show_course' course_name_slug=course %}">Back</a>
+
 
     </form>
 

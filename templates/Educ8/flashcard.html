@@ -35,8 +35,9 @@
       {% if numOfFlashcards > 1 %}
         <a class="btn" id="next" ><i class="fa-solid fa-arrow-right"></i> <span>Next Card</span></a>
       {% endif %}
+      <a class="btn" type="submit" href="{% url 'Educ8:show_course' course_name_slug=course %}"><i class="fa fa-rotate-left"></i> <span>Back to Course</span></a>
     </div>
-    <a class="btn" type="submit" href="{% url 'Educ8:show_course' course_name_slug=course %}">Back</a>
+
 
   </div>
 

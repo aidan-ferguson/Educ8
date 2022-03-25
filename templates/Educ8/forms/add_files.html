@@ -20,7 +20,7 @@
 
     <h1 class="panel_title">Add a File</h1>
     <hr>
-    
+
     <form class="" action="" method="post" enctype="multipart/form-data">
       {% csrf_token %}
 
@@ -37,11 +37,10 @@
 
       <div class="field">
         <input class="btn" type="submit" value="Add File">
+        <a class="btn" type="submit" href="{% url 'Educ8:show_course' course_name_slug=course %}">Back</a>
       </div>
 
     </form>
-
-    <a class="btn" type="submit" href="{% url 'Educ8:show_course' course_name_slug=course %}">Back</a>
 
   </div>
 

@@ -34,10 +34,11 @@
   align-items: center;
 }
 .button_container a {
-  margin: 0 20px;
+  margin: 0 8px;
   width: 50%;
   text-align: center;
   color: white;
+  font-size: 20px;
 }
 .button_container a:hover {
   text-decoration: none;
