@@ -2,8 +2,10 @@ from multiprocessing import context
 from django.http import Http404, HttpResponse, HttpResponseServerError
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.password_validation import validate_password
 from django.urls import reverse
 from django.shortcuts import redirect, render
+from django.core.exceptions import ValidationError
 from datetime import datetime
 from Educ8.forms import CourseForm, FlashcardForm, AccountRegisterForm, CourseFileForm
 from Educ8.models import Course, Flashcard, CourseFile, Account
@@ -114,35 +116,69 @@ def delete_course(request, course_name_slug):
 @login_required
 def edit_account(request):
     context_dict = {"errors":[]}
+    account_updated = False
+
+    # For updating non-password account attributes
     if request.method == "POST":
-        new_username = request.POST.get("username")
-        new_first_name = request.POST.get("first_name")
-        new_last_name = request.POST.get("last_name")
-
         current_user = Account.objects.filter(username=request.user.username)
-        if new_username != request.user.username:
-            # Username should be updated
-            if not Account.objects.filter(username=new_username).exists():
-                if len(new_username) > 0: 
-                    current_user.update(username=new_username)
-                else:
-                    context_dict["errors"].append("You must have a username")
-            else:
-                context_dict["errors"].append("A user with that username already exists")
-
-        if new_first_name != request.user.first_name:
-            if new_first_name != None and len(new_first_name) > 0:
-                current_user.update(first_name=request.POST.get("first_name"))
-            else:
-                context_dict["errors"].append("Cannot have an empty first name")
-
-        if new_last_name != request.user.last_name:
-            if new_last_name != None and len(new_last_name) > 0: 
-                current_user.update(last_name=request.POST.get("last_name"))
-            else:
-                context_dict["errors"].append("Cannot have an empty last name")
         
-        return redirect(reverse("Educ8:forms/account"))
+        if request.POST.get("information_edit_form", None) != None:
+            new_username = request.POST.get("info_username")
+            new_first_name = request.POST.get("info_first_name")
+            new_last_name = request.POST.get("info_last_name")
+            if new_username != request.user.username:
+                # Username should be updated
+                if not Account.objects.filter(username=new_username).exists():
+                    if new_username != None and len(new_username) > 0: 
+                        current_user.update(username=new_username)
+                        account_updated = True
+                    else:
+                        context_dict["errors"].append("You must have a username")
+                else:
+                    context_dict["errors"].append("A user with that username already exists")
+            if new_first_name != request.user.first_name:
+                if new_first_name != None and len(new_first_name) > 0:
+                    current_user.update(first_name=request.POST.get("first_name"))
+                    account_updated = True
+                else:
+                    context_dict["errors"].append("Cannot have an empty first name")
+            if new_last_name != request.user.last_name:
+                if new_last_name != None and len(new_last_name) > 0: 
+                    current_user.update(last_name=request.POST.get("last_name"))
+                    account_updated = True
+                else:
+                    context_dict["errors"].append("Cannot have an empty last name")
+
+        # For updating passwords
+        if request.POST.get("password_change_form", None) != None:
+            reset_password_old_password = request.POST.get("reset_old_password", None)
+            if reset_password_old_password != None and len(reset_password_old_password) > 0:
+                # User is trying to reset password
+                if request.user.check_password(reset_password_old_password):
+                    if request.POST.get("reset_new_password1") == request.POST.get("reset_new_password2"):
+                        # Verified old password and same new passwords
+                        new_password = request.POST.get("reset_new_password1")
+                        try:
+                            validate_password(new_password) 
+                            request.user.set_password(new_password)
+                            request.user.save()
+                            account_updated = True
+                        except ValidationError as errors:
+                            context_dict["errors"] += errors
+                    else:
+                        context_dict["errors"].append("New passwords do not match")
+                else:
+                    context_dict["errors"].append("Old password not correct")
+
+        # For account deletion
+        if request.POST.get("delete_account_form", None) != None:
+            password = request.POST.get("password")
+            if request.user.check_password(password):
+                current_user.delete()
+                return redirect(reverse("Educ8:index"))
+
+        if account_updated:
+            return redirect(reverse("Educ8:forms/account"))
 
     return render(request, "Educ8/forms/account.html", context=context_dict)    
 

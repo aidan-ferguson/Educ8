@@ -21,35 +21,82 @@
     <h1 class="panel_title">My Account</h1>
     <hr>
 
+    {% for error in errors %}
+      <p class="error_message">{{ error }}</p>
+    {% endfor %}
+
     <form id="information_edit_form" action="" method="post">
       {% csrf_token %}
 
-      {% for error in errors %}
-        <p class="error_message">{{ error }}</p>
-      {% endfor %}
+      <input type="hidden" name="information_edit_form" >
 
       <div class="field">
-        <label for="username">Username:</label>
+        <label for="info_username">Username:</label>
         <br>
-        <input type="text" name="username" minlength="4" maxlength="32" required value="{{ request.user.username }}">
+        <input type="text" name="info_username" minlength="4" maxlength="32" required value="{{ request.user.username }}">
       </div>
 
       <div class="field">
-        <label for="username">First Name:</label>
+        <label for="info_first_name">First Name:</label>
         <br>
-        <input type="text" name="first_name" minlength="4" maxlength="32" required value="{{ request.user.first_name }}">
+        <input type="text" name="info_first_name" maxlength="32" required value="{{ request.user.first_name }}">
       </div>
 
       <div class="field">
-        <label for="username">Last Name:</label>
+        <label for="info_last_name">Last Name:</label>
         <br>
-        <input type="text" name="last_name" minlength="4" maxlength="32" required value="{{ request.user.last_name }}">
+        <input type="text" name="info_last_name" maxlength="32" required value="{{ request.user.last_name }}">
       </div>
 
       <div class="field">
         <input class="btn" type="submit" value="Update">
       </div>
 
+    </form>
+
+    <form id="password_change_form" action="" method="post">
+      {% csrf_token %}
+
+      <input type="hidden" name="password_change_form" >
+
+      <div class="field">
+        <label for="reset_old_password">Old password:</label>
+        <br>
+        <input type="password" name="reset_old_password" required>
+      </div>
+
+      <div class="field">
+        <label for="reset_old_password1">New password:</label>
+        <br>
+        <input type="password" name="reset_new_password1" minlength="9" maxlength="32" required>
+      </div>
+
+      <div class="field">
+        <label for="reset_old_password2">Repeat new password:</label>
+        <br>
+        <input type="password" name="reset_new_password2" minlength="9" maxlength="32" required>
+      </div>
+
+      <div class="field">
+        <input class="btn" type="submit" value="Update">
+      </div>
+    </form>
+
+    <form id="delete_account_form" action="" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="delete_account_form">
+
+      <h2>If you are sure you want to delete your Educ8 account, enter your password and press delete</h2>
+
+      <div class="field">
+        <label for="password">Password:</label>
+        <br>
+        <input type="password" name="password" required>
+      </div>
+
+      <div class="field">
+        <input class="btn danger" type="submit" value="Delete">
+      </div>
     </form>
 
   </div>
