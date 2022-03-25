@@ -367,6 +367,10 @@ def register(request):
         user_type = request.POST.get('user_type', None)
         terms_conditions = request.POST.get('terms', None)
 
+        context_dict["username"] = request.POST.get('username')
+        context_dict["first_name"] = request.POST.get('first_name')
+        context_dict["last_name"] = request.POST.get('last_name')
+
         form = AccountRegisterForm(request.POST)
         if (form.is_valid()) and (user_type in ['student', 'teacher']) and (terms_conditions != None):
             user = None
