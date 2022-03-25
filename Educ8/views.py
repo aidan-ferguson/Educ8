@@ -354,7 +354,6 @@ def remove_student_ajax(request, course_name_slug):
         return HttpResponseServerError("Student does not exist")
 
 # Need to verify passwords are the same and return any form errors
-#TODO: on failure, auto fill fields which don't need to be changed 
 def register(request):
 
     """view to register a student/teacher,
