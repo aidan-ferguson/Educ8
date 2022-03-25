@@ -22,13 +22,15 @@
     <hr>
 
     {% for error in errors %}
-      <p class="error_message">{{ error }}</p>
+      <p class="error_message">{{ error }}.</p>
     {% endfor %}
 
-    <form id="information_edit_form" action="" method="post">
+    <form id="information_edit_form" method="post">
       {% csrf_token %}
 
       <input type="hidden" name="information_edit_form" >
+
+      <h2 class="panel_heading">Edit your Details</h2>
 
       <div class="field">
         <label for="info_username">Username:</label>
@@ -37,65 +39,74 @@
       </div>
 
       <div class="field">
-        <label for="info_first_name">First Name:</label>
+        <label for="info_first_name">Forename(s):</label>
         <br>
-        <input type="text" name="info_first_name" maxlength="32" required value="{{ request.user.first_name }}">
+        <input type="text" name="info_first_name" maxlength="32" required value="{{ request.user.first_name }}" placeholder="Enter forename(s)...">
       </div>
 
       <div class="field">
-        <label for="info_last_name">Last Name:</label>
+        <label for="info_last_name">Surname(s):</label>
         <br>
-        <input type="text" name="info_last_name" maxlength="32" required value="{{ request.user.last_name }}">
+        <input type="text" name="info_last_name" maxlength="32" required value="{{ request.user.last_name }}" placeholder="Enter surname(s)">
       </div>
 
       <div class="field">
-        <input class="btn" type="submit" value="Update">
+        <input class="btn" type="submit" value="Update Details">
       </div>
 
     </form>
+
+    <hr>
 
     <form id="password_change_form" action="" method="post">
       {% csrf_token %}
 
       <input type="hidden" name="password_change_form" >
 
+      <h2 class="panel_heading">Change your Password</h2>
+
       <div class="field">
         <label for="reset_old_password">Old password:</label>
         <br>
-        <input type="password" name="reset_old_password" required>
+        <input type="password" name="reset_old_password" required placeholder="Enter current password...">
       </div>
 
       <div class="field">
         <label for="reset_old_password1">New password:</label>
         <br>
-        <input type="password" name="reset_new_password1" minlength="9" maxlength="32" required>
+        <input type="password" name="reset_new_password1" minlength="9" maxlength="32" required placeholder="Create a new password...">
       </div>
 
       <div class="field">
         <label for="reset_old_password2">Repeat new password:</label>
         <br>
-        <input type="password" name="reset_new_password2" minlength="9" maxlength="32" required>
+        <input type="password" name="reset_new_password2" minlength="9" maxlength="32" required placeholder="Re-type password...">
       </div>
 
       <div class="field">
-        <input class="btn" type="submit" value="Update">
+        <input class="btn" type="submit" value="Change Password">
       </div>
+
     </form>
+
+    <hr>
 
     <form id="delete_account_form" action="" method="post">
       {% csrf_token %}
       <input type="hidden" name="delete_account_form">
 
-      <h2>If you are sure you want to delete your Educ8 account, enter your password and press delete</h2>
+      <h2 class="panel_heading">Delete your Account</h2>
+
+      <p>If you are sure you want to delete your Educ8 account, enter your password then click delete.</p>
 
       <div class="field">
         <label for="password">Password:</label>
         <br>
-        <input type="password" name="password" required>
+        <input type="password" name="password" required placeholder="Enter your password to confirm...">
       </div>
 
       <div class="field">
-        <input class="btn danger" type="submit" value="Delete">
+        <input class="btn danger" type="submit" value="Delete Account">
       </div>
     </form>
 
