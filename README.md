@@ -8,17 +8,27 @@ Educ8 features a full authentication system with registration, login and account
 # Running Educ8
 ### Requirements
 All requirements needed to run Educ8 can be found in `requirements.txt`. To install these navigate to the root directory of the project and run:
-`pip install -r requirements.txt`
+```python
+pip install -r requirements.txt
+```
 Note, Educ8 has been created using python 3.8-3.9, however other python 3 versions may work
 
 ### Running Manually
 If you want to run manually run the following commands:
-`python manage.py makemigrations Educ8`
-`python manage.py migrate`
+```python
+python manage.py makemigrations Educ8
+```
+```python
+python manage.py migrate
+```
 then, if you wish to populate the database, run:
-`python populate_educ8.py`
+```python
+python populate_educ8.py
+```
 finally, to run the webserver:
-`python manage.py runserver`
+```python
+python manage.py runserver
+```
 
 ### Running automatically
 During development, we created a utility script to
@@ -28,8 +38,12 @@ During development, we created a utility script to
 - Populate the database
 - Run the server
 It can be run with the following command:
-`python reset_and_start_server.py`
+```python
+python reset_and_start_server.py
+```
 
 ### Unit testing
 Unit tests are located in `Educ8/tests.py` and can be run with the following command:
-`python manage.py test`
+```python
+python manage.py test
+```
