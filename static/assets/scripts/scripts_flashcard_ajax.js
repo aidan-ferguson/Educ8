@@ -1,7 +1,7 @@
 /* WAD2 Team Project "Educ8" | Flashcard Page AJAX Scripts */
 
 $(document).ready(function(){
-  
+
   function next_card(button) {
 
     let next_card_url = $("#card_panel").attr("next_card_url");
@@ -11,9 +11,9 @@ $(document).ready(function(){
         $("#title").html(JSON.parse(data)["titleText"]);
         $("#question").html(JSON.parse(data)["questionText"]);
         $("#answer").html(JSON.parse(data)["answerText"]);
-        $("#next").attr("data-flashcard-num", JSON.parse(data)["new_flashcard_num"])
+        $("#card_panel").attr("data-flashcard-num", JSON.parse(data)["new_flashcard_num"])
 
-        
+
         if ($("#question:visible").length==0) {
           $("#toggle").trigger("click");
         }
@@ -22,7 +22,7 @@ $(document).ready(function(){
       });
 
   }
-  
+
   $("#next").click(next_card);
 
   next_card();
