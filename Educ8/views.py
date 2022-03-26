@@ -138,13 +138,13 @@ def edit_account(request):
                     context_dict["errors"].append("A user with that username already exists")
             if new_first_name != request.user.first_name:
                 if new_first_name != None and len(new_first_name) > 0:
-                    current_user.update(first_name=request.POST.get("first_name"))
+                    current_user.update(first_name=new_first_name)
                     account_updated = True
                 else:
                     context_dict["errors"].append("Cannot have an empty first name")
             if new_last_name != request.user.last_name:
                 if new_last_name != None and len(new_last_name) > 0: 
-                    current_user.update(last_name=request.POST.get("last_name"))
+                    current_user.update(last_name=new_last_name)
                     account_updated = True
                 else:
                     context_dict["errors"].append("Cannot have an empty last name")
