@@ -31,6 +31,7 @@ def populate() -> None:
         "catcatcatcat": {"password":"i_love_CATS", "first_name":"Catty", "last_name":"Catterson", "object":None},
         "AAAAAAAA": {"password":"the_l3tter_A", "first_name":"AAAAAAAAAdam", "last_name":"AAAAAAAnderson", "object":None},
         "ALLTHECOURSES": {"password":"enroll_m3", "first_name":"Johnny", "last_name":"Table", "object":None},
+        "Present8": {"password":"educ8present8", "first_name":"Anthony", "last_name":"Davidson", "object":None},
         }
 
     teachers = {
@@ -46,13 +47,13 @@ def populate() -> None:
         }
 
     courses = {
-        "Maths or Something" : {"createdBy":"TheMadDivisor", "students":["Dom1", "Dom2", "ALLTHECOURSES"], "object":None},
-        "Extreme Cake Baking" : {"createdBy":"Bob3", "students":["Dom4", "Dom1", "ALLTHECOURSES"], "object":None},
-        "English with Bob IV" : {"createdBy":"Bob4", "students":["ALLTHECOURSES"], "object":None},
+        "Maths or Something" : {"createdBy":"TheMadDivisor", "students":["Dom1", "Dom2", "ALLTHECOURSES", "Present8"], "object":None},
+        "Extreme Cake Baking" : {"createdBy":"Bob3", "students":["Dom4", "Dom1", "ALLTHECOURSES", "Present8"], "object":None},
+        "English with Bob IV" : {"createdBy":"Bob4", "students":["ALLTHECOURSES", "Present8"], "object":None},
         # "" : {"createdBy":"", "students":["ALLTHECOURSES"], "object":None},
-        "Advanced Chair Building" : {"createdBy":"Chairbert", "students":["ALLTHECOURSES", "ChairLover87", "Flumper1", "Lumperdumper", "catcatcatcat"], "object":None},
-        "Knitting Essentials" : {"createdBy":"Henry79", "students":["ALLTHECOURSES", "DolpyWolpy", "Tickles06", "AAAAAAAA", "catcatcatcat", "ChairLover87"], "object":None},
-        "Horse Assembly (Intermediate)" : {"createdBy":"HandymanDan", "students":["ALLTHECOURSES", "DolpyWolpy", "Flumper1", "Tickles06", "catcatcatcat"], "object":None},
+        "Advanced Chair Building" : {"createdBy":"Chairbert", "students":["ALLTHECOURSES", "ChairLover87", "Flumper1", "Lumperdumper", "catcatcatcat", "Present8"], "object":None},
+        "Knitting Essentials" : {"createdBy":"Henry79", "students":["ALLTHECOURSES", "DolpyWolpy", "Tickles06", "AAAAAAAA", "catcatcatcat", "ChairLover87", "Present8"], "object":None},
+        "Horse Assembly (Intermediate)" : {"createdBy":"HandymanDan", "students":["ALLTHECOURSES", "DolpyWolpy", "Flumper1", "Tickles06", "catcatcatcat", "Present8"], "object":None},
         "Fasting on a Budget" : {"createdBy":"Henry79", "students":["ALLTHECOURSES", "Lumperdumper", "AAAAAAAA", "Flumper1", "Tickles06", "ChairLover87"], "object":None},
         }
 
@@ -71,8 +72,8 @@ def populate() -> None:
 
         # Advanced chair building
         "Chair Legs" : {"question":"How many legs does the standard chair have (not including stabilisers)", "answer": "Four to five legs", "createdBy":"ChairLover87", "Course":"Advanced Chair Building"},
-        "Wood types" : {"question":"What are the ideal wood types to use when constructing a new chair", "answer": "Sustainable, fast-growing woods for everyday chairs, hardwoords for special occasions", "createdBy":"ChairLover87", "Course":"Advanced Chair Building"},
-        "Amount of Polish" : {"question":"How many layers of polish should be applied to a newly constructed bare-wood chair", "answer": "At least 2, preferably 4-8 layers", "createdBy":"ChairLover87", "Course":"Advanced Chair Building"},
+        "Wood types" : {"question":"What are the ideal wood types to use when constructing a new chair", "answer": "Sustainable, fast-growing woods for everyday chairs, hardwoords for special occasions", "createdBy":"Present8", "Course":"Advanced Chair Building"},
+        "Amount of Polish" : {"question":"How many layers of polish should be applied to a newly constructed bare-wood chair", "answer": "At least 2, preferably 4-8 layers", "createdBy":"Present8", "Course":"Advanced Chair Building"},
         "History of Chairs" : {"question":"Who was the inventor of the modern-day chair", "answer": "The chair was invented in 2007 by Alan Chair", "createdBy":"ChairLover87", "Course":"Advanced Chair Building"},
 
         # Horse Assembly
