@@ -19,9 +19,9 @@ def populate() -> None:
 
     students = {
         "Dom1": {"password":"Password", "first_name":"Dom", "last_name":"Jina", "object":None},
-        "Dom2": {"password":"Password", "first_name":"Dom", "last_name":"Jina", "object":None},
-        "Dom3": {"password":"Password", "first_name":"Dom", "last_name":"Jina", "object":None},
-        "Dom4": {"password":"Password", "first_name":"Dom", "last_name":"Jina", "object":None},
+        "Dom2": {"password":"Password", "first_name":"Dom", "last_name":"Jina Jr,", "object":None},
+        "Dom3": {"password":"Password", "first_name":"Dom", "last_name":"Jina the Third", "object":None},
+        "Dom4": {"password":"Password", "first_name":"Dom", "last_name":"Jina numero four", "object":None},
         # "": {"password":"", "first_name":"", "last_name":"", "object":None},
         "ChairLover87": {"password": "i<3chairz", "first_name":"Humphrey", "last_name":"Funnel", "object":None},
         "Lumperdumper": {"password":"S3CUr3P4SSw0rd", "first_name":"Geoff", "last_name":"Henningtonsworths", "object":None},
