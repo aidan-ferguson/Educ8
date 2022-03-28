@@ -246,3 +246,239 @@ class DeleteCourseViewTests(TestCase):
         self.assertContains(response, "Are you sure you want to delete this course?")
         self.assertContains(response, "If so, please copy the following text and press delete to confirm:")
 
+class EditAccountViewTests(TestCase):
+
+    def test_edit_account_view(self):
+
+        user = Account.objects.get_or_create(username = 'testteacher', first_name = "teacher", is_teacher = True)[0]
+        user.save()
+
+        self.client.force_login(user)
+
+        response = self.client.get(reverse('Educ8:forms/account'))
+        self.assertEqual(response.status_code, 200)
+
+        self.assertContains(response, "My Account")
+        self.assertContains(response, "Edit your Details")
+        self.assertContains(response, "Username:")
+        self.assertContains(response, "Forename(s):")
+        self.assertContains(response, "Surname(s):")
+        self.assertContains(response, "Change your Password")
+        self.assertContains(response, "Old password:")
+        self.assertContains(response, "New password:")
+        self.assertContains(response, "Repeat new password:")
+        self.assertContains(response, "Delete your Account")
+        self.assertContains(response, "If you are sure you want to delete your Educ8 account, enter your password then click delete.")
+        self.assertContains(response, "Password:")
+
+class AddFileViewTests(TestCase):
+
+    def test_add_file_view_(self):
+
+        user = Account.objects.get_or_create(username = 'testteacher', first_name = "teacher", is_teacher = True)[0]
+        user.save()
+
+        course = Course.objects.get_or_create(courseName = "testcourse")[0]
+        course.students.add(user)
+        course.save()
+
+        self.client.force_login(user)
+
+        response = self.client.get(reverse('Educ8:forms/add_files', kwargs={'course_name_slug' : "testcourse"}))
+        self.assertEqual(response.status_code, 200)
+
+        self.assertContains(response, "Add a File")
+        self.assertContains(response, "Upload a File:")
+
+class DeleteFileViewTests(TestCase):
+
+    def test_delete_file_view(self):
+
+        user = Account.objects.get_or_create(username = 'testteacher', first_name = "teacher", is_teacher = True)[0]
+        user.save()
+
+        course = Course.objects.get_or_create(courseName = "testcourse", createdBy = user)[0]
+        course.students.add(user)
+        course.save()
+
+        courseFile = CourseFile(course=course)
+        courseFile.file.save('why_crochet_sucks', File(open('static/population_files/why_crochet_sucks.docx', 'rb')))
+        courseFile.save()
+        
+        self.client.force_login(user)
+
+        id = CourseFile.objects.filter(course=course)[0].id
+
+        response = self.client.get(reverse('Educ8:delete_file', kwargs={'course_name_slug' : "testcourse", 'file_id' : id}))
+        self.assertEqual(response.status_code, 302)
+
+class AddOrEditFlashcardViewTests(TestCase):
+
+    def test_add_flashcard_view(self):
+
+        user = Account.objects.get_or_create(username = 'testuser', first_name = "student", is_student = True)[0]
+        user.save()
+
+        course = Course.objects.get_or_create(courseName = "testcourse")[0]
+        course.students.add(user)
+        course.save()
+
+        self.client.force_login(user)
+
+        response = self.client.get(reverse('Educ8:forms/add_flashcard', kwargs={'course_name_slug' : "testcourse"}))
+        self.assertEqual(response.status_code, 200)
+
+        self.assertContains(response, "Create/Edit Flashcard")
+        self.assertContains(response, "Title:")
+        self.assertContains(response, "Question Text:")
+        self.assertContains(response, "Answer Text:")
+
+    def test_edit_flashcard_view(self):
+
+        user = Account.objects.get_or_create(username = 'testuser', first_name = "student", is_student = True)[0]
+        user.save()
+
+        course = Course.objects.get_or_create(courseName = "testcourse")[0]
+        course.students.add(user)
+        course.save()
+
+        Flashcard.objects.get_or_create(title = "test", question = "test?", answer = "passed", course = course, createdBy = user)[0]
+
+        id = Flashcard.objects.filter(course=course)[0].id
+        
+        self.client.force_login(user)
+
+        response = self.client.get(reverse('Educ8:forms/edit_flashcard', kwargs={'course_name_slug' : "testcourse", "flashcard_id" : id}))
+        self.assertEqual(response.status_code, 200)
+
+        self.assertContains(response, "Create/Edit Flashcard")
+        self.assertContains(response, "Title:")
+        self.assertContains(response, "Question Text:")
+        self.assertContains(response, "Answer Text:")
+
+        self.assertEqual('test', response.context['existing_flashcard'].title)
+
+class DeleteFlashcardViewTests(TestCase):
+
+    def test_delete_flashcard_view(self):
+
+        user = Account.objects.get_or_create(username = 'testuser', first_name = "student", is_student = True)[0]
+        user.save()
+
+        course = Course.objects.get_or_create(courseName = "testcourse")[0]
+        course.students.add(user)
+        course.save()
+
+        Flashcard.objects.get_or_create(title = "test", question = "test?", answer = "passed", course = course, createdBy = user)[0]
+
+        id = Flashcard.objects.filter(course=course)[0].id
+
+        self.client.force_login(user)
+
+        response = self.client.get(reverse('Educ8:delete_flashcard', kwargs={'course_name_slug' : "testcourse", "flashcard_id" : id}))
+        self.assertEqual(response.status_code, 302)
+
+class ShowFlashcardViewTests(TestCase):
+
+    def test_show_flashcard_view(self):
+
+        user = Account.objects.get_or_create(username = 'testuser', first_name = "student", is_student = True)[0]
+        user.save()
+
+        course = Course.objects.get_or_create(courseName = "testcourse")[0]
+        course.students.add(user)
+        course.save()
+
+        Flashcard.objects.get_or_create(title = "test", question = "test?", answer = "passed", course = course, createdBy = user)[0]
+
+        self.client.force_login(user)
+
+        response = self.client.get(reverse('Educ8:show_flashcard', kwargs={'course_name_slug' : "testcourse"}))
+        self.assertEqual(response.status_code, 200)
+
+        self.assertContains(response, "Revise Flashcards")
+        self.assertContains(response, "test")
+
+        self.assertEqual('test', response.context['flashCards'][0].title)
+        self.assertEqual(1, response.context['numOfFlashcards'])
+
+class EditStudentsViewTests(TestCase):
+
+    def test_edit_students_view_empty(self):
+
+        user = Account.objects.get_or_create(username = 'testteacher', first_name = "teacher", is_teacher = True)[0]
+        user.save()
+
+        course = Course.objects.get_or_create(courseName = "testcourse", createdBy = user)[0]
+        course.save()
+        
+        self.client.force_login(user)
+
+        response = self.client.get(reverse('Educ8:forms/edit_students', kwargs={'course_name_slug' : "testcourse"}))
+        self.assertEqual(response.status_code, 200)
+
+        self.assertContains(response, "Add a Student")
+        self.assertContains(response, "Add Students:")
+        self.assertContains(response, "Currently enrolled:")
+
+        self.assertQuerysetEqual(response.context['available_students'], [])
+        self.assertQuerysetEqual(response.context['enrolled_students'], [])
+    
+    def test_edit_students_view_available(self):
+
+        user = Account.objects.get_or_create(username = 'testteacher', first_name = "teacher", is_teacher = True)[0]
+        user.save()
+
+        availableStudent = Account.objects.get_or_create(username = 'testuser', first_name = "student", is_student = True)[0]
+        availableStudent.save()
+
+        course = Course.objects.get_or_create(courseName = "testcourse", createdBy = user)[0]
+        course.save()
+        
+        self.client.force_login(user)
+
+        response = self.client.get(reverse('Educ8:forms/edit_students', kwargs={'course_name_slug' : "testcourse"}))
+        self.assertEqual(response.status_code, 200)
+
+        self.assertContains(response, "Add a Student")
+        self.assertContains(response, "Add Students:")
+        self.assertContains(response, "Currently enrolled:")
+
+        self.assertIn(availableStudent, response.context['available_students'])
+        self.assertQuerysetEqual(response.context['enrolled_students'], [])
+
+    def test_edit_students_view_available(self):
+
+        user = Account.objects.get_or_create(username = 'testteacher', first_name = "teacher", is_teacher = True)[0]
+        user.save()
+
+        enrolledStudent = Account.objects.get_or_create(username = 'testuser', first_name = "student", is_student = True)[0]
+        enrolledStudent.save()
+
+        course = Course.objects.get_or_create(courseName = "testcourse", createdBy = user)[0]
+        course.students.add(enrolledStudent)
+        course.save()
+        
+        self.client.force_login(user)
+
+        response = self.client.get(reverse('Educ8:forms/edit_students', kwargs={'course_name_slug' : "testcourse"}))
+        self.assertEqual(response.status_code, 200)
+
+        self.assertContains(response, "Add a Student")
+        self.assertContains(response, "Add Students:")
+        self.assertContains(response, "Currently enrolled:")
+
+        self.assertQuerysetEqual(response.context['available_students'], [])
+        self.assertIn(enrolledStudent, response.context['enrolled_students'])
+
+class UserLogoutViewTests(TestCase):
+
+    def test_user_logout_view(self):
+
+        user = Account.objects.get_or_create(username = 'testteacher', first_name = "teacher", is_teacher = True)[0]
+        user.save()
+
+        self.client.force_login(user)
+
+        response = self.client.get(reverse('Educ8:forms/logout'))
+        self.assertEqual(response.status_code, 302)
