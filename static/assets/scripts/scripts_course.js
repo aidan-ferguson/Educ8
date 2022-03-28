@@ -31,4 +31,16 @@ $(document).ready(function(){
     $(this).css("background-color", "white");
   });
 
+  // Collapse section buttons
+  $("#collapse_files").click(function() {
+    $(this).text($(this).text() == 'Expand' ? 'Collapse' : 'Expand');
+    $(".files_container").fadeToggle();
+    $(".files_margin").slideToggle();
+  });
+  $("#collapse_flashcards").click(function() {
+    $(this).text($(this).text() == 'Expand' ? 'Collapse' : 'Expand');
+    $(".flashcard_container").fadeToggle();
+    $(".flashcards_margin").slideToggle();
+  });
+
 });

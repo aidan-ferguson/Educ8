@@ -1,6 +1,22 @@
 /* WAD2 Team Project "Educ8" | Course Page Styles */
 
+/*  Title and collapse button */
+.panel_heading {
+  float: left;
+}
+.collapse {
+  float: right;
+  margin-top: 20px;
+}
+.files_margin, .flashcards_margin {
+  display: none;
+}
+
 /* Files section */
+.files_container {
+  padding-top: 100px;
+  margin-bottom: 50px;
+}
 .files_container .file {
   display: inline-block;
   border: 1px solid gray;
@@ -39,7 +55,7 @@
 
 /* Flashcard tiles */
 .flashcard_container {
-  margin-bottom: 30px;
+  padding-top: 100px;
 }
 .flashcard_container .flashcard_tile {
   overflow: hidden;
@@ -148,6 +164,10 @@ p.no_content {
   }
   .flashcard_container a.flashcard_button {
     font-size: 20px;
+  }
+
+  .files_margin, .flashcards_margin {
+    margin-bottom: 70px
   }
 
   .course_files .file {
