@@ -1,0 +1,121 @@
+{% extends 'Educ8/base.html' %}
+{% load staticfiles %}
+
+
+{% block title_block %}
+  The Team
+{% endblock %}
+
+
+{% block asset_block %}
+  <link rel="stylesheet" href="{% static 'assets/styles/styles_credits.css' %}">
+  <script src="{% static 'assets/scripts/scripts_credits.js' %}"></script>
+{% endblock %}
+
+
+{% block content_block %}
+
+  <!-- Main page content -->
+  <div class="content_panel">
+
+    <h1 class="panel_title">The Educ8&trade; Team</h1>
+    <h2 class="panel_subtitle">Meet the creators of the GOLP</h2>
+    <hr>
+
+    <section class="credit_container">
+
+      <div class="credit left fade">
+        <h1>Aiden Ferguson</h1>
+        <h2>Database Magician</h2>
+        <ul>
+          <li>Database magic</li>
+          <li>AJAX and other scripting</li>
+          <li>Population script</li>
+          <li>Batchfiles and run scripts</li>
+          <li>Form error handling</li>
+        </ul>
+      </div>
+
+      <hr class="credit_divider">
+
+      <div class="credit right fade">
+        <h1>Dom Jina</h1>
+        <h2>Form Wizard</h2>
+        <ul>
+          <li>Forms</li>
+          <li>Database</li>
+          <li>Population script</li>
+          <li>PythonAnywhere port</li>
+          <li>This site was his idea</li>
+        </ul>
+      </div>
+
+      <hr class="credit_divider">
+
+      <div class="credit left fade">
+        <h1>Cameron McDonald</h1>
+        <h2>Cookie Monster</h2>
+        <ul>
+          <li>Cookies and sessions</li>
+          <li>Unit testing</li>
+          <li>Password validation</li>
+        </ul>
+      </div>
+
+      <hr class="credit_divider">
+
+      <div class="credit right fade">
+        <h1>Michael McVey</h1>
+        <h2>Template and Authentication Professional</h2>
+        <ul>
+          <li>User authentication</li>
+          <li>Forms</li>
+          <li>PythonAnywhere port</li>
+          <li>Tim's personal assistant and valet</li>
+        </ul>
+      </div>
+
+      <hr class="credit_divider">
+
+      <div class="credit left fade">
+        <h1>Timothy Wang</h1>
+        <h2>Design Appreciator</h2>
+        <ul>
+          <li>Site design and functionality</li>
+          <li>Initial templating</li>
+          <li>Error page handling</li>
+          <li>Popluation content</li>
+          <li>Presentation design and recording</li>
+        </ul>
+      </div>
+
+      <hr class="credit_divider">
+
+      <div class="credit right fade">
+        <h1>David Whelan</h1>
+        <h2>Testing Machine</h2>
+        <ul>
+          <li>Unit Testing</li>
+          <li>Forms</li>
+        </ul>
+      </div>
+
+      <hr class="credit_divider">
+
+      <div class="credit left fade">
+        <h1>Everyone</h1>
+        <h2>Bugfixing Connoisseurs</h2>
+        <ul>
+          <li>URL mapping</li>
+          <li>Django Views</li>
+          <li>Templates</li>
+          <li>Moral boosting</li>
+        </ul>
+      </div>
+
+    </section>
+
+
+  </div>
+
+{% endblock %}

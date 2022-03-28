@@ -97,7 +97,7 @@ def add_course(request):
 @can_access_course
 def delete_course(request, course_name_slug):
     context_dict = {"course": course_name_slug}
-    
+
     if request.method == "POST":
         confirmation_text = request.POST.get("confirm_name", None)
         if confirmation_text == course_name_slug:
@@ -121,7 +121,7 @@ def edit_account(request):
     # For updating non-password account attributes
     if request.method == "POST":
         current_user = Account.objects.filter(username=request.user.username)
-        
+
         if request.POST.get("information_edit_form", None) != None:
             new_username = request.POST.get("info_username")
             new_first_name = request.POST.get("info_first_name")
@@ -129,7 +129,7 @@ def edit_account(request):
             if new_username != request.user.username:
                 # Username should be updated
                 if not Account.objects.filter(username=new_username).exists():
-                    if new_username != None and len(new_username) > 0: 
+                    if new_username != None and len(new_username) > 0:
                         current_user.update(username=new_username)
                         account_updated = True
                     else:
@@ -143,7 +143,7 @@ def edit_account(request):
                 else:
                     context_dict["errors"].append("Cannot have an empty first name")
             if new_last_name != request.user.last_name:
-                if new_last_name != None and len(new_last_name) > 0: 
+                if new_last_name != None and len(new_last_name) > 0:
                     current_user.update(last_name=new_last_name)
                     account_updated = True
                 else:
@@ -159,7 +159,7 @@ def edit_account(request):
                         # Verified old password and same new passwords
                         new_password = request.POST.get("reset_new_password1")
                         try:
-                            validate_password(new_password) 
+                            validate_password(new_password)
                             request.user.set_password(new_password)
                             request.user.save()
                             account_updated = True
@@ -180,7 +180,7 @@ def edit_account(request):
         if account_updated:
             return redirect(reverse("Educ8:forms/account"))
 
-    return render(request, "Educ8/forms/account.html", context=context_dict)    
+    return render(request, "Educ8/forms/account.html", context=context_dict)
 
 @login_required
 @user_passes_test(is_teacher)
@@ -442,6 +442,9 @@ def visitor_cookie_handler(request):
 
 def terms(request):
     return render(request, "Educ8/terms.html")
+
+def credits(request):
+    return render(request, "Educ8/credits.html")
 
 # HTTP 404 Error (Page not found)
 def page_not_found(request, exception):

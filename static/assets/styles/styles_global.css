@@ -208,6 +208,12 @@ footer p {
 	transform: translate(0, 30px);
   cursor: default;
 }
+footer a:link {
+	color: white;
+}
+footer a:visited {
+	color: white;
+}
 
 /* Back to Top Button */
 #back2top {

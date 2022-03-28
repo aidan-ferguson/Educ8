@@ -1,0 +1,36 @@
+/* WAD2 Team Project "Educ8" | Credit Page Styles */
+
+.credit_container {
+  width: 40vw;
+  margin: 100px auto;
+}
+
+/* Credit text */
+.credit h1 {
+  font-size: 50px;
+  margin-bottom: 0;
+}
+.credit h2 {
+  font-size: 30px;
+  margin-top: 6px;
+}
+.credit li {
+  font-size: 20px;
+  list-style: none outside;
+  padding-right: 30px;
+}
+.credit.right {
+  text-align: right;
+}
+
+/* <hr> styles */
+hr.credit_divider {
+  margin: 100px auto;
+}
+
+/* Fade in */
+.fade {
+  opacity: 0;
+  margin-left: -50px;
+  max-width: 100%;
+}
