@@ -230,5 +230,19 @@ class DeleteCourseViewTests(TestCase):
 
     def test_delete_course_view(self):
 
-        pass
+        user = Account.objects.get_or_create(username = 'testteacher', first_name = "teacher", is_teacher = True)[0]
+        user.save()
+
+        course = Course.objects.get_or_create(courseName = "testcourse")[0]
+        course.students.add(user)
+        course.save()
+
+        self.client.force_login(user)
+
+        response = self.client.get(reverse('Educ8:forms/delete_course', kwargs={'course_name_slug' : "testcourse"}))
+        self.assertEqual(response.status_code, 200)
+
+        self.assertContains(response, "Delete Course")
+        self.assertContains(response, "Are you sure you want to delete this course?")
+        self.assertContains(response, "If so, please copy the following text and press delete to confirm:")
 
