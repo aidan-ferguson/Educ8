@@ -47,3 +47,12 @@ Unit tests are located in `Educ8/tests.py` and can be run with the following com
 ```python
 python manage.py test
 ```
+
+### Useful site accounts
+Student account which is enrolled in every course:
+- Username: "ALLTHECOURSES"
+- Password: "enroll_m3"
+
+Teacher account which has created a maths course:
+- Username: "TheMadDivisor"
+- Password: "pi_R_squ4red"
