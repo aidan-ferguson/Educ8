@@ -31,19 +31,19 @@
       <div class="field">
         <label for="title">Title:</label>
         <br>
-        <input type="text" name="title" minlength="1" maxlength="128" value="{{ existing_flashcard.title }}" required>
+        <input type="text" name="title" minlength="1" maxlength="128" value="{{ existing_flashcard.title }}" required placeholder="Enter title...">
       </div>
 
       <div class="field">
         <label for="question">Question Text:</label>
         <br>
-        <textarea name="question" minlength="1" maxlength="1024" required>{{ existing_flashcard.question }}</textarea>
+        <textarea name="question" minlength="1" maxlength="1024" required placeholder="Enter question...">{{ existing_flashcard.question }}</textarea>
       </div>
 
       <div class="field">
         <label for="answer">Answer Text:</label>
         <br>
-        <textarea name="answer" minlength="1" maxlength="1024" required>{{ existing_flashcard.answer }}</textarea>
+        <textarea name="answer" minlength="1" maxlength="1024" required placeholder="Enter answer...">{{ existing_flashcard.answer }}</textarea>
       </div>
 
       <hr class="form_hr">
